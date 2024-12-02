@@ -23,7 +23,7 @@
       <% elsif user_signed_in? %>
         <p>ログイン中です。<%= current_user.name %>さん</p>
         <li><%= link_to 'サイト概要', root_path %></li>
-        <li><%= link_to 'マイページ' %></li>
+        <li><%= link_to 'マイページ', mypage_path %></li>
         <li><%= link_to '新規投稿' %></li>
         <li><%= link_to 'サークル作成' %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
