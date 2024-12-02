@@ -1,25 +1,38 @@
-<header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
-  <%= link_to homes_top_path do %>
-    <% image_tag 'logo.png' %>
-  <% end %>
-
-  <ul>
-    <% if admin_signed_in? %>
-      <li><%= link_to 'サークル一覧' %></li>
-      <li><%= link_to '会員一覧' %></li>
-      <li><%= link_to '投稿一覧' %></li>
-      <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-    <% elsif user_signed_in? %>
-      <p>ログイン中です。<%= current_user.name %>さん</p>
-      <li><%= link_to 'サイト概要', root_path %></li>
-      <li><%= link_to 'マイページ' %></li>
-      <li><%= link_to '新規投稿' %></li>
-      <li><%= link_to 'サークル作成' %></li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to 'サイト概要', root_path %></li>
-      <li><%= link_to '新規登録', new_user_registration_path %></li>
-      <li><%= link_to 'ログイン', new_user_session_path %></li>
+<header>
+  <div class="header-back">
+    <%= link_to homes_top_path do %>
+      <% image_tag 'logo_white.png' %>
     <% end %>
-  </ul>
+
+    <div id="hm-icon">
+      <a class="menu-trigger" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+  </div>
+
+  <div id="sp-menu">
+    <ul>
+      <% if admin_signed_in? %>
+        <li><%= link_to 'サークル一覧' %></li>
+        <li><%= link_to '会員一覧' %></li>
+        <li><%= link_to '投稿一覧' %></li>
+        <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+      <% elsif user_signed_in? %>
+        <p>ログイン中です。<%= current_user.name %>さん</p>
+        <li><%= link_to 'サイト概要', root_path %></li>
+        <li><%= link_to 'マイページ' %></li>
+        <li><%= link_to '新規投稿' %></li>
+        <li><%= link_to 'サークル作成' %></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'サイト概要', root_path %></li>
+        <li><%= link_to '新規登録', new_user_registration_path %></li>
+        <li><%= link_to 'ログイン', new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </div>
+
 </header>
