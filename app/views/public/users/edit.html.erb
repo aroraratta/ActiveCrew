@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h2>プロフィール編集</h2>
+  </div>
+
+  <%= form_with model:@user do |f| %>
+    <%= f.label :image, "画像" %>
+    <div class="image_field">
+      <div class="square">
+        <%= image_tag (@user.user_image.attached? ? @user.user_image : 'no_user_image.png'), id: "img_prev", class: "image-fluid" %>
+      </div>
+    <%= f.file_field :image,  accept:'image/*' %>
+  <% end %>
+</div>
