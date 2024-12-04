@@ -48,8 +48,16 @@
     <p>所属サークル一覧</p>
   </div>
 
-  <div class='row'>
     <p>投稿一覧</p>
-  </div>
+    <% @posts.each do |post| %>
+      <div class="row">
+        <div class="col-3">
+          <div class="square">
+            <%= display_post_image(post) %>
+          </div>
+            <%= post.body %>
+        </div>
+      </div>
+    <% end %>
 
 </div>

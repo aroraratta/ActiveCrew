@@ -1,7 +1,7 @@
 <header>
   <div class="header-back">
     <%= link_to homes_top_path do %>
-      <% image_tag 'logo_white.png' %>
+      <% image_tag "logo_white.png" %>
     <% end %>
 
     <div id="hm-icon">
@@ -16,21 +16,21 @@
   <div id="sp-menu">
     <ul>
       <% if admin_signed_in? %>
-        <li><%= link_to 'サークル一覧' %></li>
-        <li><%= link_to '会員一覧' %></li>
-        <li><%= link_to '投稿一覧' %></li>
-        <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+        <li><%= link_to "サークル一覧" %></li>
+        <li><%= link_to "会員一覧" %></li>
+        <li><%= link_to "投稿一覧" %></li>
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       <% elsif user_signed_in? %>
         <p>ログイン中です。<%= current_user.name %>さん</p>
-        <li><%= link_to 'サイト概要', root_path %></li>
-        <li><%= link_to 'マイページ', mypage_path %></li>
-        <li><%= link_to '新規投稿' %></li>
-        <li><%= link_to 'サークル作成' %></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <li><%= link_to "サイト概要", root_path %></li>
+        <li><%= link_to "マイページ", mypage_path %></li>
+        <li><%= link_to "新規投稿", new_post_path %></li>
+        <li><%= link_to "サークル作成" %></li>
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
       <% else %>
-        <li><%= link_to 'サイト概要', root_path %></li>
-        <li><%= link_to '新規登録', new_user_registration_path %></li>
-        <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <li><%= link_to "サイト概要", root_path %></li>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
       <% end %>
     </ul>
   </div>
