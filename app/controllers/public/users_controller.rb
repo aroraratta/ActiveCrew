@@ -7,6 +7,7 @@ class Public::UsersController < ApplicationController
       @user = User.find(params[:id])
     else
       @user = current_user
+      @posts = @user.posts
     end
     render :show
   end
