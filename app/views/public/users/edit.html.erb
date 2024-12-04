@@ -3,12 +3,29 @@
     <h2>プロフィール編集</h2>
   </div>
 
-  <%= form_with model:@user do |f| %>
-    <%= f.label :image, "画像" %>
-    <div class="image_field">
-      <div class="square">
-        <%= image_tag (@user.user_image.attached? ? @user.user_image : 'no_user_image.png'), id: "img_prev", class: "image-fluid" %>
+  <%= form_with model: @user, url: update_information_path, method: :patch do |f| %>
+    <div class="col-3">
+      <div class="image_field">
+        <p>画像プレビュー</p>
+        <div class="square">
+          <%= f.label :user_image, class: "image-label", for: "image_input" do %>
+            <%= image_tag (@user.user_image.attached? ? @user.user_image : "no_user_image.png"), id: "img_prev", class: "image-fluid" %>
+          <% end %>
+          <%= f.file_field :user_image, accept: "image/*", id: "image_input", class: "image_salect" %>
+        </div>
       </div>
-    <%= f.file_field :image,  accept:'image/*' %>
+    </div>
+    <%= f.label :name, "ユーザー名" %>
+		<%= f.text_field :name %>
+
+    <%= f.label :introduction, "紹介文" %>
+		<%= f.text_area :introduction %>
+
+    <%= f.label :email, "メールアドレス" %>
+		<%= f.text_area :email %>
+
+    <%= f.submit "編集内容を保存する", class: "btn btn-primary" %>
   <% end %>
+
+	<%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
 </div>
