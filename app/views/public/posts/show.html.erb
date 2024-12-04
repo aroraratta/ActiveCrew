@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <h2>投稿詳細</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <div class="square">
+        <%= display_post_image(@post) %>
+      </div>
+    </div>
+    <%= @post.body %>
+  </div>
+
+  <div class="row">
+    <% if @post.user == current_user %>
+      <%= link_to "編集", edit_post_path(@post) %>
+      <%= link_to "削除", post_path, method: :delete, data: { confirm: '本当に消しますか？' } %>
+    <% end %>
+  </div>
+</div>
