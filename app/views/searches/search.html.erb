@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <h2>検索結果</h2>
+  </div>
+  
+  <% if @range == "user" %>
+    <% @users.each do |user| %>
+      <%= link_to (current_user == user ? mypage_path : user_path(user)) do %>
+        <div class="row">
+          <div class="col-3">
+            <div class="square">
+              <%= display_user_image(user) %>
+            </div>
+          </div>
+          <div class="col-auto">
+            <%= user.name %>
+          </div>
+          <div class="col-auto">
+            <%= user.introduction %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% elsif @range == "post" %>
+    <% @posts.each do |post| %>
+      <%= link_to post_path(post) do %>
+        <div class="row">
+          <div class="col-auto">
+            <%= post.body %>
+          </div>
+          <div class="col-3">
+            <div class="square">
+              <%= display_post_image(post) %>
+            </div>
+          </div>
+        </div>
+      <% end %> 
+    <% end %>
+  <% end %>
+</div>
