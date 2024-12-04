@@ -8,4 +8,13 @@ module ApplicationHelper
     end
   end
 
+  # ユーザーを表示する画面で使用する
+  def display_user_image(user)
+    if user.user_image.attached?
+      image_tag(user.user_image)
+    else
+      image_tag("no_image.png")
+    end
+  end
+
 end
