@@ -2,17 +2,35 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user, except: [:show]
 
-  def mypage
-  end
-
   def show
-    @user = User.find(params[:id])
+    if params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+    render :show
   end
 
   def edit
   end
 
   def update
+    if @user.update(user_params)
+      flash[:notice] = "ユーザー情報を更新しました。"
+      redirect_to mypage_path
+    else
+      render :edit
+    end
+  end
+
+  def unsubscribe
+  end
+
+  def withdraw
+    @user.update(is_active: false)
+    reset_session
+    flash[:notice] = "退会処理を実行しました"
+    redirect_to root_path
   end
 
   private

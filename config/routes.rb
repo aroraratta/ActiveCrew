@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   get 'homes/top'
 
   scope module: :public do
-    get 'mypage' => 'users#mypage', as: 'mypage'
-    get 'users/:id', to: 'users#show', as: 'user'
+    get 'mypage' => 'users#show', as: 'mypage'
     get 'users/information/edit' => 'users#edit', as: 'edit_information'
-    get 'users/information/update' => 'users#update', as: 'update_information'
+    patch 'users/information/update' => 'users#update', as: 'update_information'
+    get 'users/information/:id' => 'users#show', as: 'user'
+    get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
