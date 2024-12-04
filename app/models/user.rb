@@ -14,4 +14,17 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (is_active == true)
   end
+
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name = ? OR introduction = ?", word, word)
+    elsif search == "forward_match"
+      @user = User.where("name LIKE ? OR introduction LIKE ?", "#{word}%", "#{word}%")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE ? OR introduction LIKE ?", "%#{word}%", "%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+
 end

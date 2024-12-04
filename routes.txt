@@ -1,5 +1,7 @@
-routes > routes.txt
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+                                    root GET    /                                                                                                 homes#about
+                                     top GET    /top(.:format)                                                                                    homes#top
+                                searches GET    /searches(.:format)                                                                               searches#search
                        new_admin_session GET    /admins/sign_in(.:format)                                                                         admin/sessions#new
                            admin_session POST   /admins/sign_in(.:format)                                                                         admin/sessions#create
                    destroy_admin_session DELETE /admins/sign_out(.:format)                                                                        admin/sessions#destroy
@@ -13,8 +15,6 @@ routes > routes.txt
                                          PUT    /users(.:format)                                                                                  public/registrations#update
                                          DELETE /users(.:format)                                                                                  public/registrations#destroy
                                          POST   /users(.:format)                                                                                  public/registrations#create
-                                    root GET    /                                                                                                 homes#about
-                               homes_top GET    /homes/top(.:format)                                                                              homes#top
                                    posts POST   /posts(.:format)                                                                                  public/posts#create
                                 new_post GET    /posts/new(.:format)                                                                              public/posts#new
                                edit_post GET    /posts/:id/edit(.:format)                                                                         public/posts#edit

@@ -9,4 +9,17 @@ class Post < ApplicationRecord
   def get_post_image
     post_image.attached? ? post_image : "no_image.png"
   end
+
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @posts = Post.where("body LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @posts = Post.where("body LIKE?","#{word}%")
+    elsif search == "partial_match"
+      @posts = Post.where("body LIKE?","%#{word}%")
+    else
+      @posts = Post.all
+    end
+  end
+
 end
