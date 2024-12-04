@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'homes/top'
 
   scope module: :public do
+    resources :posts, except: [:index]
     get 'mypage' => 'users#show', as: 'mypage'
     get 'users/information/edit' => 'users#edit', as: 'edit_information'
     patch 'users/information/update' => 'users#update', as: 'update_information'
