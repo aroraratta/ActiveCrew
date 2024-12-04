@@ -71,9 +71,10 @@
   background-color: #fff;
 }
 
+ /* スライドインの開始点を合わせるために、ヘッダーの高さとtopの数値を合わせる */
 #sp-menu {
   position: absolute;
-  top: 140px; /* ヘッダーの高さ分 */
+  top: 140px;
   left: 0;
   background: #ddd;
   color: #fff;
@@ -90,4 +91,33 @@
   list-style-type: none;
   margin: 0 auto;
   text-align: center;
+}
+
+// users#show
+.square {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.square img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// users#edit
+.image-label {
+  cursor: pointer;
+}
+
+.image-label:hover {
+  opacity: 0.8; /* 画像にホバー時のエフェクトを追加 */
+}
+
+.image_salect {
+  display: none;
 }
