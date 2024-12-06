@@ -17,4 +17,9 @@ module ApplicationHelper
     end
   end
 
+  # 年月日変換
+  def format_datetime(datetime)
+    datetime.strftime("%Y年%m月%d日 %H:%M")
+  end
+
 end

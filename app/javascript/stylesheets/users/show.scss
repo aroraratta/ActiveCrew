@@ -1,0 +1,30 @@
+.user-profile {
+  height: 100%;
+  margin: auto auto auto 30px;
+  padding: 10px 30px;
+  border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
+.user-name {
+  color: #46B1E1;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.user-introduction {
+  color: #46B1E1;
+}
+
+.btn-follow-position {
+  position: absolute;
+  bottom: 2px;
+}
+
+.post-background {
+  padding: 20px 10px;
+  width: 90%;
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 0 auto;
+}
