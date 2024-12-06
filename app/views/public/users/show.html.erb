@@ -1,50 +1,69 @@
-<div class='container'>
-  <div class='row'>
-    <% if @user = current_user %>
-      <div class='col-auto'>
-        <h2>マイページ<h2>
+<div class="container">
+  <div class="row my-5">
+    <% if @user == current_user %>
+      <div class="col text-center">
+        <h3 class="page-title my-auto">マイページ<h2>
       </div>
-      <div class='col-3 offset-3'>
-        <%= link_to 'プロフィールを編集', edit_information_path %>
+      <div class="col text-center my-auto">
+        <%= link_to "プロフィール編集", edit_information_path, class: "btn-custom-blue" %>
       </div>
-      <div class='col-3'>
-        <%= link_to '退会', unsubscribe_path %>
+      <div class="col ml-auto text-center my-auto">
+        <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
     <% else %>
-      <div class='col-auto'>
-        <h2><%= @user.name %>さんのプロフィール<h2>
+      <div class="col-auto">
+        <h3 class="page-title my-auto"><%= @user.name %>さんのプロフィール<h2>
       </div>
-      <div class='col-3 offset-auto'>
-        <%= link_to 'DM' %>
+      <div class="col  ml-auto text-center my-auto">
+        <%= link_to "DM", root_path, class: "btn-custom-blue" %>
       </div>
     <% end %>
   </div>
   
-  <div class='row'>
-    <div class='col-2'>
-      <div class='square'>
+  <div class="row">
+    <div class="col-3">
+      <div class="square">
         <%= display_user_image(@user) %>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="user-profile">
+        <div class="row">
+          <p class="user-name"><%= @user.name %></p>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center">
+            <p>紹介文</p>
+          </div>
+          <div class="col-9">
+            <p><%= @user.introduction %></p>
+          </div>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center">
+            <p>所属サークル</p>
+          </div><div class="col-9">
+            <p>ここに所属サークル一覧(後で実装)</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class='row'>
-    <p>ユーザー名<%= @user.name %></p>
-  </div>
 
-  <div class='row'>
+  <div class="row">
     <p>紹介文<%= @user.introduction %></p>
   </div>
 
-  <div class='row'>
+  <div class="row">
     <p>フォロー</p>
   </div>
 
-  <div class='row'>
+  <div class="row">
     <p>フォロワー</p>
   </div>
 
-  <div class='row'>
+  <div class="row">
     <p>所属サークル一覧</p>
   </div>
 
