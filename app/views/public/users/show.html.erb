@@ -20,8 +20,8 @@
     <% end %>
   </div>
   
-  <div class="row">
-    <div class="col-3">
+  <div class="row d-flex align-items-stretch">
+    <div class="col-3 my-auto">
       <div class="square">
         <%= display_user_image(@user) %>
       </div>
@@ -46,41 +46,46 @@
             <p>ここに所属サークル一覧(後で実装)</p>
           </div>
         </div>
+        <div class="row">
+          <div class="col-3 mx-auto">
+            <div class="text-center">
+              <%= link_to root_path do %>
+                <p class="m-0 btn-custom-blue"><strong>フォロー</strong><br>100</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-3 mx-auto">
+            <div class="text-center">
+              <%= link_to root_path do %>
+                <p class="m-0 btn-custom-blue"><strong>フォロワー</strong><br>100</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-
-  <div class="row">
-    <p>紹介文<%= @user.introduction %></p>
-  </div>
-
-  <div class="row">
-    <p>フォロー</p>
-  </div>
-
-  <div class="row">
-    <p>フォロワー</p>
-  </div>
-
-  <div class="row">
-    <p>所属サークル一覧</p>
-  </div>
-
-    <p>投稿一覧</p>
-    <% @posts.each do |post| %>
-      <%= link_to post_path(post) do %>
-        <div class="row">
-          <div class="col-3">
+  <div class="row my-3">
+    <div class="bg-gray">
+      <p class="text-center"><strong>投稿一覧</strong></p>
+      <% @posts.each do |post| %>
+        <div class="row py-3 my-3 post-background">
+          <div class="col-1">
             <div class="square">
-              <%= display_post_image(post) %>
+              <%= display_user_image(post.user) %>
             </div>
           </div>
-          <div class="col-auto">
-            <%= post.body %>
+          <div class="col-8">
+            <div class="row">
+              <%= format_datetime(post.created_at) %>
+            </div>
+            <div class="row">
+              <%= post.body %>
+            </div>
           </div>
         </div>
       <% end %>
-    <% end %>
-
+    </div>
+  </div>
 </div>
