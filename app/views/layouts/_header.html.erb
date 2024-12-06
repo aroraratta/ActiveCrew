@@ -17,21 +17,24 @@
     <div id="sp-menu">
       <ul>
         <% if admin_signed_in? %>
-          <li><%= link_to "サークル一覧", class: "header-content" %></li>
-          <li><%= link_to "会員一覧", class: "header-content" %></li>
-          <li><%= link_to "投稿一覧", class: "header-content" %></li>
-          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "header-content" %></li>
+          <%= link_to root_path do %><li class="header-content">サークル一覧</li><% end %>
+          <%= link_to root_path do %><li class="header-content">会員一覧</li><% end %>
+          <%= link_to root_path do %><li class="header-content">投稿一覧</li><% end %>
+          <%= link_to top_path do %><li class="header-content">検索</li><% end %>
+          <%= link_to destroy_admin_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% elsif user_signed_in? %>
-          <p>ログイン中です。<%= current_user.name %>さん</p>
+          <p><strong>ログイン中です。<%= current_user.name %>さん</strong></p>
           <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
-          <li><%= link_to "マイページ", mypage_path, class: "header-content" %></li>
-          <li><%= link_to "新規投稿", new_post_path, class: "header-content" %></li>
-          <li><%= link_to "サークル作成", class: "header-content" %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-content" %></li>
+          <%= link_to mypage_path do %><li class="header-content">マイページ</li><% end %>
+          <%= link_to new_post_path do %><li class="header-content">新規投稿</li><% end %>
+          <%= link_to root_path do %><li class="header-content">サークル作成</li><% end %>
+          <%= link_to top_path do %><li class="header-content">検索</li><% end %>
+          <%= link_to destroy_user_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% else %>
-          <li><%= link_to "サイト概要", root_path, class: "header-content" %></li>
-          <li><%= link_to "新規登録", new_user_registration_path, class: "header-content" %></li>
-          <li><%= link_to "ログイン", new_user_session_path, class: "header-content" %></li>
+          <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
+          <%= link_to top_path do %><li class="header-content">検索</li><% end %>
+          <%= link_to new_user_registration_path do %><li class="header-content">新規登録</li><% end %>
+          <%= link_to new_user_session_path do %><li class="header-content">ログイン</li><% end %>
         <% end %>
       </ul>
     </div>

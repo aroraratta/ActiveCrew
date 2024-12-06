@@ -1,3 +1,58 @@
-<h2>ようこそ</h2>
+<div class="container-fluid">
+  <div class="row mt-3 mb-3 position-relative d-flex align-items-center justify-content-center">
+    <%= image_tag "background.png", class: "dot-image" %>
+    <div class="dot-image-text">
+      <div class="text-center">
+        <p class="h4 font-weight-bold">同じ趣味の人を見つけて<br>サークルに参加しましょう。</p>
+        <%= link_to "→始める", top_path, class: "btn mt-2" %>
+      </div>
+    </div>
+  </div>
 
-<%= link_to "始める", top_path %>
+  <div class="row mt-3 mb-3 bg-gray">
+    <p class="ranking">coming soon</P>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <p class="h4 my-5 text-center">このサイトの使い方</P>
+    </div>
+  </div>
+  <div class="row mx-4 my-5">
+    <div class="col-10">
+      <div class="how-to-use">
+        <p class="how-to-use-title">サークルを探す</P>
+        <p class="how-to-use-body">サークルを検索したり、人気なサークルを確認しましょう。</P>
+      </div>
+    </div>
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-magnifying-glass how-to-use-icon how-to-use-icon"></i>
+    </div>
+  </div>
+
+  </div>
+  <div class="row row mx-4 my-5">
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-door-open how-to-use-icon"></i>
+    </div>
+    <div class="col-10">
+      <div class="how-to-use">
+        <p class="how-to-use-title">サークルに入る</P>
+        <p class="how-to-use-body">気に入ったサークルがあればクルーになりましょう。</P>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row mx-4 my-5">
+    <div class="col-10">
+      <div class="how-to-use">
+        <p class="how-to-use-title">投稿する</P>
+        <p class="how-to-use-body">スポーツの記録や方法を共有しましょう。</P>
+        <p class="how-to-use-body">サークルに所属していなくても投稿することができます。</P>
+      </div>
+    </div>
+    <div class="col-2 d-flex align-items-center justify-content-center">
+      <i class="fa-regular fa-comments how-to-use-icon"></i>
+    </div>
+  </div>
+</div>
