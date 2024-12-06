@@ -1,9 +1,15 @@
 @use '~bootstrap/scss/bootstrap';
+@import "homes/about";
+@import "layout/footer";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.main-margin {
+  min-height: 70vh;
 }
 
 .header-custom {
@@ -65,12 +71,12 @@
   background-color: #fff;
 }
 
-.main {
+.down-move {
   transition: transform 0.5s ease;
 }
 
-body.menu-open .main {
-  transform: translateY(180px);
+body.menu-open .down-move {
+  transform: translateY(200px);
 }
 
 #sp-menu {
@@ -78,7 +84,7 @@ body.menu-open .main {
   position: absolute;
   top: 150px;
   left: 0;
-  background: #fff;
+  background: transparent;
   color: #46B1E1;
   text-decoration: none;
   width: 100%;
