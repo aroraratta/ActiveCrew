@@ -52,16 +52,21 @@
   color: #fff;
 }
 
+.bg-gray {
+  background-color: #F2F2F2;
+  width: 100%;
+}
+
+.text-blue {
+  text-decoration: none;
+  color: #46B1E1;
+}
+
 .header-custom {
   background-color: #46B1E1;
   height: 150px;
   position: relative;
   z-index: 10;
-}
-
-.bg-gray {
-  background-color: #F2F2F2;
-  width: 100%;
 }
 
 #hm-icon {
