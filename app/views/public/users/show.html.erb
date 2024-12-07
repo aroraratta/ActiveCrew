@@ -66,22 +66,40 @@
     </div>
   </div>
 
-  <div class="row my-3">
+  <div class="row my-5">
     <div class="bg-gray">
-      <p class="text-center"><strong>投稿一覧</strong></p>
+      <p class="text-center my-3"><strong>投稿一覧</strong></p>
       <% @posts.each do |post| %>
         <div class="row py-3 my-3 post-background">
-          <div class="col-1">
-            <div class="square">
-              <%= display_user_image(post.user) %>
-            </div>
+          <div class="col-9">
+            <%= link_to user_path(post.user) do %>
+              <div class="row mb-3">
+                <div class="col-2">
+                  <div class="square my-auto">
+                    <%= display_user_image(post.user) %>
+                  </div>
+                </div>
+                <div class="col text-truncate my-auto text-blue">
+                  <%= post.user.name %>
+                </div>
+              </div>
+            <% end %>
+            <%= link_to post_path(post), class: "text-dark" do %>
+              <div class="row mb-3">
+                <div class="col">
+                  <%= post.body %>
+                </div>
+              </div>
+              <div class="row text-muted">
+                <div class="col">
+                  (<%= format_datetime(post.created_at) %>)
+                </div>
+              </div>
+            <% end %>
           </div>
-          <div class="col-8">
-            <div class="row">
-              <%= format_datetime(post.created_at) %>
-            </div>
-            <div class="row">
-              <%= post.body %>
+          <div class="col-3">
+            <div class="square">
+              <%= display_post_image(post) %>
             </div>
           </div>
         </div>
