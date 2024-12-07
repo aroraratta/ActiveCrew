@@ -70,8 +70,20 @@
   border-radius: 8px;
 }
 
+.fit-blue-border {
+  margin: auto;
+  padding: 10px 30px;
+  border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
 .custom-form {
   width: 85%;
+}
+
+.custom-form-large {
+  width: 85%;
+  font-size: 20px; 
 }
 
 .large-icon {
