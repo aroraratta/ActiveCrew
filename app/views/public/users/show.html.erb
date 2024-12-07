@@ -2,12 +2,12 @@
   <div class="row my-5">
     <% if @user == current_user %>
       <div class="col text-center">
-        <h3 class="page-title my-auto">マイページ<h2>
+        <h3 class="page-title my-auto">マイページ</h3>
       </div>
-      <div class="col text-center my-auto">
+      <div class="col text-right my-auto">
         <%= link_to "プロフィール編集", edit_information_path, class: "btn-custom-blue" %>
       </div>
-      <div class="col ml-auto text-center my-auto">
+      <div class="col ml-auto text-right my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
     <% else %>
@@ -19,7 +19,7 @@
       </div>
     <% end %>
   </div>
-  
+
   <div class="row d-flex align-items-stretch">
     <div class="col-3 my-auto">
       <div class="square">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="col-9">
-      <div class="user-profile">
+      <div class="blue-border">
         <div class="row">
           <p class="user-name"><%= @user.name %></p>
         </div>
