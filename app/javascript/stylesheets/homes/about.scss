@@ -1,0 +1,55 @@
+.dot-image {
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.dot-image-text {
+  background-color: #fff;
+  position: absolute;
+  width: 55%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  .btn {
+    margin: 3px;
+    background-color: #83CBEB;
+    font-weight: bold;
+    color: #fff;
+    padding: 20px 70px;
+    border: 3px solid transparent;
+  }
+  
+  .btn:hover {
+    background-color: white;
+    border: 3px solid #83CBEB;
+    color: #83CBEB;
+  }
+}
+
+.ranking {
+  height: 200px;
+}
+
+.how-to-use {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  background-color: #C1E5F5;
+  border-radius: 15px;
+}
+
+.how-to-use-title {
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+}
+
+.how-to-use-body {
+  font-size: 15px;
+  color: #000;
+}
