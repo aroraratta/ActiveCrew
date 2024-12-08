@@ -1,0 +1,42 @@
+<div class="row my-3">
+  <div class="col">
+    <div class="blue-border">
+
+      <%= link_to (current_user == obj.user ? mypage_path : user_path(obj.user)) do %>
+        <div class="row mb-3">
+          <div class="col-2">
+            <div class="square my-auto">
+              <%= display_user_image(obj.user) %>
+            </div>
+          </div>
+          <div class="col text-truncate my-auto text-blue">
+            <%= obj.user.name %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= link_to post_path(obj) do %>
+        <div class="row mb-3">
+          <div class="col-7">
+            <div class="row my-5">
+              <%= obj.body %>
+            </div>
+            <div class="row text-muted">
+              (<%= format_datetime(obj.created_at) %>)
+            </div>
+          </div>
+
+          <div class="col-2 my-auto">
+            <i class="fa-regular fa-comment small-icon"></i>
+          </div>
+
+          <div class="col-3 my-auto">
+            <div class="square">
+              <%= display_post_image(obj) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

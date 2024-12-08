@@ -21,10 +21,11 @@
 * 引っ越しなどをして近くにスポーツをしてくれる同志がいない時
 * どんな雰囲気のサークルの雰囲気を知りたい時
 * 日々の活動を投稿を通じて残したい時
-​
+
 ## 設計書
-「後ほど作成予定」
-​
+* ER図 (https://app.diagrams.net/#G1033CUkXHqAnIzeQ_nq3XNBLVO5A-9EHC#%7B%22pageId%22%3A%22vzjcXcgsg06S2VZX8npz%22%7D)
+* UI Flows (https://app.diagrams.net/#G1033CUkXHqAnIzeQ_nq3XNBLVO5A-9EHC#%7B%22pageId%22%3A%22vzjcXcgsg06S2VZX8npz%22%7D)​
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
