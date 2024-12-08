@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row my-5">
+    <% if @user == current_user %>
+      <div class="col-3 text-center">
+        <h3 class="page-title my-auto">マイページ</h3>
+      </div>
+      <div class="col-3 offset-4 text-right my-auto">
+        <%= link_to "プロフィール編集", edit_information_path, class: "btn-custom-blue" %>
+      </div>
+      <div class="col-2 ml-auto text-right my-auto">
+        <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
+      </div>
+    <% else %>
+      <div class="col-3">
+        <h3 class="page-title my-auto">プロフィール</h3>
+      </div>
+      <div class="col-2 offset-7 ml-auto text-right my-auto">
+        <%= link_to "DM", root_path, class: "btn-custom-blue" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row d-flex align-items-stretch">
+    <div class="col-3 my-auto">
+      <div class="square">
+        <%= display_user_image(@user) %>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="blue-border">
+        <div class="row">
+          <p class="user-name"><%= @user.name %></p>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center">
+            <p>紹介文</p>
+          </div>
+          <div class="col-9">
+            <p><%= @user.introduction %></p>
+          </div>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center">
+            <p>所属サークル</p>
+          </div><div class="col-9">
+            <p>ここに所属サークル一覧(後で実装)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 mx-auto">
+            <div class="text-center">
+              <%= link_to root_path do %>
+                <p class="m-0 btn-custom-blue"><strong>フォロー</strong><br>100</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-3 mx-auto">
+            <div class="text-center">
+              <%= link_to root_path do %>
+                <p class="m-0 btn-custom-blue"><strong>フォロワー</strong><br>100</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-5">
+    <div class="bg-gray">
+      <p class="text-center my-3"><strong>投稿一覧</strong></p>
+      <% @posts.each do |post| %>
+        <div class="row py-3 my-3 post-background">
+          <div class="col-9">
+            <%= link_to user_path(post.user) do %>
+              <div class="row mb-3">
+                <div class="col-2">
+                  <div class="square my-auto">
+                    <%= display_user_image(post.user) %>
+                  </div>
+                </div>
+                <div class="col text-truncate my-auto text-blue">
+                  <%= post.user.name %>
+                </div>
+              </div>
+            <% end %>
+            <%= link_to post_path(post), class: "text-dark" do %>
+              <div class="row mb-3">
+                <div class="col">
+                  <%= post.body %>
+                </div>
+              </div>
+              <div class="row text-muted">
+                <div class="col">
+                  (<%= format_datetime(post.created_at) %>)
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-3">
+            <div class="square">
+              <%= display_post_image(post) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

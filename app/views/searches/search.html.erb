@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">
+        <% if @range == "user" %>
+          ユーザー
+        <% elsif @range == "post" %>
+          投稿
+        <% elsif @range == "circle" %>
+          サークル
+        <% end %>
+        検索結果
+      </h3>
+    </div>
+  </div>
+  
+  <% if @range == "user" %>
+    <% @users.each do |user| %>
+      <%= render "public/users/user_display", obj: user %>
+    <% end %>
+
+  <% elsif @range == "post" %>
+    <% @posts.each do |post| %>
+      <%= render "public/posts/post_display", obj: post %>
+    <% end %>
+  <% end %>
+</div>
