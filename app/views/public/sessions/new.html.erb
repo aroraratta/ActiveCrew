@@ -1,26 +1,56 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">ログイン</h3>
     </div>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="fit-blue-border">
+      <div class="row">
+        <div class="col">
+
+          <div class="row my-3">
+            <div class="col-2 field-title my-auto text-center">
+              <%= f.label :email, "メール" %>
+            </div>
+            <div class="col-10">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "custom-form-small" %>
+            </div>
+          </div>
+
+          <div class="row my-3">
+            <div class="col-2 field-title my-auto text-center">
+              <%= f.label :password, "パスワード" %>
+            </div>
+            <div class="col-10">
+              <%= f.password_field :password, autocomplete: "current-password", class: "custom-form-small" %>
+            </div>
+
+            <div class="row mx-auto mt-5">
+              <div class="col text-center">
+                <%= f.submit "ログイン", class: "btn-custom-blue" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="row my-3">
+        <div class="col text-blue text-center">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="row my-3">
+    <p class="col text-blue text-center">
+      登録は<%= render "public/shared/links" %>から
+    </p>
   </div>
-<% end %>
 
-<%= render "public/shared/links" %>
+</div>
