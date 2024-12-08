@@ -1,0 +1,25 @@
+<%= link_to (current_user == obj ? mypage_path : user_path(obj)) do %>
+  <div class="row my-3">
+    <div class="col">
+      <div class="blue-border">
+
+        <div class="row mb-3">
+          <div class="col-2 my-auto">
+            <div class="square my-auto">
+              <%= display_user_image(obj) %>
+            </div>
+          </div>
+          <div class="col-10 my-auto">
+            <div class="row my-3 text-blue">
+              <strong><%= obj.name %></strong>
+            </div>
+            <div class="row my-3 text-blue">
+              <%= obj.introduction %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+<% end %>
