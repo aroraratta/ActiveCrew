@@ -3,6 +3,7 @@
 @import "homes/top";
 @import "layout/footer";
 @import "users/show";
+@import "sessions/new";
 
 * {
   margin: 0;
@@ -78,13 +79,41 @@
   border-radius: 8px;
 }
 
+.custom-form-small {
+  width: 85%;
+  border: 2px solid #46B1E1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.custom-form-small:focus {
+  border: 2px solid blue;
+  outline: none;
+}
+
 .custom-form {
   width: 85%;
+  border: 2px solid #46B1E1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.custom-form:focus {
+  border: 2px solid blue;
+  outline: none;
 }
 
 .custom-form-large {
   width: 85%;
   font-size: 20px; 
+  border: 2px solid #46B1E1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.custom-form-large:focus {
+  border: 2px solid blue;
+  outline: none;
 }
 
 .large-icon {
