@@ -1,26 +1,138 @@
 @use '~bootstrap/scss/bootstrap';
+@import "homes/about";
+@import "homes/top";
+@import "layout/footer";
+@import "users/show";
+@import "sessions_registration/new";
 
 * {
   margin: 0;
   padding: 0;
-
   box-sizing: border-box;
 }
 
-.header-back {
-  display: flex;
-  align-items: center;
-  height: 140px;
-  background-color: #000;
+.main-margin {
+  min-height: 70vh;
+}
+
+.page-title {
+  background-color: #83CBEB;
+  color: #fff;
+  border-radius: 15px;
+  padding: 20px 30px;
+}
+
+.btn-custom-blue {
+  background-color: #fff;
+  color: #46B1E1;
+  border-radius: 15px;
+  padding: 10px 30px;
+  border: 3px solid #46B1E1;
+  transition: all 0.4s ease;
+  text-decoration: none;
+}
+
+.btn-custom-blue:hover {
+  background-color: #46B1E1;
+  border: 3px solid transparent;
+  color: #fff;
+}
+
+
+.btn-custom-red {
+  background-color: #fff;
+  color: #ff0000;
+  border-radius: 15px;
+  padding: 10px 30px;
+  border: 3px solid #ff0000;
+  transition: all 0.4s ease;
+}
+
+.btn-custom-red:hover {
+  background-color: #ff0000;
+  border: 3px solid transparent;
+  color: #fff;
+}
+
+.bg-gray {
+  background-color: #F2F2F2;
+  width: 100%;
+}
+
+.text-blue {
+  text-decoration: none;
+  color: #46B1E1;
+}
+
+.blue-border {
+  height: 100%;
+  margin: auto auto auto 30px;
+  padding: 10px 30px;
+  border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
+.fit-blue-border {
+  margin: auto;
+  padding: 10px 30px;
+  border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
+.custom-form-small {
+  width: 85%;
+  border: 2px solid #46B1E1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.custom-form-small:focus {
+  border: 2px solid blue;
+  outline: none;
+}
+
+.custom-form {
+  width: 85%;
+  border: 2px solid #46B1E1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.custom-form:focus {
+  border: 2px solid blue;
+  outline: none;
+}
+
+.custom-form-large {
+  width: 85%;
+  font-size: 20px; 
+  border: 2px solid #46B1E1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.custom-form-large:focus {
+  border: 2px solid blue;
+  outline: none;
+}
+
+.large-icon {
+  font-size: 15vh;
+}
+
+.small-icon {
+  font-size: 3vh;
+}
+
+.header-custom {
+  background-color: #46B1E1;
+  height: 150px;
   position: relative;
-  margin-bottom: 100px;
   z-index: 10;
 }
 
 #hm-icon {
-  position: fixed;
-  right: 20px;
-  z-index: 20;
+  margin: auto 0;
 }
 
 .menu-trigger,
@@ -34,6 +146,7 @@
   position: relative;
   width: 50px;
   height: 44px;
+  margin-right: 15px;
 }
 
 .menu-trigger span {
@@ -71,16 +184,26 @@
   background-color: #fff;
 }
 
- /* スライドインの開始点を合わせるために、ヘッダーの高さとtopの数値を合わせる */
+.down-move {
+  transition: transform 0.5s ease;
+}
+
+body.menu-open .down-move {
+  transform: translateY(200px);
+}
+
 #sp-menu {
+  border-top: #fff solid 5px;
   position: absolute;
-  top: 140px;
+  top: 150px;
   left: 0;
-  background: #ddd;
-  color: #fff;
+  background: transparent;
+  color: #46B1E1;
+  text-decoration: none;
   width: 100%;
   transform: translateY(-100%);
-  transition: transform 0.5s ease;
+  transition: transform 0.8s ease;
+  z-index: 1;
 }
 
 #sp-menu.open {
@@ -91,6 +214,58 @@
   list-style-type: none;
   margin: 0 auto;
   text-align: center;
+}
+
+.header-content {
+  text-decoration: none;
+  color: #46B1E1;
+  transition: all 0.4s ease;
+}
+
+.header-content:hover {
+  color: #ffffff;
+  background-color: #46B1E1;
+}
+
+// 追従ヘッダー用CSS
+.hidden-header-custom {
+  height: 70px;
+  background-color: #fff;
+}
+
+.border-custom {
+  border-style: solid;
+  border-color: #46B1E1;
+  border-top-width: thick;
+  border-width: medium medium medium 20px;
+
+  .col {
+    text-decoration: none;
+    color: #46B1E1;
+    font-weight: bold;
+    transition: all 0.4s ease;
+  }
+
+  .col:hover {
+    color: #ffffff;
+    background-color: #46B1E1;
+    border-radius: 8px;
+  }
+}
+
+.fixed-header {
+  width: 100%;
+  position: fixed;
+  top: -80px;
+  left: 0;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+}
+
+.fixed-header.is-show {
+  top: 0;
+  visibility: visible;
 }
 
 // users#show
@@ -107,6 +282,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 30px;
 }
 
 // users#edit

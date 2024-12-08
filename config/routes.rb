@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get "top" => "homes#top"
   get "searches" => "searches#search"
 
-
   # 管理者用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
