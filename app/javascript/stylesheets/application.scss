@@ -5,6 +5,10 @@
 @import "users/show";
 @import "sessions_registration/new";
 
+body {
+  background-image: url("../images/hoge.jpg");
+}
+
 * {
   margin: 0;
   padding: 0;
