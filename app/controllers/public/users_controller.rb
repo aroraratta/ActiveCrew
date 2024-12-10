@@ -5,10 +5,10 @@ class Public::UsersController < ApplicationController
   def show
     if params[:id]
       @user = User.find(params[:id])
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: :desc)
     else
       @user = current_user
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: :desc)
     end
   end
 

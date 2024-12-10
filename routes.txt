@@ -23,7 +23,7 @@
                                          PUT    /posts/:id(.:format)                                                                              public/posts#update
                                          DELETE /posts/:id(.:format)                                                                              public/posts#destroy
                                   mypage GET    /mypage(.:format)                                                                                 public/users#show
-                        edit_information GET    /users/information/edit(.:format)                                                                 public/users#edit
+                             edit_mypage GET    /mypage/edit(.:format)                                                                            public/users#edit
                       update_information PATCH  /users/information/update(.:format)                                                               public/users#update
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
