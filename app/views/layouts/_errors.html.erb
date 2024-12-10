@@ -1,0 +1,14 @@
+<% if obj.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <%= pluralize(obj.errors.count, "件") %>のエラーが発生しました。
+    </div>
+    <div class="text-danger">
+      <ul class="list-unstyled">
+        <% obj.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

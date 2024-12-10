@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :ensure_post, except: [:new, :create]
 
   def new
@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "投稿しました"
-      redirect_to post_path(@post)
+      redirect_to mypage_path
     else
       render :new
     end

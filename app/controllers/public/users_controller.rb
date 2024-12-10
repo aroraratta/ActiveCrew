@@ -1,14 +1,14 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :set_current_user, except: [:show]
 
   def show
     if params[:id]
       @user = User.find(params[:id])
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: :desc)
     else
       @user = current_user
-      @posts = @user.posts
+      @posts = @user.posts.order(created_at: :desc)
     end
   end
 
