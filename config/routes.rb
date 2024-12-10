@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :posts, except: [:index]
     get "mypage" => "users#show", as: "mypage"
-    get "users/information/edit" => "users#edit", as: "edit_information"
+    get "mypage/edit" => "users#edit", as: "edit_mypage"
     patch "users/information/update" => "users#update", as: "update_information"
     get "users/information/:id" => "users#show", as: "user"
     get "/users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"

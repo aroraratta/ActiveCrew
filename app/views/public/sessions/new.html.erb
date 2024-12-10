@@ -14,7 +14,7 @@
             <div class="col-2 field-title text-center">
               <%= f.label :email, "メール", class: "my-auto" %>
             </div>
-            <div class="col-10">
+            <div class="col-10 d-flex justify-content-center">
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "custom-form-small" %>
             </div>
           </div>
@@ -23,9 +23,10 @@
             <div class="col-2 field-title text-center">
               <%= f.label :password, "パスワード", class: "my-auto" %>
             </div>
-            <div class="col-10">
+            <div class="col-10 d-flex justify-content-center">
               <%= f.password_field :password, autocomplete: "current-password", class: "custom-form-small" %>
             </div>
+          </div>
 
             <div class="row mx-auto mt-5">
               <div class="col text-center">
