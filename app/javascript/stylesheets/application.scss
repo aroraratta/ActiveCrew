@@ -3,11 +3,8 @@
 @import "homes/top";
 @import "layout/footer";
 @import "users/show";
+@import "users/unsubscribe";
 @import "sessions_registration/new";
-
-body {
-  background-image: url("../images/hoge.jpg");
-}
 
 * {
   margin: 0;
