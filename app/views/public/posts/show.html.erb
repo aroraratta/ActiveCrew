@@ -15,4 +15,38 @@
 
   <%= render "post_display", obj: @post %>
 
+  <div class="row my-5 bg-gray">
+    <div class="col">
+      <div class="row my-3">
+        <div class="col text-center">
+          <p><strong>コメント</strong></P>
+        </div>
+      </div>
+      <%= form_with model: [@post, @post_comment] do |f| %>
+        <div class="row my-5">
+          <div class="col-10 my-auto text-right">
+            <%= f.text_area :comment, placeholder: "コメントを残す", class: "custom-form", rows: 1 %>
+          </div>
+          <div class="col-2 my-auto text-left">
+            <%= f.submit "送信", class: "btn-custom-blue" %>
+          </div>
+        </div>
+      <% end %>
+
+      <% @post_comments.each do |post_comment| %>
+        <div class="row py-3 my-3 post-background">
+          <%= render "public/posts/index", obj: post_comment, url: post_path(post_comment.post), content: post_comment.comment %>
+          <% if post_comment.user == current_user %>
+            <div class="col-1 my-auto text-center">
+              <%= link_to "編集", class: "btn-custom-blue" %>
+            </div>
+            <div class="col-1 my-auto text-center">
+              <%= link_to "削除", class: "btn-custom-red" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
 </div>
