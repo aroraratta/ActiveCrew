@@ -45,8 +45,8 @@ class Public::PostsController < ApplicationController
   def ensure_post
     @post = Post.find(params[:id])
   end
-end
 
   def post_params
     params.require(:post).permit(:body, :post_image)
   end
+end
