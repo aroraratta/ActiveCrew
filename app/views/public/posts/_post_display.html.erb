@@ -1,10 +1,10 @@
 <div class="row my-3">
   <div class="col">
-    <div class="blue-border">
+    <div class="fit-blue-border">
 
       <%= link_to (current_user == obj.user ? mypage_path : user_path(obj.user)) do %>
         <div class="row mb-3">
-          <div class="col-2">
+          <div class="col-1">
             <div class="square my-auto">
               <%= display_user_image(obj.user) %>
             </div>
@@ -17,7 +17,7 @@
 
       <%= link_to post_path(obj) do %>
         <div class="row mb-3">
-          <div class="col-7">
+          <div class="col-8">
             <div class="row my-5">
               <%= obj.body %>
             </div>
@@ -26,14 +26,15 @@
             </div>
           </div>
 
-          <div class="col-2 my-auto">
-            <i class="fa-regular fa-comment small-icon"></i>
-          </div>
-
           <div class="col-3 my-auto">
             <div class="square">
               <%= display_post_image(obj) %>
             </div>
+          </div>
+
+          <div class="col-1 my-auto text-center">
+            <i class="fa-regular fa-comment small-icon"></i>
+            <%= obj.post_comments.count %>
           </div>
         </div>
       <% end %>
