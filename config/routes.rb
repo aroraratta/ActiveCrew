@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :posts, except: [:index] do
-      resources :post_comments, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :update, :destroy]
     end
     get "mypage" => "users#show", as: "mypage"
     get "mypage/edit" => "users#edit", as: "edit_mypage"

@@ -37,3 +37,23 @@ document.addEventListener('turbolinks:load', function() {
     });
   });
 });
+
+$(document).on('turbolinks:load', function() {
+  $('.edit-btn').on('click', function() {
+    var commentId = $(this).data('comment-id');
+    var contentDiv = $('#comment-content-' + commentId);
+    var formDiv = $('#edit-form-' + commentId);
+
+    contentDiv.addClass('d-none');
+    formDiv.removeClass('d-none');
+  });
+
+  $('.cancel-edit').on('click', function() {
+    var commentId = $(this).data('comment-id');
+    var contentDiv = $('#comment-content-' + commentId);
+    var formDiv = $('#edit-form-' + commentId);
+
+    formDiv.addClass('d-none');
+    contentDiv.removeClass('d-none');
+  });
+});
