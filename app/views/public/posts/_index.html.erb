@@ -16,6 +16,13 @@
       <div class="col">
         <%= content %>
       </div>
+      <% if obj.post_image.attached? %>
+        <div class="col-3">
+          <div class="square">
+            <%= display_post_image(obj) %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="row text-muted">
       <div class="col">
@@ -24,10 +31,3 @@
     </div>
   <% end %>
 </div>
-<% if obj.post_image.attached? %>
-  <div class="col-3">
-    <div class="square">
-      <%= display_post_image(obj) %>
-    </div>
-  </div>
-<% end %>
