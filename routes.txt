@@ -16,7 +16,9 @@
                                          DELETE /users(.:format)                                                                                  public/registrations#destroy
                                          POST   /users(.:format)                                                                                  public/registrations#create
                       post_post_comments POST   /posts/:post_id/post_comments(.:format)                                                           public/post_comments#create
-                       post_post_comment DELETE /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#destroy
+                       post_post_comment PATCH  /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
+                                         PUT    /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
+                                         DELETE /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#destroy
                                    posts POST   /posts(.:format)                                                                                  public/posts#create
                                 new_post GET    /posts/new(.:format)                                                                              public/posts#new
                                edit_post GET    /posts/:id/edit(.:format)                                                                         public/posts#edit
