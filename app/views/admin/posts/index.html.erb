@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">投稿一覧</h3>
+    </div>
+  </div>
+  
+  <% @posts.each do |post| %>
+    <%= render "public/posts/post_display", obj: post %>
+  <% end %>
+
+</div>
