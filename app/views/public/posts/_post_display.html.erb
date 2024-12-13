@@ -1,6 +1,9 @@
+<% border_class = obj.user.is_active ? "fit-blue-border" : "gray-border" %>
+<% text_class = obj.user.is_active ? "text-blue" : "text-gray" %>
+
 <div class="row my-3">
   <div class="col">
-    <div class="fit-blue-border">
+    <div class="<%= border_class %>">
 
       <%= link_to (current_user == obj.user ? mypage_path : user_path(obj.user)) do %>
         <div class="row mb-3">
@@ -9,7 +12,7 @@
               <%= display_user_image(obj.user) %>
             </div>
           </div>
-          <div class="col text-truncate my-auto text-blue">
+          <div class="col text-truncate my-auto <%= text_class %>">
             <%= obj.user.name %>
           </div>
         </div>

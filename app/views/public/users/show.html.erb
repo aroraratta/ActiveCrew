@@ -5,11 +5,20 @@
         <h3 class="page-title my-auto">マイページ</h3>
       </div>
       <div class="col-3 offset-4 text-right my-auto">
-        <%= link_to "プロフィール編集", edit_mypage_path, class: "btn-custom-blue" %>
+        <button class="btn-custom-blue edit-btn">プロフィール編集</button>
       </div>
       <div class="col-2 ml-auto text-right my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
+
+    <% elsif admin_signed_in? %>
+      <div class="col-auto text-center">
+        <h3 class="page-title my-auto">ユーザーID:<%= @user.id %></h3>
+      </div>
+      <div class="col-3 offset-4 text-right my-auto">
+        <button class="btn-custom-blue edit-btn">ユーザー編集</button>
+      </div>
+
     <% else %>
       <div class="col-3">
         <h3 class="page-title my-auto">プロフィール</h3>
@@ -19,8 +28,12 @@
       </div>
     <% end %>
   </div>
+  
+  <div class="row ml-3 my-3">
+    <%= render "layouts/errors", obj: @user %>
+  </div>
 
-  <div class="row d-flex align-items-stretch">
+  <div class="row" id="content">
     <div class="col-3 my-auto">
       <div class="square">
         <%= display_user_image(@user) %>
@@ -33,7 +46,7 @@
         </div>
         <div class="row user-introduction">
           <div class="col-3 text-center">
-            <p>紹介文</p>
+            <p><strong>紹介文</strong></p>
           </div>
           <div class="col-9">
             <p><%= @user.introduction %></p>
@@ -41,7 +54,7 @@
         </div>
         <div class="row user-introduction">
           <div class="col-3 text-center">
-            <p>所属サークル</p>
+            <p><strong>所属サークル</strong></p>
           </div><div class="col-9">
             <p>ここに所属サークル一覧(後で実装)</p>
           </div>
@@ -65,6 +78,64 @@
       </div>
     </div>
   </div>
+
+  <%= form_with model: @user, url: update_information_path(@user), method: :patch do |f| %>
+    <div class="row d-none" id="edit-form">
+      <div class="col-3 my-auto">
+        <div class="square">
+          <%= f.label :user_image, class: "image-label", for: "image_input" do %>
+            <%= image_tag (@user.user_image.attached? ? @user.user_image : "no_image.png"), id: "img_prev", class: "image-fluid" %>
+          <% end %>
+          <%= f.file_field :user_image, accept: "image/*", id: "image_input", class: "image_select" %>
+        </div>
+      </div>
+      <div class="col-9 my-auto">
+        <div class="gray-border">
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><p class= "text-gray" %>会員ステータス</p></div>
+                <div class="col my-auto text-gray"><%= f.radio_button :is_active, true %>有効</div>
+                <div class="col my-auto text-gray"><%= f.radio_button :is_active, false %>退会</div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><%= f.label :email, "メールアドレス", class: "text-gray" %></div>
+                <div class="col-9 my-auto"><%= f.text_field :email, placeholder: "example@gmail.com", class: "custom-form-gray" %></div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><%= f.label :name, "ユーザー名", class: "text-gray" %></div>
+                <div class="col-9 my-auto"><%= f.text_field :name, placeholder: "サンプル太郎", class: "custom-form-gray" %></div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><%= f.label :introduction, "紹介文", class: "text-gray" %></div>
+                <div class="col-9 my-auto"><%= f.text_area :introduction, placeholder: "紹介文を記入してください", class: "custom-form-gray", rows: 5 %></div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-6 text-center">
+              <%= f.submit "保存", class: "btn-custom-blue" %>
+            </div>
+            <div class="col-6 text-center">
+              <button type="button" class="btn-custom-red cancel-edit">戻る</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <div class="row my-5 bg-gray">
     <div class="col">

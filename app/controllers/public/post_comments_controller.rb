@@ -1,5 +1,5 @@
 class Public::PostCommentsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user_or_admin!, except: [:create]
 
   def create
     post = Post.find(params[:post_id])

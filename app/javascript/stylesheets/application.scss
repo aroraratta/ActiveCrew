@@ -65,11 +65,24 @@
   color: #46B1E1;
 }
 
+.text-gray {
+  text-decoration: none;
+  color: #a3a3a3;
+}
+
 .blue-border {
   height: 100%;
   margin: auto auto auto 30px;
   padding: 10px 30px;
   border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
+.gray-border {
+  height: 100%;
+  margin: auto auto auto 30px;
+  padding: 10px 30px;
+  border: 2px solid #a3a3a3;
   border-radius: 8px;
 }
 
@@ -95,6 +108,13 @@
 .custom-form {
   width: 85%;
   border: 2px solid #46B1E1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.custom-form-gray {
+  width: 85%;
+  border: 2px solid #a3a3a3;
   padding: 20px;
   border-radius: 5px;
 }
