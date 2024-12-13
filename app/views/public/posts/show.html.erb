@@ -3,9 +3,9 @@
     <div class="col-2 text-center">
       <h3 class="page-title my-auto">投稿</h3>
     </div>
-    <% if @post.user == current_user %>
+    <% if @post.user == current_user || admin_signed_in? %>
       <div class="col-2 offset-6 ml-auto text-right my-auto">
-        <%= link_to "編集", edit_post_path(@post), class: "btn-custom-blue" %>
+        <button class="btn-custom-blue edit-btn">投稿編集</button>
       </div>
       <div class="col-2 text-right my-auto">
         <%= link_to "削除", post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
@@ -13,7 +13,13 @@
     <% end %>
   </div>
 
-  <%= render "post_display", obj: @post %>
+  <div id="content">
+    <%= render "post_display", obj: @post %>
+  </div>
+
+  <div class="d-none" id="edit-form">
+    <%= render "form", post: @post, submit_text: "保存", route: post_path %>
+  </div>
 
   <div class="row my-5 bg-gray">
     <div class="col">
@@ -23,22 +29,24 @@
         </div>
       </div>
       <%= form_with model: [@post, @post_comment] do |f| %>
-        <div class="row my-5">
-          <div class="col-10 my-auto text-right">
-            <%= f.text_area :comment, placeholder: "コメントを残す", class: "custom-form", rows: 1 %>
+        <% if user_signed_in? %>
+          <div class="row my-5">
+            <div class="col-10 my-auto text-right">
+              <%= f.text_area :comment, placeholder: "コメントを残す", class: "custom-form", rows: 1 %>
+            </div>
+            <div class="col-2 my-auto text-left">
+              <%= f.submit "送信", class: "btn-custom-blue" %>
+            </div>
           </div>
-          <div class="col-2 my-auto text-left">
-            <%= f.submit "送信", class: "btn-custom-blue" %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
 
       <% @post_comments.each do |post_comment| %>
-        <div class="row py-3 my-3 post-background comment-content" id="comment-content-<%= post_comment.id %>">
+        <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
           <%= render "public/posts/index", obj: post_comment, url: post_path(post_comment.post), content: post_comment.comment %>
-          <% if post_comment.user == current_user %>
+          <% if post_comment.user == current_user || admin_signed_in? %>
             <div class="col-2 my-auto text-center">
-              <button class="btn-custom-blue edit-btn" data-comment-id="<%= post_comment.id %>">編集</button>
+              <button class="btn-custom-blue edit-comment-btn" data-comment-id="<%= post_comment.id %>">編集</button>
             </div>
             <div class="col-2 my-auto text-center">
               <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn-custom-red" %>
@@ -47,7 +55,7 @@
         </div>
 
         <%= form_with(model: post_comment, url: post_post_comment_path(post_comment.post, post_comment), method: :patch, local: true) do |f| %>
-          <div class="row py-3 my-3 post-background d-none edit-form" id="edit-form-<%= post_comment.id %>">
+          <div class="row py-3 my-3 post-background d-none" id="edit-form-<%= post_comment.id %>">
             <div class="col-8 my-auto text-right">
               <%= f.text_area :comment, value: post_comment.comment, placeholder: "コメントを残す", class: "custom-form", rows: 1 %>
             </div>
@@ -55,7 +63,7 @@
               <%= f.submit "保存", class: "btn-custom-blue" %>
             </div>
             <div class="col-2 my-auto text-center">
-              <button type="button" class="btn-custom-red cancel-edit" data-comment-id="<%= post_comment.id %>">戻る</button>
+              <button type="button" class="btn-custom-red cancel-edit-comment" data-comment-id="<%= post_comment.id %>">戻る</button>
             </div>
           </div>
         <% end %>

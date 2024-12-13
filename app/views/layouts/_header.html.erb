@@ -17,6 +17,7 @@
     <div id="sp-menu">
       <ul>
         <% if admin_signed_in? %>
+          <p><strong>管理者ログイン中。</strong></p>
           <%= link_to root_path do %><li class="header-content">サークル一覧</li><% end %>
           <%= link_to admin_users_path do %><li class="header-content">会員一覧</li><% end %>
           <%= link_to admin_posts_path do %><li class="header-content">投稿一覧</li><% end %>
@@ -31,6 +32,7 @@
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
           <%= link_to destroy_user_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% else %>
+          <p><strong>ログインしてください。</strong></p>
           <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
           <%= link_to new_user_registration_path do %><li class="header-content">新規登録</li><% end %>
