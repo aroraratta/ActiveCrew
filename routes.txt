@@ -33,7 +33,7 @@
                                          DELETE /posts/:id(.:format)                                                                              public/posts#destroy
                                   mypage GET    /mypage(.:format)                                                                                 public/users#show
                              edit_mypage GET    /mypage/edit(.:format)                                                                            public/users#edit
-                      update_information PATCH  /users/information/update(.:format)                                                               public/users#update
+                      update_information PATCH  /users/information/:id/update(.:format)                                                           public/users#update
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
                                 withdraw PATCH  /users/withdraw(.:format)                                                                         public/users#withdraw

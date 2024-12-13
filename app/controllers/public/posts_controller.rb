@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :update]
   before_action :ensure_post, except: [:new, :create]
 
   def new
@@ -26,6 +26,7 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    authenticate_user_or_admin!
     if @post.update(post_params)
       flash[:notice] = "投稿を編集しました"
       redirect_to post_path(@post)
