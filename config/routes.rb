@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'posts/index'
+  end
   # 共用
   root to: "homes#about"
   get "top" => "homes#top"
@@ -9,13 +12,16 @@ Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
+  namespace :admin do
+    resources :users, only: [:index, :show]
+    resources :posts, only: [:index, :show]
+  end
 
   # 利用者用
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-
   scope module: :public do
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]
