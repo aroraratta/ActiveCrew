@@ -15,8 +15,8 @@
   </div>
   
   <% if @range == "user" %>
-    <%= link_to (current_user == obj ? mypage_path : user_path(obj)) do %>
-      <% @users.each do |user| %>
+    <% @users.each do |user| %>
+      <%= link_to (current_user == user ? mypage_path : user_path(user)) do %>
         <%= render "public/users/user_display", obj: user %>
       <% end %>
     <% end %>

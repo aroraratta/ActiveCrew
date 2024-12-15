@@ -14,6 +14,8 @@
                               admin_post GET    /admin/posts/:id(.:format)                                                                        admin/posts#show
                                          PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
+                                         DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
+                          admin_searches GET    /admin/searches(.:format)                                                                         admin/searches#search
                         new_user_session GET    /users/sign_in(.:format)                                                                          public/sessions#new
                             user_session POST   /users/sign_in(.:format)                                                                          public/sessions#create
                     destroy_user_session DELETE /users/sign_out(.:format)                                                                         public/sessions#destroy
@@ -41,6 +43,7 @@
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
                                 withdraw PATCH  /users/withdraw(.:format)                                                                         public/users#withdraw
+                          users_searches GET    /users/searches(.:format)                                                                         public/searches#search
            rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
            rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
