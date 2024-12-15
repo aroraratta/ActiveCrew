@@ -1,24 +1,11 @@
 <div class="container">
   <div class="row my-5">
-    <% if @user == current_user %>
-      <div class="col-3 text-center">
-        <h3 class="page-title my-auto">マイページ</h3>
-      </div>
-      <div class="col-3 offset-4 text-right my-auto">
-        <button class="btn-custom-blue edit-btn">プロフィール編集</button>
-      </div>
-      <div class="col-2 ml-auto text-right my-auto">
-        <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
-      </div>
-
-    <% else %>
-      <div class="col-3">
-        <h3 class="page-title my-auto">プロフィール</h3>
-      </div>
-      <div class="col-2 offset-7 ml-auto text-right my-auto">
-        <%= link_to "DM", root_path, class: "btn-custom-blue" %>
-      </div>
-    <% end %>
+    <div class="col-auto text-center">
+      <%= user_status_title(@user) %>
+    </div>
+    <div class="col-3 offset-4 text-right my-auto">
+      <button class="btn-custom-blue edit-btn">ユーザー編集</button>
+    </div>
   </div>
   
   <div class="row ml-3 my-3">
@@ -71,7 +58,7 @@
     </div>
   </div>
 
-  <%= form_with model: @user, url: update_information_path(@user), method: :patch do |f| %>
+  <%= form_with model: @user, url: admin_user_path(@user), method: :patch do |f| %>
     <div class="row d-none" id="edit-form">
       <div class="col-3 my-auto">
         <div class="square">
@@ -83,6 +70,21 @@
       </div>
       <div class="col-9 my-auto">
         <div class="gray-border">
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><p class= "text-gray" %>会員ステータス</p></div>
+                <div class="col my-auto text-gray">
+                  <%= f.radio_button :is_active, true, id: "is_active_true" %>
+                  <%= f.label :is_active, "有効", value: true, for: "is_active_true" %>
+                </div>
+                <div class="col my-auto text-gray">
+                  <%= f.radio_button :is_active, false, id: "is_active_false" %>
+                  <%= f.label :is_active, "退会", value: false, for: "is_active_false" %>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row my-3">
             <div class="col">
               <div class="row text-center">

@@ -1,11 +1,11 @@
-<% border_class = obj.user.is_active ? "fit-blue-border" : "gray-border" %>
+<% border_class = obj.user.is_active ? "blue-border" : "gray-border" %>
 <% text_class = obj.user.is_active ? "text-blue" : "text-gray" %>
 
 <div class="row my-3">
   <div class="col">
     <div class="<%= border_class %>">
 
-      <%= link_to (current_user == obj.user ? mypage_path : user_path(obj.user)) do %>
+      <%= link_to user_route do %>
         <div class="row mb-3">
           <div class="col-1">
             <div class="square my-auto">
@@ -18,10 +18,10 @@
         </div>
       <% end %>
 
-      <%= link_to post_path(obj) do %>
+      <%= link_to post_route do %>
         <div class="row mb-3">
           <div class="col-8">
-            <div class="row my-5">
+            <div class="row my-5 <%= text_class %>">
               <%= obj.body %>
             </div>
             <div class="row text-muted">

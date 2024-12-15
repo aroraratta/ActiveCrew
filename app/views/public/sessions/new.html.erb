@@ -9,49 +9,7 @@
     <%= render "layouts/errors", obj: resource %>
   </div>
 
-  <%= form_with model: resource, scope: resource_name, url: session_path(resource_name) do |f| %>
-
-    <div class="fit-blue-border">
-      <div class="row">
-        <div class="col">
-
-          <div class="row my-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :email, "メール", class: "my-auto" %>
-            </div>
-            <div class="col-10 d-flex justify-content-center">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "custom-form-small" %>
-            </div>
-          </div>
-
-          <div class="row my-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :password, "パスワード", class: "my-auto" %>
-            </div>
-            <div class="col-10 d-flex justify-content-center">
-              <%= f.password_field :password, autocomplete: "current-password", class: "custom-form-small" %>
-            </div>
-          </div>
-
-            <div class="row mx-auto mt-5">
-              <div class="col text-center">
-                <%= f.submit "ログイン", class: "btn-custom-blue" %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="row my-3">
-        <div class="col text-blue text-center">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render "login_form" %>
 
   <div class="row my-3">
     <p class="col text-blue text-center">

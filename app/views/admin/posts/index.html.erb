@@ -4,9 +4,9 @@
       <h3 class="page-title my-auto">投稿一覧</h3>
     </div>
   </div>
-  
+
   <% @posts.each do |post| %>
-    <%= render "public/posts/post_display", obj: post %>
+    <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: post_path(post) %>
   <% end %>
 
 </div>
