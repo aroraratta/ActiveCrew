@@ -4,9 +4,10 @@
       <h3 class="page-title my-auto">ユーザー一覧フォロー数とフォロワー数入れる投稿数も入れるか</h3>
     </div>
   </div>
-  
-  <% @users.each do |user| %>
-    <%= render "public/users/user_display", obj: user %>
-  <% end %>
 
+  <% @users.each do |user| %>
+    <%= link_to admin_user_path(user) do %>
+      <%= render "public/users/user_display", obj: user %>
+    <% end %>
+  <% end %>
 </div>

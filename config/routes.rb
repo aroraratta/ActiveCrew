@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   namespace :admin do
-    resources :users, only: [:index, :show]
-    resources :posts, only: [:index, :show]
+    resources :users, only: [:index, :show, :update]
+    resources :posts, only: [:index, :show, :update]
   end
 
   # 利用者用

@@ -4,11 +4,10 @@ class Public::UsersController < ApplicationController
   def show
     if params[:id]
       @user = User.find(params[:id])
-      @posts = @user.posts.order(created_at: :desc)
     else
       @user = current_user
-      @posts = @user.posts.order(created_at: :desc)
     end
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit
@@ -28,7 +27,7 @@ class Public::UsersController < ApplicationController
     else
       @posts = @user.posts.order(created_at: :desc)
       render :show
-    endew_user_session
+    end
   end
 
   def unsubscribe
