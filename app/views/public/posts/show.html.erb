@@ -12,6 +12,10 @@
       </div>
     <% end %>
   </div>
+  
+  <div class="row ml-3">
+    <%= render "layouts/errors", obj: @post %>
+  </div>
 
   <div id="content">
     <%= render "post_display", obj: @post, user_route: (current_user == @post.user ? mypage_path : user_path(@post.user)), post_route: post_path(@post) %>

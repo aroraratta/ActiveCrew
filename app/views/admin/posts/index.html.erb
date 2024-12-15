@@ -6,7 +6,7 @@
   </div>
 
   <% @posts.each do |post| %>
-    <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: post_path(post) %>
+    <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: admin_post_path(post) %>
   <% end %>
 
 </div>

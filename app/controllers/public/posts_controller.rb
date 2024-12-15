@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :update]
+  before_action :authenticate_user!, except: [:show]
   before_action :ensure_post, except: [:new, :create]
 
   def new
@@ -22,16 +22,14 @@ class Public::PostsController < ApplicationController
     @post_comments = @post.post_comments.order(created_at: :desc)
   end
 
-  def edit
-  end
-
   def update
-    authenticate_user_or_admin!
     if @post.update(post_params)
       flash[:notice] = "投稿を編集しました"
       redirect_to post_path(@post)
     else
-      render :edit
+      @post_comment = PostComment.new
+      @post_comments = @post.post_comments.order(created_at: :desc)
+      render :show
     end
   end
 

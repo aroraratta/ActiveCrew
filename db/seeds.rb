@@ -16,7 +16,6 @@ kanagawa = User.find_or_create_by!(email: "kanagawa@example.com") do |user|
   user.introduction = "神奈川太郎です。バドミントンとサイクリングが大好きです!気軽にDMしてください。"
   user.user_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/user1_cycling.jpg"), filename:"user1_cycling.jpg")
 end
-
 ehime = User.find_or_create_by!(email: "ehime@example.com") do |user|
   user.name = "愛媛花子"
   user.password = ENV["USER_PASSWORD"]

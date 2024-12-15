@@ -8,17 +8,21 @@
         <button class="btn-custom-blue edit-btn">投稿編集</button>
       </div>
       <div class="col-2 text-right my-auto">
-        <%= link_to "削除", post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
+        <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
       </div>
     <% end %>
   </div>
 
+  <div class="row ml-3">
+    <%= render "layouts/errors", obj: @post %>
+  </div>
+
   <div id="content">
-    <%= render "post_display", obj: @post, user_route: admin_post_path(@post), post_route: post_path(@post) %>
+    <%= render "public/posts/post_display", obj: @post, user_route: admin_user_path(@post.user), post_route: admin_post_path(@post) %>
   </div>
 
   <div class="d-none" id="edit-form">
-    <%= render "form", post: @post, submit_text: "保存", route: post_path %>
+    <%= render "public/posts/form", post: @post, submit_text: "保存", route: admin_post_path %>
   </div>
 
   <div class="row my-5 bg-gray">
@@ -43,7 +47,7 @@
 
       <% @post_comments.each do |post_comment| %>
         <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
-          <%= render "public/posts/index", obj: post_comment, url: post_path(post_comment.post), content: post_comment.comment %>
+          <%= render "public/posts/index", obj: post_comment, url: admin_post_path(post_comment.post), content: post_comment.comment %>
           <% if post_comment.user == current_user || admin_signed_in? %>
             <div class="col-2 my-auto text-center">
               <button class="btn-custom-blue edit-comment-btn" data-comment-id="<%= post_comment.id %>">編集</button>
