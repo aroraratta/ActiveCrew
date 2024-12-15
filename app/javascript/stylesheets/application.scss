@@ -3,11 +3,8 @@
 @import "homes/top";
 @import "layout/footer";
 @import "users/show";
+@import "users/unsubscribe";
 @import "sessions_registration/new";
-
-body {
-  background-image: url("../images/hoge.jpg");
-}
 
 * {
   margin: 0;
@@ -21,6 +18,13 @@ body {
 
 .page-title {
   background-color: #83CBEB;
+  color: #fff;
+  border-radius: 15px;
+  padding: 20px 30px;
+}
+
+.page-title-gray {
+  background-color: #a3a3a3;
   color: #fff;
   border-radius: 15px;
   padding: 20px 30px;
@@ -68,11 +72,24 @@ body {
   color: #46B1E1;
 }
 
+.text-gray {
+  text-decoration: none;
+  color: #a3a3a3;
+}
+
 .blue-border {
   height: 100%;
   margin: auto auto auto 30px;
   padding: 10px 30px;
   border: 2px solid #46B1E1;
+  border-radius: 8px;
+}
+
+.gray-border {
+  height: 100%;
+  margin: auto auto auto 30px;
+  padding: 10px 30px;
+  border: 2px solid #a3a3a3;
   border-radius: 8px;
 }
 
@@ -102,6 +119,13 @@ body {
   border-radius: 5px;
 }
 
+.custom-form-gray {
+  width: 85%;
+  border: 2px solid #a3a3a3;
+  padding: 20px;
+  border-radius: 5px;
+}
+
 .custom-form:focus {
   border: 2px solid blue;
   outline: none;
@@ -126,6 +150,10 @@ body {
 
 .small-icon {
   font-size: 3vh;
+}
+
+.field_with_errors input{
+  border-color:#ea352d;
 }
 
 .header-custom {

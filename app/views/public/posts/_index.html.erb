@@ -1,0 +1,33 @@
+<div class="col">
+  <%= link_to (current_user == obj.user ? mypage_path : user_path(obj.user)) do %>
+    <div class="row mb-3">
+      <div class="col-1">
+        <div class="square my-auto">
+          <%= display_user_image(obj.user) %>
+        </div>
+      </div>
+      <div class="col text-truncate my-auto text-blue">
+        <%= obj.user.name %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to url, class: "text-dark" do %>
+    <div class="row mb-3">
+      <div class="col">
+        <%= content %>
+      </div>
+      <% if obj.post_image.attached? %>
+        <div class="col-3">
+          <div class="square">
+            <%= display_post_image(obj) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="row text-muted">
+      <div class="col">
+        (<%= format_datetime(obj.created_at) %>)
+      </div>
+    </div>
+  <% end %>
+</div>

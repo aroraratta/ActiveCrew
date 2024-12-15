@@ -16,12 +16,14 @@
   
   <% if @range == "user" %>
     <% @users.each do |user| %>
-      <%= render "public/users/user_display", obj: user %>
+      <%= link_to (current_user == user ? mypage_path : user_path(user)) do %>
+        <%= render "public/users/user_display", obj: user %>
+      <% end %>
     <% end %>
 
   <% elsif @range == "post" %>
     <% @posts.each do |post| %>
-      <%= render "public/posts/post_display", obj: post %>
+      <%= render "public/posts/post_display", obj: post, obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post) %>
     <% end %>
   <% end %>
 </div>

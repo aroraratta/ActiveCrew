@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :ensure_post, except: [:new, :create]
 
   def new
@@ -11,16 +11,15 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "投稿しました"
-      redirect_to post_path(@post)
+      redirect_to mypage_path
     else
       render :new
     end
   end
 
   def show
-  end
-
-  def edit
+    @post_comment = PostComment.new
+    @post_comments = @post.post_comments.order(created_at: :desc)
   end
 
   def update
@@ -28,7 +27,9 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿を編集しました"
       redirect_to post_path(@post)
     else
-      render :edit
+      @post_comment = PostComment.new
+      @post_comments = @post.post_comments.order(created_at: :desc)
+      render :show
     end
   end
 
@@ -43,8 +44,8 @@ class Public::PostsController < ApplicationController
   def ensure_post
     @post = Post.find(params[:id])
   end
-end
 
   def post_params
     params.require(:post).permit(:body, :post_image)
   end
+end

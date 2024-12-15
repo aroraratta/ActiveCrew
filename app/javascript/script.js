@@ -37,3 +37,43 @@ document.addEventListener('turbolinks:load', function() {
     });
   });
 });
+
+// ユーザー、投稿編集フォーム用jquery
+$(document).on('turbolinks:load', function() {
+  $('.edit-btn').on('click', function() {
+    var contentDiv = $('#content');
+    var formDiv = $('#edit-form');
+
+    contentDiv.addClass('d-none');
+    formDiv.removeClass('d-none');
+  });
+
+  $('.cancel-edit').on('click', function() {
+    var contentDiv = $('#content');
+    var formDiv = $('#edit-form');
+
+    formDiv.addClass('d-none');
+    contentDiv.removeClass('d-none');
+  });
+});
+
+// コメント編集フォーム用jquery
+$(document).on('turbolinks:load', function() {
+  $('.edit-comment-btn').on('click', function() {
+    var commentId = $(this).data('comment-id');
+    var edit_contentDiv = $('#comment-content-' + commentId);
+    var edit_formDiv = $('#edit-form-' + commentId);
+
+    edit_contentDiv.addClass('d-none');
+    edit_formDiv.removeClass('d-none');
+  });
+
+  $('.cancel-edit-comment').on('click', function() {
+    var commentId = $(this).data('comment-id');
+    var edit_contentDiv = $('#comment-content-' + commentId);
+    var edit_formDiv = $('#edit-form-' + commentId);
+
+    edit_formDiv.addClass('d-none');
+    edit_contentDiv.removeClass('d-none');
+  });
+});

@@ -1,10 +1,21 @@
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+                       admin_posts_index GET    /admin/posts/index(.:format)                                                                      admin/posts#index
                                     root GET    /                                                                                                 homes#about
                                      top GET    /top(.:format)                                                                                    homes#top
                                 searches GET    /searches(.:format)                                                                               searches#search
                        new_admin_session GET    /admins/sign_in(.:format)                                                                         admin/sessions#new
                            admin_session POST   /admins/sign_in(.:format)                                                                         admin/sessions#create
                    destroy_admin_session DELETE /admins/sign_out(.:format)                                                                        admin/sessions#destroy
+                             admin_users GET    /admin/users(.:format)                                                                            admin/users#index
+                              admin_user GET    /admin/users/:id(.:format)                                                                        admin/users#show
+                                         PATCH  /admin/users/:id(.:format)                                                                        admin/users#update
+                                         PUT    /admin/users/:id(.:format)                                                                        admin/users#update
+                             admin_posts GET    /admin/posts(.:format)                                                                            admin/posts#index
+                              admin_post GET    /admin/posts/:id(.:format)                                                                        admin/posts#show
+                                         PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
+                                         PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
+                                         DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
+                          admin_searches GET    /admin/searches(.:format)                                                                         admin/searches#search
                         new_user_session GET    /users/sign_in(.:format)                                                                          public/sessions#new
                             user_session POST   /users/sign_in(.:format)                                                                          public/sessions#create
                     destroy_user_session DELETE /users/sign_out(.:format)                                                                         public/sessions#destroy
@@ -15,6 +26,10 @@
                                          PUT    /users(.:format)                                                                                  public/registrations#update
                                          DELETE /users(.:format)                                                                                  public/registrations#destroy
                                          POST   /users(.:format)                                                                                  public/registrations#create
+                      post_post_comments POST   /posts/:post_id/post_comments(.:format)                                                           public/post_comments#create
+                       post_post_comment PATCH  /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
+                                         PUT    /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
+                                         DELETE /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#destroy
                                    posts POST   /posts(.:format)                                                                                  public/posts#create
                                 new_post GET    /posts/new(.:format)                                                                              public/posts#new
                                edit_post GET    /posts/:id/edit(.:format)                                                                         public/posts#edit
@@ -23,11 +38,12 @@
                                          PUT    /posts/:id(.:format)                                                                              public/posts#update
                                          DELETE /posts/:id(.:format)                                                                              public/posts#destroy
                                   mypage GET    /mypage(.:format)                                                                                 public/users#show
-                        edit_information GET    /users/information/edit(.:format)                                                                 public/users#edit
-                      update_information PATCH  /users/information/update(.:format)                                                               public/users#update
+                             edit_mypage GET    /mypage/edit(.:format)                                                                            public/users#edit
+                      update_information PATCH  /users/information/:id/update(.:format)                                                           public/users#update
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
                                 withdraw PATCH  /users/withdraw(.:format)                                                                         public/users#withdraw
+                          users_searches GET    /users/searches(.:format)                                                                         public/searches#search
            rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
            rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
