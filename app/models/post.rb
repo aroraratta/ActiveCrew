@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  belongs_to :circle
+  belongs_to :circle, optional: true
   has_many :post_comments
   
   validates :body, presence: true

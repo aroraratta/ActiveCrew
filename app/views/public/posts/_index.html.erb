@@ -6,28 +6,41 @@
           <%= display_user_image(obj.user) %>
         </div>
       </div>
-      <div class="col text-truncate my-auto text-blue">
+      <div class="col text-truncate my-auto text-blue font-weight-bold">
         <%= obj.user.name %>
       </div>
     </div>
   <% end %>
-  <%= link_to url, class: "text-dark" do %>
-    <div class="row mb-3">
-      <div class="col">
-        <%= content %>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="row">
+        <%= link_to url, class: "text-dark" do %>
+          <div class="col">
+            <%= simple_format(content) %>
+          </div>
+        <% end %>
       </div>
-      <% if obj.post_image.attached? %>
-        <div class="col-3">
-          <div class="square">
-            <%= display_post_image(obj) %>
+      <% if circle.present? %>
+        <div class="row text-muted">
+          <div class="col">
+            <%= link_to circle_path(circle), class: "small-btn-custom-blue" do %>
+              @<%= circle.circle_name %>
+            <% end %>
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="row text-muted">
-      <div class="col">
-        (<%= format_datetime(obj.created_at) %>)
+      <div class="row my-3 text-muted">
+        <div class="col">
+          (<%= format_datetime(obj.created_at) %>)
+        </div>
       </div>
     </div>
-  <% end %>
+    <% if obj.post_image.attached? %>
+      <div class="col-3 my-auto">
+        <div class="square">
+          <%= display_post_image(obj) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

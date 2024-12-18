@@ -1,6 +1,6 @@
 class Public::CirclesController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_owner, only: [:edit, :update]
+  before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def new
     @circle = Circle.new
@@ -12,6 +12,8 @@ class Public::CirclesController < ApplicationController
     @circle = Circle.new(circle_params)
     @circle.owner_id = current_user.id
     if @circle.save
+      CircleUser.create(user_id: current_user.id, circle_id: @circle.id)
+      flash[:notice] = "サークルを作成しました"
       redirect_to circle_path(@circle)
     else
       render "new"
@@ -21,6 +23,7 @@ class Public::CirclesController < ApplicationController
   def show
     @circle = Circle.find(params[:id])
     @circle_posts = @circle.posts
+    @prefectures = Prefecture.all
   end
 
   def edit
@@ -32,6 +35,12 @@ class Public::CirclesController < ApplicationController
     else
       render "edit"
     end
+  end
+  
+  def destroy
+    @circle.destroy
+    flash[:notice] = "サークルを削除しました"
+    redirect_to mypage_path
   end
 
   private
