@@ -10,4 +10,16 @@ class Circle < ApplicationRecord
   belongs_to :prefecture
 
   has_one_attached :circle_image
+
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @circle = Circle.where("name = ? OR introduction = ?", word, word)
+    elsif search == "forward_match"
+      @circle = Circle.where("name LIKE ? OR introduction LIKE ?", "#{word}%", "#{word}%")
+    elsif search == "partial_match"
+      @circle = Circle.where("name LIKE ? OR introduction LIKE ?", "%#{word}%", "%#{word}%")
+    else
+      @circle = Circle.all
+    end
+  end
 end
