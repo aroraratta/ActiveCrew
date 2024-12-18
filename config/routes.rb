@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "homes#about"
   get "top" => "homes#top"
   get "searches" => "searches#search"
+  resources :cities, only: [:index]
 
   # 管理者用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
   scope module: :public do
+    resources :circles do
+      resource :circle_users, only: [:create, :destroy]
+    end
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]
     end

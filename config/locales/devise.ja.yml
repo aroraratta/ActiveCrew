@@ -28,8 +28,11 @@ ja:
         name: 名前
       post:
         body: 投稿内容
+      circle:
+        city: 市
     models:
       user: ユーザー
+      circle: サークル
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -142,6 +145,7 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
       blank: を入力してください。
+      required: "を選択してください"
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"

@@ -16,6 +16,15 @@ module ApplicationHelper
       image_tag("no_image.png")
     end
   end
+  
+  # サークルを表示する画面で使用する
+  def display_circle_image(circle)
+    if circle.circle_image.attached?
+      image_tag(circle.circle_image)
+    else
+      image_tag("no_image.png")
+    end
+  end
 
   # 年月日変換
   def format_datetime(datetime)

@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :ensure_post, except: [:new, :create]
+  before_action :ensure_circle, except: [:destroy]
 
   def new
     @post = Post.new
@@ -44,8 +45,12 @@ class Public::PostsController < ApplicationController
   def ensure_post
     @post = Post.find(params[:id])
   end
+  
+  def ensure_circle
+    @circles = current_user.circles
+  end
 
   def post_params
-    params.require(:post).permit(:body, :post_image)
+    params.require(:post).permit(:body, :circle_id, :post_image)
   end
 end

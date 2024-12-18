@@ -3,6 +3,7 @@
                                     root GET    /                                                                                                 homes#about
                                      top GET    /top(.:format)                                                                                    homes#top
                                 searches GET    /searches(.:format)                                                                               searches#search
+                                  cities GET    /cities(.:format)                                                                                 cities#index
                        new_admin_session GET    /admins/sign_in(.:format)                                                                         admin/sessions#new
                            admin_session POST   /admins/sign_in(.:format)                                                                         admin/sessions#create
                    destroy_admin_session DELETE /admins/sign_out(.:format)                                                                        admin/sessions#destroy
@@ -26,6 +27,16 @@
                                          PUT    /users(.:format)                                                                                  public/registrations#update
                                          DELETE /users(.:format)                                                                                  public/registrations#destroy
                                          POST   /users(.:format)                                                                                  public/registrations#create
+                     circle_circle_users DELETE /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#destroy
+                                         POST   /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#create
+                                 circles GET    /circles(.:format)                                                                                public/circles#index
+                                         POST   /circles(.:format)                                                                                public/circles#create
+                              new_circle GET    /circles/new(.:format)                                                                            public/circles#new
+                             edit_circle GET    /circles/:id/edit(.:format)                                                                       public/circles#edit
+                                  circle GET    /circles/:id(.:format)                                                                            public/circles#show
+                                         PATCH  /circles/:id(.:format)                                                                            public/circles#update
+                                         PUT    /circles/:id(.:format)                                                                            public/circles#update
+                                         DELETE /circles/:id(.:format)                                                                            public/circles#destroy
                       post_post_comments POST   /posts/:post_id/post_comments(.:format)                                                           public/post_comments#create
                        post_post_comment PATCH  /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
                                          PUT    /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update

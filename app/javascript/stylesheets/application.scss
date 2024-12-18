@@ -30,6 +30,39 @@
   padding: 20px 30px;
 }
 
+.square {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.square img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.circle {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.circle img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #46B1E1;
+}
+
 .btn-custom-blue {
   background-color: #fff;
   color: #46B1E1;
@@ -298,23 +331,6 @@ body.menu-open .down-move {
 .fixed-header.is-show {
   top: 0;
   visibility: visible;
-}
-
-// users#show
-.square {
-  position: relative;
-  width: 100%;
-  padding-top: 100%;
-}
-
-.square img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 30px;
 }
 
 // users#edit
