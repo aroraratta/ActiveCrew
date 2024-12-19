@@ -18,9 +18,10 @@
   </div>
 
   <div id="content">
-    <%= render "post_display", obj: @post, user_route: (current_user == @post.user ? mypage_path : user_path(@post.user)), post_route: post_path(@post) %>
+    <%= render "post_display", obj: @post, user_route: (current_user == @post.user ? mypage_path : user_path(@post.user)), post_route: post_path(@post), circles: @circles %>
   </div>
 
+  # サインインしていないユーザーでは読み込み自体を防ぐ
   <% if user_signed_in? %>
     <div class="d-none" id="edit-form">
       <%= render "form", post: @post, submit_text: "保存", route: post_path, circles: @circles %>
@@ -54,7 +55,7 @@
 
       <% @post_comments.each do |post_comment| %>
         <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
-          <%= render "public/posts/index", obj: post_comment, url: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle %>
+          <%= render "public/posts/index", user_route: user_path(post_comment.user), obj: post_comment, post_route: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: circle_path(post_comment.post.circle) %>
           <% if post_comment.user == current_user || admin_signed_in? %>
             <div class="col-2 my-auto text-center">
               <button class="btn-custom-blue edit-comment-btn" data-comment-id="<%= post_comment.id %>">編集</button>

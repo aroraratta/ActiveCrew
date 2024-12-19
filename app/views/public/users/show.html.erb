@@ -139,7 +139,7 @@
 
       <% @posts.each do |post| %>
         <div class="row py-3 my-3 post-background">
-          <%= render "public/posts/index", obj: post, url: post_path(post), content: post.body, circle: post.circle %>
+          <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
           <div class="col-1 my-auto text-center">
             <i class="fa-regular fa-comment small-icon"></i>
             <%= post.post_comments.count %>

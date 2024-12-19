@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update, :destroy]
-    get "searches" => "searches#search"
+    resources :circles, only: [:index, :show, :update, :destroy]
   end
 
   # 利用者用
@@ -37,7 +37,6 @@ Rails.application.routes.draw do
     get "users/information/:id" => "users#show", as: "user"
     get "/users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
     patch "/users/withdraw" => "users#withdraw", as: "withdraw"
-    get "users/searches" => "searches#search"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   

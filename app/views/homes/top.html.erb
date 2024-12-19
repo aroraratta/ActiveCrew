@@ -2,10 +2,6 @@
   <div class="row my-5">
 
   <div class="row w-100">
-    <% if admin_signed_in? %>
-      <%= render "admin/searches/search" %>
-    <% else %>
-      <%= render "public/searches/search" %>
-    <% end %>
+    <%= render "searches/search" %>
   </div>
 </div>

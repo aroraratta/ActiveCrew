@@ -19,6 +19,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @circle = @post.circle
+    @circles = @post.user.circles
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)
   end
