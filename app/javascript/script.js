@@ -77,3 +77,27 @@ $(document).on('turbolinks:load', function() {
     edit_contentDiv.removeClass('d-none');
   });
 });
+
+// 活動場所選択フォーム
+$(document).on('change', '#circle_prefecture_id', function() {
+  var prefectureId = $(this).val();
+  var citySelect = $('#circle_city_id');
+
+  if (prefectureId) {
+    $.ajax({
+      url: '/cities',  // citiesのindexアクションを呼び出す
+      data: { prefecture_id: prefectureId },
+      dataType: 'json',
+      success: function(data) {
+        citySelect.empty();  // 既存のcityをクリア
+        citySelect.append('<option value="">市を選択</option>');
+        $.each(data, function(index, city) {
+          citySelect.append('<option value="' + city.id + '">' + city.city_name + '</option>');
+        });
+      }
+    });
+  } else {
+    citySelect.empty();
+    citySelect.append('<option value="">市を選択</option>');
+  }
+});

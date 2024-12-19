@@ -18,6 +18,8 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @circle = @post.circle
+    @circles = @post.user.circles
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)
   end
@@ -46,6 +48,6 @@ class Public::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body, :post_image)
+    params.require(:post).permit(:body, :circle_id, :post_image)
   end
 end

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">サークル作成</h3>
+    </div>
+  </div>
+  
+  <div class="row ml-3">
+    <%= render "layouts/errors", obj: @circle %>
+  </div>
+
+  <div class="fit-blue-border">
+    <div class="row">
+      <div class="col">
+        <%= render "form", circle: @circle, route: circles_path, prefectures: @prefectures, submit_text: "作成" %>
+      </div>
+    </div>
+  </div>
+
+</div>

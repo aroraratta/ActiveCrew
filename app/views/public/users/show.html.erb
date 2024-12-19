@@ -27,8 +27,24 @@
 
   <div class="row" id="content">
     <div class="col-3 my-auto">
-      <div class="square">
-        <%= display_user_image(@user) %>
+      <div class="row my-3">
+        <div class="col mx-auto">
+          <div class="square">
+            <%= display_user_image(@user) %>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col text-center">
+          <%= link_to root_path do %>
+            <p class="m-0 small-btn-custom-blue font-weight-bold">フォロー<br>100</p>
+          <% end %>
+        </div>
+        <div class="col text-center">
+          <%= link_to root_path do %>
+            <p class="m-0 small-btn-custom-blue font-weight-bold">フォロワー<br>100</p>
+          <% end %>
+        </div>
       </div>
     </div>
     <div class="col-9">
@@ -37,34 +53,27 @@
           <p class="user-name"><%= @user.name %></p>
         </div>
         <div class="row user-introduction">
-          <div class="col-3 text-center">
-            <p><strong>紹介文</strong></p>
+          <div class="col-3 text-center my-auto">
+            <p class="my-0 font-weight-bold">紹介文</p>
           </div>
           <div class="col-9">
-            <p><%= @user.introduction %></p>
+            <p><%= simple_format(@user.introduction) %></p>
           </div>
         </div>
         <div class="row user-introduction">
-          <div class="col-3 text-center">
-            <p><strong>所属サークル</strong></p>
-          </div><div class="col-9">
-            <p>ここに所属サークル一覧(後で実装)</p>
+          <div class="col-3 text-center my-auto">
+            <p class="my-0 font-weight-bold">所属サークル</p>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-3 mx-auto">
-            <div class="text-center">
-              <%= link_to root_path do %>
-                <p class="m-0 btn-custom-blue"><strong>フォロー</strong><br>100</p>
-              <% end %>
-            </div>
-          </div>
-          <div class="col-3 mx-auto">
-            <div class="text-center">
-              <%= link_to root_path do %>
-                <p class="m-0 btn-custom-blue"><strong>フォロワー</strong><br>100</p>
-              <% end %>
-            </div>
+          <div class="col-9">
+            <% @circles.each do |circle| %>
+              <div class="row">
+                <div class="col blue-text">
+                  <%= link_to circle_path(circle), class: "text-blue" do %>
+                    <%= circle.circle_name %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -130,7 +139,7 @@
 
       <% @posts.each do |post| %>
         <div class="row py-3 my-3 post-background">
-          <%= render "public/posts/index", obj: post, url: post_path(post), content: post.body %>
+          <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
           <div class="col-1 my-auto text-center">
             <i class="fa-regular fa-comment small-icon"></i>
             <%= post.post_comments.count %>

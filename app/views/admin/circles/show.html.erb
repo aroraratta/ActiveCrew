@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">サークル詳細</h3>
+    </div>
+    <div class="col-3 offset-4 text-right my-auto">
+      <button class="btn-custom-blue edit-btn">編集</button>
+    </div>
+    <div class="col-2 ml-auto text-right my-auto">
+      <%= link_to "削除", admin_circle_path(@circle), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
+    </div>
+  </div>
+  
+  <div class="row" id="content">
+    <div class="col-3 my-auto">
+      <div class="row my-3">
+        <div class="col mx-auto">
+          <div class="circle">
+            <%= display_circle_image(@circle) %>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col text-center">
+          <%= link_to root_path do %>
+            <p class="m-0 btn-custom-blue font-weight-bold">参加者<br>100</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="blue-border">
+        <div class="row">
+          <p class="user-name"><%= @circle.circle_name %></p>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center my-auto">
+            <p class="my-0 font-weight-bold">紹介文</p>
+          </div>
+          <div class="col-9">
+            <p><%= simple_format(@circle.circle_introduction) %></p>
+          </div>
+        </div>
+        <div class="row user-introduction">
+          <div class="col-3 text-center my-auto">
+            <p class="font-weight-bold">活動場所</p>
+          </div><div class="col-9">
+            <p><%= @circle.prefecture.prefecture_name %>/<%= @circle.city.city_name %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-none" id="edit-form">
+    <%= render "public/circles/form", circle: @circle, route: admin_circle_path(@circle), prefectures: @prefectures, submit_text: "変更を保存" %>
+    <div class="row ml-1">
+      <div class="col text-center">
+        <button type="button" class="btn-custom-red cancel-edit">編集画面を閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-5 bg-gray">
+    <div class="col">
+      <div class="row my-3">
+        <div class="col text-center">
+          <p class="font-weight-bold">このサークルに関する投稿一覧</P>
+        </div>
+      </div>
+
+      <% @circle_posts.each do |post| %>
+        <div class="row py-3 my-3 post-background">
+          <%= render "public/posts/index", obj: post, user_route: admin_user_path(post.user), post_route: admin_post_path(post), content: post.body, circle: post.circle, circle_route: admin_circle_path(post.circle) %>
+          <div class="col-1 my-auto text-center">
+            <i class="fa-regular fa-comment small-icon"></i>
+            <%= post.post_comments.count %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+</div>

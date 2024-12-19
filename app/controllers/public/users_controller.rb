@@ -8,6 +8,7 @@ class Public::UsersController < ApplicationController
       @user = current_user
     end
     @posts = @user.posts.order(created_at: :desc)
+    @circles = @user.circles
   end
 
   def edit

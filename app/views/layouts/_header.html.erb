@@ -18,7 +18,7 @@
       <ul>
         <% if admin_signed_in? %>
           <p><strong>管理者ログイン中。</strong></p>
-          <%= link_to root_path do %><li class="header-content">サークル一覧</li><% end %>
+          <%= link_to admin_circles_path do %><li class="header-content">サークル一覧</li><% end %>
           <%= link_to admin_users_path do %><li class="header-content">会員一覧</li><% end %>
           <%= link_to admin_posts_path do %><li class="header-content">投稿一覧</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
@@ -28,7 +28,7 @@
           <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
           <%= link_to mypage_path do %><li class="header-content">マイページ</li><% end %>
           <%= link_to new_post_path do %><li class="header-content">新規投稿</li><% end %>
-          <%= link_to root_path do %><li class="header-content">サークル作成</li><% end %>
+          <%= link_to new_circle_path do %><li class="header-content">サークル作成</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
           <%= link_to destroy_user_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% else %>
@@ -50,7 +50,7 @@
         <%= image_tag "logo.png", class: "h-100" %>
       <% end %>
       <% if admin_signed_in? %>
-        <%= link_to "サークル一覧", class: "col my-auto" %>
+        <%= link_to "サークル一覧", admin_circles_path, class: "col my-auto" %>
         <%= link_to "会員一覧", admin_users_path, class: "col my-auto" %>
         <%= link_to "投稿一覧", admin_posts_path, class: "col my-auto" %>
         <%= link_to "検索", top_path, class: "col my-auto" %>
@@ -59,7 +59,7 @@
         <%= link_to "サイト概要", root_path, class: "col my-auto" %>
         <%= link_to "マイページ", mypage_path, class: "col my-auto" %>
         <%= link_to "新規投稿", new_post_path, class: "col my-auto" %>
-        <%= link_to "サークル作成", root_path, class: "col my-auto" %>
+        <%= link_to "サークル作成", new_circle_path, class: "col my-auto" %>
         <%= link_to "検索", top_path, class: "col my-auto" %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "col my-auto" %>
       <% else %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "homes#about"
   get "top" => "homes#top"
   get "searches" => "searches#search"
+  resources :cities, only: [:index]
 
   # 管理者用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update, :destroy]
-    get "searches" => "searches#search"
+    resources :circles, only: [:index, :show, :update, :destroy]
   end
 
   # 利用者用
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
   scope module: :public do
+    resources :circles do
+      resource :circle_users, only: [:create, :destroy]
+    end
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]
     end
@@ -33,7 +37,6 @@ Rails.application.routes.draw do
     get "users/information/:id" => "users#show", as: "user"
     get "/users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
     patch "/users/withdraw" => "users#withdraw", as: "withdraw"
-    get "users/searches" => "searches#search"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
