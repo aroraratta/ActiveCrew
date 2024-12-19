@@ -1,0 +1,47 @@
+<div class="row my-3">
+  <div class="col">
+    <%= link_to circle_route do %>
+      <div class="blue-border">
+        <div class="row mb-3">
+          <div class="col font-weight-bold text-blue h4">
+            <%= obj.circle_name %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="circle">
+              <%= display_circle_image(obj) %>
+            </div>
+          </div>
+          <div class="col-9 my-auto">
+            <div class="row my-3">
+              <div class="col-3">
+                <p class="m-0 text-center font-weight-bold text-dark">サークル紹介</p>
+              </div>
+              <div class="col-9 text-dark">
+                <%= obj.circle_introduction %>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-3">
+                <p class="m-0 text-center font-weight-bold text-dark">管理者</p>
+              </div>
+              <div class="col-9 text-dark">
+                <%= obj.owner.name %>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-3">
+                <p class="m-0 text-center font-weight-bold text-dark">サークルに関する投稿</p>
+              </div>
+              <div class="col-9 text-dark">
+                <%= obj.posts.size %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

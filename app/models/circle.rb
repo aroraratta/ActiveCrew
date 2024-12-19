@@ -13,11 +13,11 @@ class Circle < ApplicationRecord
 
   def self.looks(search, word)
     if search == "perfect_match"
-      @circle = Circle.where("name = ? OR introduction = ?", word, word)
+      @circle = Circle.where("circle_name = ? OR circle_introduction = ?", word, word)
     elsif search == "forward_match"
-      @circle = Circle.where("name LIKE ? OR introduction LIKE ?", "#{word}%", "#{word}%")
+      @circle = Circle.where("circle_name LIKE ? OR circle_introduction LIKE ?", "#{word}%", "#{word}%")
     elsif search == "partial_match"
-      @circle = Circle.where("name LIKE ? OR introduction LIKE ?", "%#{word}%", "%#{word}%")
+      @circle = Circle.where("circle_name LIKE ? OR circle_introduction LIKE ?", "%#{word}%", "%#{word}%")
     else
       @circle = Circle.all
     end

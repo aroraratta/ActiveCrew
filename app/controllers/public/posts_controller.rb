@@ -1,7 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :ensure_post, except: [:new, :create]
-  before_action :ensure_circle, except: [:destroy]
 
   def new
     @post = Post.new
@@ -19,6 +18,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @circle = @post.circle
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)
   end
@@ -44,10 +44,6 @@ class Public::PostsController < ApplicationController
   
   def ensure_post
     @post = Post.find(params[:id])
-  end
-  
-  def ensure_circle
-    @circles = current_user.circles
   end
 
   def post_params

@@ -23,7 +23,12 @@
 
   <% elsif @range == "post" %>
     <% @posts.each do |post| %>
-      <%= render "public/posts/post_display", obj: post, obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post) %>
+      <%= render "public/posts/post_display", obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post) %>
+    <% end %>
+
+  <% elsif @range == "circle" %>
+    <% @circles.each do |circle| %>
+      <%= render "public/circles/circle_display", obj: circle, circle_route: circle_path(circle) %>
     <% end %>
   <% end %>
 

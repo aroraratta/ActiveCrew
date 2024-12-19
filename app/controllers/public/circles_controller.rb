@@ -1,5 +1,5 @@
 class Public::CirclesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except:[:show]
   before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def new
