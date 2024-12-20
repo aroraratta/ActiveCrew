@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_16_232053) do
+ActiveRecord::Schema.define(version: 2024_12_19_085159) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(version: 2024_12_16_232053) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "permits", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "circle_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["circle_id"], name: "index_permits_on_circle_id"
+    t.index ["user_id"], name: "index_permits_on_user_id"
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -131,4 +140,6 @@ ActiveRecord::Schema.define(version: 2024_12_16_232053) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "circle_users", "circles"
   add_foreign_key "circle_users", "users"
+  add_foreign_key "permits", "circles"
+  add_foreign_key "permits", "users"
 end

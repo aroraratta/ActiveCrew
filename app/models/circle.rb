@@ -1,13 +1,14 @@
 class Circle < ApplicationRecord
-  validates :circle_name, presence: true
-
   has_many :circle_users, dependent: :destroy
   has_many :users, through: :circle_users
   has_many :posts, dependent: :destroy
+  has_many :permits, dependent: :destroy
   
   belongs_to :owner, class_name: "User"
   belongs_to :city
   belongs_to :prefecture
+  
+  validates :circle_name, presence: true
 
   has_one_attached :circle_image
 
@@ -21,5 +22,9 @@ class Circle < ApplicationRecord
     else
       @circle = Circle.all
     end
+  end
+
+  def owner?(user)
+    user.id == owner_id
   end
 end

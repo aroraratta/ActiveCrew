@@ -24,13 +24,12 @@ class Public::CirclesController < ApplicationController
     @circle = Circle.find(params[:id])
     @circle_posts = @circle.posts
     @prefectures = Prefecture.all
-  end
-
-  def edit
+    @permits = @circle.permits
   end
 
   def update
     if @circle.update(circle_params)
+      flash[:notice] = "サークルを編集しました"
       redirect_to circle_path
     else
       render "edit"
@@ -53,6 +52,6 @@ class Public::CirclesController < ApplicationController
   end
 
   def circle_params
-    params.require(:circle).permit(:circle_name, :circle_introduction, :circle_image, :prefecture_id,:city_id)
+    params.require(:circle).permit(:circle_name, :circle_introduction, :circle_image, :prefecture_id, :city_id)
   end
 end
