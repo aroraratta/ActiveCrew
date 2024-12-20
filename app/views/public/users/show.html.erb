@@ -15,9 +15,24 @@
       <div class="col-3">
         <h3 class="page-title my-auto">プロフィール</h3>
       </div>
-      <div class="col-2 offset-7 ml-auto text-right my-auto">
-        <%= link_to "DM", root_path, class: "btn-custom-blue" %>
-      </div>
+      <% if user_signed_in? %>
+        <% unless @user.id == current_user.id %>
+          <% if @is_room == true %>
+            <div class="col-2 offset-7 ml-auto text-right my-auto">
+              <%= link_to "DM", room_path(@room_id), class: "btn-custom-blue" %>
+            </div>
+          <% else %>
+            <div class="col-2 offset-7 ml-auto text-right my-auto">
+              <%= form_for @room do |f| %>
+                <%= fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "DMを始める", class: "btn-custom-blue"%>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
   

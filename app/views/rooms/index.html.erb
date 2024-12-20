@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">DM一覧</h3>
+    </div>
+  </div>
+  <% @rooms.each do |room| %>
+    <div class="row my-3">
+      <div class="col">
+        <%= link_to room_path(room) do %>
+          <% if room.users.where.not(id: current_user.id).where(is_active: true).exists? %>
+            <div class="blue-border">
+              <div class="row">
+                <div class="col-1">
+                  <div class="square">
+                    <%= display_user_image(room.users.where.not(id: current_user.id).where(is_active: true).first) %>
+                  </div>
+                </div>
+                <div class="col my-auto font-weight-bold text-blue">
+                  <%= room.users.where.not(id: current_user.id).where(is_active: true).first&.name %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col my-2 text-gray">
+                  <p class="m-0"><%= room.messages.last&.message || "まだメッセージがありません" %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

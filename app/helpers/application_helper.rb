@@ -31,4 +31,9 @@ module ApplicationHelper
     datetime.strftime("%Y年%m月%d日 %H:%M")
   end
 
+  # is_activeがtrueのユーザーの取得(複数ユーザーある場合に使用)
+  def first_active_user(user)
+    users.where.not(id: user.id).where(is_active: true).first
+  end
+
 end

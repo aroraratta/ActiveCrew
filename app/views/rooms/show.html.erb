@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row my-5">
+    <% @entries.each do |entry| %>
+      <% if current_user != entry.user %>
+        <div class="col-auto text-center">
+          <h3 class="page-title my-auto">DM:<%= entry.user.name %></h3>
+        </div>
+        <div class="col-auto my-auto ml-auto">
+          <%= link_to "DM一覧へ", rooms_path, class: "btn-custom-blue" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @messages.present? %>
+    <% @messages.each do |message| %>
+      <% if current_user == message.user %>
+        <div class="row m-3">
+          <div class="col">
+            <div class="row">
+              <div class="col-auto ml-auto send-message">
+                <%= simple_format(message.message) %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-auto ml-auto">
+                <p class="m-0 text-gray">(<%= format_datetime(message.created_at) %>)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="row my-3">
+            <div class="col-1">
+              <%= link_to user_path(message.user) do %>
+                <div class="square">
+                  <%= display_user_image(message.user) %>
+                </div>
+              <% end %>
+            </div>
+          <div class="col my-auto text-dark">
+            <div class="row">
+              <div class="col">
+                <%= message.user.name %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-auto m-0 sent-message">
+                <%= message.message %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-auto">
+                <p class="m-0 text-gray">(<%= format_datetime(message.created_at) %>)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+   
+  <div class="row">
+    <div class="col text-center">
+      <%= form_for @message do |f| %>
+        <%= f.text_field :message, placeholder: "メッセージを入力", class:"custom-form" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "送信",class: "my-auto small-btn-custom-blue"%>
+      <% end %>
+    </div>
+  </div>
+</div>
