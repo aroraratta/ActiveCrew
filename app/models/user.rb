@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :circles, through: :circle_users
   has_many :permits, dependent: :destroy
   has_many :groups,through: :group_users
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :rooms, through: :entries
 
   has_one_attached :user_image
 
