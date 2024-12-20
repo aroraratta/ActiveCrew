@@ -4,6 +4,13 @@
 <div class="row my-3">
   <div class="col">
     <div class="<%= border_class %>">
+      <div class="row">
+        <div class="col">
+          <div class="row my-3 font-weight-bold <%= text_class %>">
+            <%= obj.name %>
+          </div>
+        </div>
+      </div>
       <div class="row mb-3">
         <div class="col-2 my-auto">
           <div class="square my-auto">
@@ -12,10 +19,7 @@
         </div>
         <div class="col-10 my-auto">
           <div class="row my-3 <%= text_class %>">
-            <strong><%= obj.name %></strong>
-          </div>
-          <div class="row my-3 <%= text_class %>">
-            <%= obj.introduction %>
+            <%= simple_format(obj.introduction) %>
           </div>
         </div>
       </div>

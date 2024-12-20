@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto"><%= @circle.circle_name %>参加者一覧</h3>
+    </div>
+  </div>
+
+  <% @circle_users.each do |user| %>
+    <div class="row">
+      <div class="col-10">
+        <%= link_to user_path(user) do %>
+          <%= render "public/users/user_display", obj: user %>
+        <% end %>
+      </div>
+      <% if @circle.owner?(user) %>
+        <div class="col-2 my-auto text-center">
+          <p class="m-0 font-weight-bold text-blue">管理者</p>
+        </div>
+      <% else %>
+        <% if user_signed_in? %>
+          <% if @circle.owner?(current_user) %>
+            <div class="col my-auto text-center">
+              <%= link_to "退出", circle_circle_user_path(circle_id: @circle, id: user), method: :delete, class: "btn-custom-red", data: { confirm: "ユーザーを退出させますか?" } %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

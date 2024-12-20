@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'posts/index'
-  end
   # 共用
   root to: "homes#about"
   get "top" => "homes#top"
@@ -26,7 +23,8 @@ Rails.application.routes.draw do
   }
   scope module: :public do
     resources :circles do
-      resource :circle_users, only: [:create, :destroy]
+      resources :permits, only: [:create, :destroy]
+      resources :circle_users, only: [:index, :create, :destroy]
     end
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]

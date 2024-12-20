@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :post_comments
   has_many :circle_users, dependent: :destroy
   has_many :circles, through: :circle_users
+  has_many :permits, dependent: :destroy
+  has_many :groups,through: :group_users
 
   has_one_attached :user_image
 
