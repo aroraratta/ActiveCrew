@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">フォロワー一覧:<%= @user.name %></h3>
+    </div>
+    <div class="col-auto my-auto">
+      <%= link_to "戻る", user_path(@user), class: "btn-custom-red" %>
+    </div>
+  </div>
+
+  <%if @users.exists? %>
+    <% @users.each do |user| %>
+      <div class="row">
+        <div class="col">
+          <%= link_to user_path(user) do %>
+            <%= render "public/users/user_display", obj: user %>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <% if current_user.following?(user) %>
+            <div class="col-3 my-auto">
+              <%= link_to "フォロー解除", user_relationships_path(user), method: :delete, class: "btn-custom-red" %>
+            </div>
+            <% else %>
+              <div class="col-3 my-auto">
+              <%= link_to "フォロー", user_relationships_path(user), method: :post, class: "btn-custom-blue" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="row my-3">
+      <div class="col">
+        <p class="text-blue font-weight-bold">フォロワーがいません</p>
+      </div>
+    </div>
+  <% end %>
+</div>

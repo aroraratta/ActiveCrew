@@ -37,6 +37,11 @@ Rails.application.routes.draw do
     get "users/information/:id" => "users#show", as: "user"
     get "/users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
     patch "/users/withdraw" => "users#withdraw", as: "withdraw"
+    resources :users, only: [] do
+      resource :relationships, only: [:create, :destroy]
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   

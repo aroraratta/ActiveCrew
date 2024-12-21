@@ -4,7 +4,8 @@
                                 searches GET    /searches(.:format)                                                                               searches#search
                                   cities GET    /cities(.:format)                                                                                 cities#index
                                 messages POST   /messages(.:format)                                                                               messages#create
-                                   rooms POST   /rooms(.:format)                                                                                  rooms#create
+                                   rooms GET    /rooms(.:format)                                                                                  rooms#index
+                                         POST   /rooms(.:format)                                                                                  rooms#create
                                     room GET    /rooms/:id(.:format)                                                                              rooms#show
                        new_admin_session GET    /admins/sign_in(.:format)                                                                         admin/sessions#new
                            admin_session POST   /admins/sign_in(.:format)                                                                         admin/sessions#create
@@ -63,6 +64,10 @@
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
                                 withdraw PATCH  /users/withdraw(.:format)                                                                         public/users#withdraw
+                      user_relationships DELETE /users/:user_id/relationships(.:format)                                                           public/relationships#destroy
+                                         POST   /users/:user_id/relationships(.:format)                                                           public/relationships#create
+                         user_followings GET    /users/:user_id/followings(.:format)                                                              public/relationships#followings
+                          user_followers GET    /users/:user_id/followers(.:format)                                                               public/relationships#followers
            rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
            rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create

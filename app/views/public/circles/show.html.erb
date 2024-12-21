@@ -65,7 +65,7 @@
           </div>
           <div class="col-9 text-blue">
             <%= link_to circle_circle_users_path(@circle) do %>
-              <p><%= @circle.users.count %></p>
+              <p><%= @circle.users.where(is_active: true).count %></p>
             <% end %>
           </div>
         </div>
