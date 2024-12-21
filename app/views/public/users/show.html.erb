@@ -4,32 +4,41 @@
       <div class="col-3 text-center">
         <h3 class="page-title my-auto">マイページ</h3>
       </div>
-      <div class="col-3 offset-4 text-right my-auto">
+      <div class="col-auto my-auto">
         <button class="btn-custom-blue edit-btn">プロフィール編集</button>
       </div>
-      <div class="col-2 ml-auto text-right my-auto">
+      <div class="col-auto my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
 
     <% else %>
-      <div class="col-3">
+      <div class="col-3 text-center">
         <h3 class="page-title my-auto">プロフィール</h3>
       </div>
       <% if user_signed_in? %>
         <% unless @user.id == current_user.id %>
           <% if @is_room == true %>
-            <div class="col-2 offset-7 ml-auto text-right my-auto">
+            <div class="col-auto my-auto">
               <%= link_to "DM", room_path(@room_id), class: "btn-custom-blue" %>
             </div>
           <% else %>
-            <div class="col-2 offset-7 ml-auto text-right my-auto">
+            <div class="col-auto my-auto">
               <%= form_for @room do |f| %>
                 <%= fields_for @entry do |e| %>
                   <%= e.hidden_field :user_id, value: @user.id %>
                 <% end %>
-                <%= f.submit "DMを始める", class: "btn-custom-blue"%>
-              </div>
-            <% end %>
+                <%= f.submit "DMを始める", class: "btn-custom-blue" %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if current_user.following?(@user) %>
+            <div class="col-auto my-auto">
+              <%= link_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "btn-custom-red" %>
+            </div>
+            <% else %>
+              <div class="col-auto my-auto">
+              <%= link_to "フォロー", user_relationships_path(@user), method: :post, class: "btn-custom-blue" %>
+            </div>
           <% end %>
         <% end %>
       <% end %>
@@ -42,42 +51,26 @@
 
   <div class="row" id="content">
     <div class="col-3 my-auto">
-      <div class="row my-3">
-        <div class="col mx-auto">
-          <div class="square">
-            <%= display_user_image(@user) %>
-          </div>
-        </div>
-      </div>
-      <div class="row my-3">
-        <div class="col text-center">
-          <%= link_to root_path do %>
-            <p class="m-0 small-btn-custom-blue font-weight-bold">フォロー<br>100</p>
-          <% end %>
-        </div>
-        <div class="col text-center">
-          <%= link_to root_path do %>
-            <p class="m-0 small-btn-custom-blue font-weight-bold">フォロワー<br>100</p>
-          <% end %>
-        </div>
+      <div class="square">
+        <%= display_user_image(@user) %>
       </div>
     </div>
     <div class="col-9">
       <div class="blue-border">
         <div class="row">
-          <p class="user-name"><%= @user.name %></p>
+          <p class="m-0 user-name"><%= @user.name %></p>
         </div>
-        <div class="row user-introduction">
+        <div class="row my-3 text-blue bg-light">
           <div class="col-3 text-center my-auto">
-            <p class="my-0 font-weight-bold">紹介文</p>
+            <p class="m-0 font-weight-bold">紹介文</p>
           </div>
-          <div class="col-9">
-            <p><%= simple_format(@user.introduction) %></p>
+          <div class="col-9 user-introduciton">
+            <%= simple_format(@user.introduction) %>
           </div>
         </div>
-        <div class="row user-introduction">
+        <div class="row my-3 text-blue bg-light">
           <div class="col-3 text-center my-auto">
-            <p class="my-0 font-weight-bold">所属サークル</p>
+            <p class="m-0 font-weight-bold">所属サークル</p>
           </div>
           <div class="col-9">
             <% @circles.each do |circle| %>
@@ -88,6 +81,26 @@
                   <% end %>
                 </div>
               </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row my-3 text-blue bg-light">
+          <div class="col-3 text-center my-auto">
+            <p class="m-0 font-weight-bold">フォロー</p>
+          </div>
+          <div class="col-9">
+            <%= link_to user_followings_path(@user), class: "text-blue" do %>
+              <span><%= @following_count %></span>
+            <% end %>
+          </div>
+        </div>
+        <div class="row my-3 text-blue bg-light">
+          <div class="col-3 text-center my-auto">
+            <p class="m-0 font-weight-bold">フォロワー</p>
+          </div>
+          <div class="col-9">
+            <%= link_to user_followers_path(@user), class: "text-blue" do %>
+              <span><%= @follower_count %></span>
             <% end %>
           </div>
         </div>

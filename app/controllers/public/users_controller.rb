@@ -9,6 +9,8 @@ class Public::UsersController < ApplicationController
     end
     @posts = @user.posts.order(created_at: :desc)
     @circles = @user.circles
+    @following_count = @user.followings.where(is_active: true).count
+    @follower_count = @user.followers.where(is_active: true).count
 
     # 以下DM機能用コントローラー
     @current_entry = Entry.where(user_id: current_user.id)
