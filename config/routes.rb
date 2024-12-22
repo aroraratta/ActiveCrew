@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "searches" => "searches#search"
   resources :cities, only: [:index]
   resources :messages, only: [:create]
-  resources :rooms, only: [:create, :show, :index]
+  resources :rooms, only: [:create, :show]
 
   # 管理者用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {

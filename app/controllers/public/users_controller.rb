@@ -9,6 +9,9 @@ class Public::UsersController < ApplicationController
     end
     @posts = @user.posts.order(created_at: :desc)
     @circles = @user.circles
+    @circle_posts = Post.where(circle_id: @circles.pluck(:id)).order(created_at: :desc)
+    @following_posts = Post.where(user_id: @user.followings.pluck(:id)).order(created_at: :desc)
+    @rooms = @user.rooms.includes(:messages, :users)
     @following_count = @user.followings.where(is_active: true).count
     @follower_count = @user.followers.where(is_active: true).count
 

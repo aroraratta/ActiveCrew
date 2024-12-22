@@ -101,3 +101,18 @@ $(document).on('change', '#circle_prefecture_id', function() {
     citySelect.append('<option value="">市を選択</option>');
   }
 });
+
+// マイページのタブ用
+$(document).on('turbolinks:load', function() {
+  $('#tab-contents .tab').not('#tab1').hide();
+  $('#tab-menu a').on('click', function(event) {
+    event.preventDefault();
+    const targetTab = $(this).attr('href');
+    $('#tab-contents .tab').hide();
+    $(targetTab).show();
+    $('#tab-menu .active a').removeClass('text-blue').addClass('text-white');
+    $('#tab-menu .active').removeClass('active').addClass('inactive');
+    $(this).parent().removeClass('inactive').addClass('active');
+    $(this).removeClass('text-white').addClass('text-blue');
+  });
+});
