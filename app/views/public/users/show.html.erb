@@ -49,7 +49,7 @@
     <%= render "layouts/errors", obj: @user %>
   </div>
 
-  <div class="row" id="content">
+  <div class="row my-3" id="content">
     <div class="col-3 my-auto">
       <div class="square">
         <%= display_user_image(@user) %>
@@ -109,7 +109,7 @@
   </div>
 
   <%= form_with model: @user, url: update_information_path(@user), method: :patch do |f| %>
-    <div class="row d-none" id="edit-form">
+    <div class="row my-3 d-none" id="edit-form">
       <div class="col-3 my-auto">
         <div class="square">
           <%= f.label :user_image, class: "image-label", for: "image_input" do %>
@@ -156,24 +156,96 @@
       </div>
     </div>
   <% end %>
+  
+  <% if current_user == @user %>
+    <div class="row" id="tab-menu">
+      <div class="col active"><a href="#tab1" class="text-blue">投稿一覧</a></div>
+      <div class="col inactive"><a href="#tab2" class="text-white">所属サークルの投稿</a></div>
+      <div class="col inactive"><a href="#tab3" class="text-white">フォローユーザー投稿</a></div>
+      <div class="col inactive"><a href="#tab4" class="text-white">DM</a></div>
+    </div>
+  <% end %>
 
-  <div class="row my-5 bg-gray">
+  <div class="row mb-5 bg-gray">
     <div class="col">
-      <div class="row my-3">
-        <div class="col text-center">
-          <p><strong>投稿一覧</strong></P>
-        </div>
-      </div>
 
-      <% @posts.each do |post| %>
-        <div class="row py-3 my-3 post-background">
-          <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
-          <div class="col-1 my-auto text-center">
-            <i class="fa-regular fa-comment small-icon"></i>
-            <%= post.post_comments.count %>
+      <div id="tab-contents">
+        <div id="tab1" class="tab">
+          <div class="row my-3">
+            <div class="col text-center">
+              <p class="font-weight-bold">投稿一覧</P>
+            </div>
           </div>
+          <% @posts.each do |post| %>
+            <div class="row py-3 my-3 post-background">
+              <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+              <div class="col-1 my-auto text-center">
+                <i class="fa-regular fa-comment small-icon"></i>
+                <%= post.post_comments.count %>
+              </div>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+
+        <% if current_user == @user %>
+          <div id="tab2" class="tab">
+            <% @circle_posts.each do |post| %>
+              <div class="row py-3 my-3 post-background">
+                <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+                <div class="col-1 my-auto text-center">
+                  <i class="fa-regular fa-comment small-icon"></i>
+                  <%= post.post_comments.count %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div id="tab3" class="tab">
+            <% @following_posts.each do |post| %>
+              <div class="row py-3 my-3 post-background">
+                <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+                <div class="col-1 my-auto text-center">
+                  <i class="fa-regular fa-comment small-icon"></i>
+                  <%= post.post_comments.count %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          
+          <div id="tab4" class="tab">
+            <% @rooms.each do |room| %>
+              <% if room.users.where.not(id: current_user.id).where(is_active: true).exists? %>
+                <div class="row my-3">
+                  <div class="col">
+                    <%= link_to room_path(room) do %>
+                      <div class="blue-border bg-white">
+                        <div class="row">
+                          <div class="col-1">
+                            <div class="square">
+                              <%= display_user_image(room.users.where.not(id: current_user.id).where(is_active: true).first) %>
+                            </div>
+                          </div>
+                          <div class="col my-auto font-weight-bold text-blue">
+                            <%= room.users.where.not(id: current_user.id).where(is_active: true).first&.name %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col my-2 text-gray">
+                            <p class="m-0"><%= room.messages.last&.message || "まだメッセージがありません" %></p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-auto my-auto">
+                    <%= link_to "ユーザーページ", user_path(room.users.where.not(id: current_user.id).first), class: "btn-custom-blue" %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

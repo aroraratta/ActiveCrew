@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @circles = current_user.circles
   end
 
   def create
