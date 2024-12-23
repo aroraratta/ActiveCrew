@@ -1,47 +1,54 @@
-<div class="row my-3">
-  <div class="col">
-    <%= link_to circle_route do %>
-      <div class="blue-border">
-        <div class="row mb-3">
-          <div class="col font-weight-bold text-blue h4">
-            <%= obj.circle_name %>
+<%= link_to circle_route do %>
+  <div class="blue-border my-5">
+    <div class="row my-2">
+      <div class="col-2 my-auto">
+        <div class="circle">
+          <%= display_circle_image(obj) %>
+        </div>
+      </div>
+
+      <div class="col-10 my-auto">
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークル名</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.circle_name %></p>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-3">
-            <div class="circle">
-              <%= display_circle_image(obj) %>
-            </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークルの紹介</p>
           </div>
-          <div class="col-9 my-auto">
-            <div class="row my-3">
-              <div class="col-3">
-                <p class="m-0 text-center font-weight-bold text-dark">サークル紹介</p>
-              </div>
-              <div class="col-9 text-dark">
-                <%= simple_format(obj.circle_introduction) %>
-              </div>
-            </div>
-            <div class="row my-3">
-              <div class="col-3">
-                <p class="m-0 text-center font-weight-bold text-dark">管理者</p>
-              </div>
-              <div class="col-9 text-dark">
-                <%= obj.owner.name %>
-              </div>
-            </div>
-            <div class="row my-3">
-              <div class="col-3">
-                <p class="m-0 text-center font-weight-bold text-dark">サークルに関する投稿</p>
-              </div>
-              <div class="col-9 text-dark">
-                <%= obj.posts.size %>
-              </div>
-            </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.circle_introduction %></p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークル参加者数</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.user_count %>人</p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークルに関する投稿</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.post_count %>件</p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">管理者</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.post_count %></p>
           </div>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

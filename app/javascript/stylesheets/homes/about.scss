@@ -32,6 +32,13 @@
 .ranking {
   height: 200px;
 }
+.how-to-use-title {
+  margin-bottom: 50px;
+}
+
+.how-to-use-row {
+  margin-bottom: 200px;
+}
 
 .how-to-use {
   display: flex;
@@ -52,4 +59,49 @@
 .how-to-use-body {
   font-size: 15px;
   color: #000;
+}
+
+.paragraph-background {
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 0 auto;
+}
+
+.about-content {
+  margin: 10% 10%;
+}
+
+.crown-1 {
+  font-size: 8vh;
+  color: #FFFF00;
+}
+
+.crown-2 {
+  font-size: 8vh;
+  color: #BFBFBF;
+}
+
+.crown-3 {
+  font-size: 8vh;
+  color: #C04F15;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 2.5s ease-out, transform 0.6s ease-out;
+}
+
+.hidden-left {
+  transform: translateX(-50px);
+}
+
+.hidden-right {
+  transform: translateX(50px);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
