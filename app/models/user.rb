@@ -12,7 +12,6 @@ class User < ApplicationRecord
   has_many :circle_users, dependent: :destroy
   has_many :circles, through: :circle_users
   has_many :permits, dependent: :destroy
-  has_many :groups,through: :group_users
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :rooms, through: :entries
@@ -22,6 +21,8 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   has_one_attached :user_image
+  
+  GUEST_USER_EMAIL = "guest@example.com"
 
   def active_for_authentication?
     super && (is_active == true)
@@ -57,6 +58,14 @@ class User < ApplicationRecord
   
   def followers_count
     followers.where(is_active: true).count
+  end
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+      user.introduction = "ゲストユーザーでログイン中です。各種機能をお試しください。(ゲストユーザーで行った投稿はログアウト後に削除されます。)"
+    end
   end
 
 end
