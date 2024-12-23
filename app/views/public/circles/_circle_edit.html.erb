@@ -1,0 +1,49 @@
+<div class="row" id="content">
+  <div class="col-3 my-auto">
+    <div class="circle">
+      <%= display_circle_image(circle) %>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="blue-border">
+      <div class="row">
+        <p class="user-name"><%= circle.circle_name %></p>
+      </div>
+      <div class="row user-introduction">
+        <div class="col-3 text-center my-auto">
+          <p class="my-0 font-weight-bold">紹介文</p>
+        </div>
+        <div class="col-9">
+          <p><%= simple_format(circle.circle_introduction) %></p>
+        </div>
+      </div>
+      <div class="row user-introduction">
+        <div class="col-3 text-center my-auto">
+          <p class="font-weight-bold">活動場所</p>
+        </div>
+        <div class="col-9">
+          <p><%= circle.prefecture.prefecture_name %>/<%= @circle.city.city_name %></p>
+        </div>
+      </div>
+      <div class="row user-introduction">
+        <div class="col-3 text-center my-auto">
+          <p class="font-weight-bold">参加者</p>
+        </div>
+        <div class="col-9 text-blue">
+          <%= link_to circle_circle_users_path(circle) do %>
+            <p><%= circle.users.where(is_active: true).count %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-none" id="edit-form">
+  <%= render "form", circle: circle, route: circle_path(circle), prefectures: prefectures, submit_text: "変更を保存", async: false %>
+  <div class="row ml-1">
+    <div class="col text-center">
+      <button type="button" class="btn-custom-red cancel-edit">編集画面を閉じる</button>
+    </div>
+  </div>
+</div>

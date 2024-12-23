@@ -28,11 +28,11 @@ class Public::CirclesController < ApplicationController
   end
 
   def update
+    @prefectures = Prefecture.all
     if @circle.update(circle_params)
       flash[:notice] = "サークルを編集しました"
-      redirect_to circle_path
     else
-      render "edit"
+      flash[:alert] = "サークルの編集に失敗しました"
     end
   end
   

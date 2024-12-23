@@ -1,0 +1,2 @@
+$("#js-post-edit").html("<%=j render "public/posts/post_edit", post: @post, submit_text: "保存", route: post_path, circles: @circles, async: false %>");
+$("#flash-messages").html("<%= j render "layouts/flash" %>");

@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :update]
+  before_action :authenticate_user!, except: [:show]
 
   def show
     if params[:id]
@@ -39,18 +39,14 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    if admin_signed_in?
-      @user = User.find(params[:id])
-    elsif authenticate_user!
-      @user = current_user
-    end
-
+    @user = User.find(params[:id])
+    @circles = @user.circles
+    @following_count = @user.followings.where(is_active: true).count
+    @follower_count = @user.followers.where(is_active: true).count
     if @user.update(user_params)
-      flash[:notice] = "ユーザー情報を更新しました。"
-      redirect_to user_path(@user)
+      flash.now[:notice] = "ユーザー情報を更新しました"
     else
-      @posts = @user.posts.order(created_at: :desc)
-      render :show
+      @user.reload
     end
   end
 
