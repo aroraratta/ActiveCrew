@@ -47,8 +47,7 @@ $(document).on('turbolinks:load', function() {
     contentDiv.addClass('d-none');
     formDiv.removeClass('d-none');
   });
-
-  $('.cancel-edit').on('click', function() {
+  $(document).on('click', '.cancel-edit', function() {
     var contentDiv = $('#content');
     var formDiv = $('#edit-form');
 
@@ -68,7 +67,7 @@ $(document).on('turbolinks:load', function() {
     edit_formDiv.removeClass('d-none');
   });
 
-  $('.cancel-edit-comment').on('click', function() {
+  $(document).on('click', '.cancel-edit-comment', function() {
     var commentId = $(this).data('comment-id');
     var edit_contentDiv = $('#comment-content-' + commentId);
     var edit_formDiv = $('#edit-form-' + commentId);
@@ -85,11 +84,11 @@ $(document).on('change', '#circle_prefecture_id', function() {
 
   if (prefectureId) {
     $.ajax({
-      url: '/cities',  // citiesのindexアクションを呼び出す
+      url: '/cities',
       data: { prefecture_id: prefectureId },
       dataType: 'json',
       success: function(data) {
-        citySelect.empty();  // 既存のcityをクリア
+        citySelect.empty();
         citySelect.append('<option value="">市を選択</option>');
         $.each(data, function(index, city) {
           citySelect.append('<option value="' + city.id + '">' + city.city_name + '</option>');

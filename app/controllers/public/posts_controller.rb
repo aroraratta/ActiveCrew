@@ -26,13 +26,9 @@ class Public::PostsController < ApplicationController
   end
 
   def update
+    @circles = @post.user.circles
     if @post.update(post_params)
-      flash[:notice] = "投稿を編集しました"
-      redirect_to post_path(@post)
-    else
-      @post_comment = PostComment.new
-      @post_comments = @post.post_comments.order(created_at: :desc)
-      render :show
+      flash.now[:notice] = "投稿を編集しました"
     end
   end
 

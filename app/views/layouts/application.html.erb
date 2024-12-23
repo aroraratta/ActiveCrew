@@ -15,7 +15,9 @@
     <%= render "layouts/header" %>
 
     <div class="down-move">
-      <%= render "layouts/flash" %>
+      <div id="flash-messages">
+        <%= render "layouts/flash" %>
+      </div>
       <div class="main-margin">
         <%= yield %>
       </div>
