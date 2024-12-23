@@ -40,6 +40,9 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @circles = @user.circles
+    @following_count = @user.followings.where(is_active: true).count
+    @follower_count = @user.followers.where(is_active: true).count
     if @user.update(user_params)
       flash.now[:notice] = "ユーザー情報を更新しました"
     else

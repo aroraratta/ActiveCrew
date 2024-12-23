@@ -1,7 +1,7 @@
-$("#js-user-edit").html("<%=j render "public/users/user_edit", user: @user, circles: @circles, following_count: @following_count, follower_count: @follower_count %>");
+$("#js-circle-edit").html("<%=j render "public/circles/circle_edit", circle: @circle, prefectures: @prefectures %>");
 $("#flash-messages").html("<%= j render "layouts/flash" %>");
 
-<% if @user.errors.any? %>
+<% if @circle.errors.any? %>
   var contentDiv = $("#content");
   var formDiv = $("#edit-form");
   contentDiv.addClass("d-none");

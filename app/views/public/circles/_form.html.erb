@@ -1,7 +1,7 @@
 <div class="fit-blue-border">
   <div class="row my-2">
     <div class="col">
-      <%= form_with model: circle, url: route do |f| %>
+      <%= form_with model: circle, url: route, local: async do |f| %>
         <div class="row text-center my-5">
           <div class="col-3 my-auto"><%= f.label :circle_image, "サークルのアイコン", class: "font-weight-bold text-blue" %></div>
           <div class="col-3 my-auto mx-auto">

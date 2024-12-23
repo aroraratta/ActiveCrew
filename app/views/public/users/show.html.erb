@@ -44,68 +44,9 @@
       <% end %>
     <% end %>
   </div>
-
-  <div class="row my-3" id="content">
-    <div class="col-3 my-auto">
-      <div class="square">
-        <%= display_user_image(@user) %>
-      </div>
-    </div>
-    <div class="col-9">
-      <div class="blue-border">
-        <div class="row">
-          <p class="m-0 user-name"><%= @user.name %></p>
-        </div>
-        <div class="row my-3 text-blue bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 font-weight-bold">紹介文</p>
-          </div>
-          <div class="col-9 user-introduciton">
-            <%= simple_format(@user.introduction) %>
-          </div>
-        </div>
-        <div class="row my-3 text-blue bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 font-weight-bold">所属サークル</p>
-          </div>
-          <div class="col-9">
-            <% @circles.each do |circle| %>
-              <div class="row">
-                <div class="col blue-text">
-                  <%= link_to circle_path(circle), class: "text-blue" do %>
-                    <%= circle.circle_name %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="row my-3 text-blue bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 font-weight-bold">フォロー</p>
-          </div>
-          <div class="col-9">
-            <%= link_to user_followings_path(@user), class: "text-blue" do %>
-              <span><%= @following_count %></span>
-            <% end %>
-          </div>
-        </div>
-        <div class="row my-3 text-blue bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 font-weight-bold">フォロワー</p>
-          </div>
-          <div class="col-9">
-            <%= link_to user_followers_path(@user), class: "text-blue" do %>
-              <span><%= @follower_count %></span>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
   <div id="js-user-edit">
-    <%= render "user_edit",  user: @user %>
+    <%= render "user_edit", user: @user, circles: @circles, following_count: @following_count, follower_count: @follower_count %>
   </div>
   
   <% if current_user == @user %>
