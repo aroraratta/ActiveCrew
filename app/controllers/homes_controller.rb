@@ -13,5 +13,7 @@ class HomesController < ApplicationController
   end
 
   def about
+    @top_user_circles = Circle.top_3_by_members
+    @top_post_circles = Circle.top_3_by_posts
   end
 end

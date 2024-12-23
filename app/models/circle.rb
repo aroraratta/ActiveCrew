@@ -12,6 +12,32 @@ class Circle < ApplicationRecord
 
   has_one_attached :circle_image
 
+  # homes/topで使用する
+  def top_3_by_posts
+    select("circles.*, COUNT(posts.id) AS posts_count")
+    .joins(:posts)
+    .group("circles.id")
+    .order("posts_count DESC")
+    .limit(3)
+  end
+
+  # homes/topで使用する
+  scope :top_3_by_posts, -> {
+    joins(:circle_users)
+      .select("circles.*, COUNT(circle_users.id) AS members_count")
+      .group("circles.id")
+      .order("members_count DESC")
+      .limit(3)
+  }
+  
+  scope :top_3_by_members, -> {
+    joins(:circle_users)
+      .select("circles.*, COUNT(circle_users.id) AS members_count")
+      .group("circles.id")
+      .order("members_count DESC")
+      .limit(3)
+  }
+
   def self.looks(search, word)
     if search == "perfect_match"
       @circle = Circle.where("circle_name = ? OR circle_introduction = ?", word, word)
@@ -27,4 +53,13 @@ class Circle < ApplicationRecord
   def owner?(user)
     user.id == owner_id
   end
+
+  def user_count
+    circle_users.count
+  end
+  
+  def post_count
+    posts.count
+  end
+
 end

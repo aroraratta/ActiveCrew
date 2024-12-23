@@ -50,5 +50,13 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+  
+  def followings_count
+    followings.where(is_active: true).count
+  end
+  
+  def followers_count
+    followers.where(is_active: true).count
+  end
 
 end

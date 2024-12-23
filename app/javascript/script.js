@@ -115,3 +115,34 @@ $(document).on('turbolinks:load', function() {
     $(this).removeClass('text-white').addClass('text-blue');
   });
 });
+
+// aboutページのスライドショー用
+document.addEventListener('turbolinks:load', function() {
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    pagination: { 
+      el: '.swiper-pagination',
+    },
+    navigation: { 
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  });
+});
+
+// aboutページのフェードイン用
+$(document).ready(function () {
+  function animateOnScroll() {
+    $(".hidden").each(function () {
+      const elementTop = $(this).offset().top;
+      const viewportBottom = $(window).scrollTop() + $(window).height();
+      if (elementTop < viewportBottom - 50) {
+        $(this).addClass("visible");
+      }
+    });
+  }
+  animateOnScroll();
+  $(window).on("scroll", function () {
+    animateOnScroll();
+  });
+});

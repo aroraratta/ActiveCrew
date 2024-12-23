@@ -1,26 +1,59 @@
 <% border_class = obj.is_active ? "blue-border" : "gray-border" %>
 <% text_class = obj.is_active ? "text-blue" : "text-gray" %>
 
-<div class="row my-3">
-  <div class="col">
-    <div class="<%= border_class %>">
-      <div class="row">
+<div class="<%= border_class %> my-5">
+  <div class="row my-2">
+    <div class="col-2 my-auto">
+      <div class="square my-auto">
+        <%= display_user_image(obj) %>
+    </div>
+    </div>
+
+    <div class="col-10 my-auto">
+      <div class="row my-3 bg-light">
+        <div class="col-3 text-center">
+          <p class="m-0 text-blue font-weight-bold">名前</p>
+        </div>
         <div class="col">
-          <div class="row my-3 font-weight-bold <%= text_class %>">
-            <%= obj.name %>
-          </div>
+          <p class="m-0 text-blue">:<%= obj.name %></p>
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-2 my-auto">
-          <div class="square my-auto">
-            <%= display_user_image(obj) %>
-          </div>
+      <div class="row my-3 bg-light">
+        <div class="col-3 text-center">
+          <p class="m-0 text-blue font-weight-bold">紹介文</p>
         </div>
-        <div class="col-10 my-auto">
-          <div class="row my-3 <%= text_class %>">
-            <%= simple_format(obj.introduction) %>
+        <div class="col">
+          <p class="m-0 text-blue">:<%= obj.introduction %></p>
+        </div>
+      </div>
+      <div class="row my-3 bg-light">
+        <div class="col-3 text-center my-auto">
+          <p class="m-0 text-blue font-weight-bold">所属サークル</p>
+        </div>
+        <div class="col">
+        <% obj.circles.each do |circle| %>
+          <div class="row">
+            <div class="col text-blue">
+              :<%= circle.circle_name %>
+            </div>
           </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="row my-3 bg-light">
+        <div class="col-3 text-center">
+          <p class="m-0 text-blue font-weight-bold">フォロー</p>
+        </div>
+        <div class="col">
+          <p class="m-0 text-blue">:<%= obj.followings_count %></p>
+        </div>
+      </div>
+      <div class="row my-3 bg-light">
+        <div class="col-3 text-center">
+          <p class="m-0 text-blue font-weight-bold">フォロワー</p>
+        </div>
+        <div class="col">
+          <p class="m-0 text-blue">:<%= obj.followers_count %></p>
         </div>
       </div>
     </div>
