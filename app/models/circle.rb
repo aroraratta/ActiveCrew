@@ -55,11 +55,11 @@ class Circle < ApplicationRecord
   end
 
   def user_count
-    circle_users.count
+    users.where(is_active: true).count
   end
   
   def post_count
-    posts.count
+    posts.joins(:user).where(users: { is_active: true }).count
   end
 
 end

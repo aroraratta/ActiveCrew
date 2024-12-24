@@ -18,6 +18,7 @@
                                          PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
+               admin_circle_circle_users GET    /admin/circles/:circle_id/circle_users(.:format)                                                  admin/circle_users#index
                            admin_circles GET    /admin/circles(.:format)                                                                          admin/circles#index
                             admin_circle GET    /admin/circles/:id(.:format)                                                                      admin/circles#show
                                          PATCH  /admin/circles/:id(.:format)                                                                      admin/circles#update

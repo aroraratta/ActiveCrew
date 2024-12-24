@@ -29,7 +29,7 @@
           </div>
           <% if obj.circle.present? %>
             <div class="row my-5">
-              <%= link_to circle_path(obj.circle), class: "small-btn-custom-blue" do %>
+              <%= link_to (user_signed_in? ? circle_path(obj.circle) : admin_circle_path(obj.circle)), class: "small-btn-custom-blue" do %>
                 @<%= obj.circle.circle_name %>
               <% end %>
             </div>

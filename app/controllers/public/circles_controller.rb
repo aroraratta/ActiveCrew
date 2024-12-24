@@ -1,5 +1,6 @@
 class Public::CirclesController < ApplicationController
-  before_action :authenticate_user!, except:[:show]
+  before_action :authenticate_user_or_admin!, only: [:update]
+  before_action :authenticate_user!, except: [:update]
   before_action :ensure_owner, only: [:edit, :update, :destroy]
 
   def new
@@ -46,8 +47,10 @@ class Public::CirclesController < ApplicationController
 
   def ensure_owner
     @circle = Circle.find(params[:id])
-    unless @circle.owner_id == current_user.id
-      redirect_to circles_path
+    if user_signed_in?
+      unless @circle.owner_id == current_user.id
+        redirect_to circles_path
+      end
     end
   end
 

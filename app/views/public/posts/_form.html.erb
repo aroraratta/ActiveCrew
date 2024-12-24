@@ -1,4 +1,8 @@
 <div class="fit-blue-border">
+  <div class="row ml-3 my-3 test">
+    <%= render "layouts/errors", obj: post %>
+  </div>
+
   <div class="row my-2">
     <div class="col">
       <%= form_with model: post, url: route, local: async do |f| %>

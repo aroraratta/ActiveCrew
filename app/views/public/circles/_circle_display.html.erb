@@ -18,7 +18,7 @@
         </div>
         <div class="row my-3 bg-light">
           <div class="col-3 text-center">
-            <p class="m-0 text-blue font-weight-bold">サークルの紹介</p>
+            <p class="m-0 text-blue font-weight-bold">紹介文</p>
           </div>
           <div class="col">
             <p class="m-0 text-blue">:<%= obj.circle_introduction %></p>
@@ -26,7 +26,15 @@
         </div>
         <div class="row my-3 bg-light">
           <div class="col-3 text-center">
-            <p class="m-0 text-blue font-weight-bold">サークル参加者数</p>
+            <p class="m-0 text-blue font-weight-bold">活動場所</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.prefecture.prefecture_name %>/<%= obj.city.city_name %></p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">参加者</p>
           </div>
           <div class="col">
             <p class="m-0 text-blue">:<%= obj.user_count %>人</p>
@@ -45,7 +53,7 @@
             <p class="m-0 text-blue font-weight-bold">管理者</p>
           </div>
           <div class="col">
-            <p class="m-0 text-blue">:<%= obj.post_count %></p>
+            <p class="m-0 text-blue">:<%= obj.owner.name %></p>
           </div>
         </div>
       </div>

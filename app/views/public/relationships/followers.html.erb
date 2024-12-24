@@ -4,7 +4,11 @@
       <h3 class="page-title my-auto">フォロー一覧:<%= @user.name %></h3>
     </div>
     <div class="col-auto my-auto">
-      <%= link_to "戻る", user_path(@user), class: "btn-custom-red" %>
+      <% if user_signed_in? %>
+        <%= link_to "ユーザー詳細へ", user_path(@user), class: "btn-custom-blue" %>
+      <% elsif admin_signed_in? %>
+        <%= link_to "ユーザー詳細へ", admin_user_path(@user), class: "btn-custom-blue" %>
+      <% end %>
     </div>
   </div>
     
@@ -12,7 +16,7 @@
     <% @users.each do |user| %>
       <div class="row">
         <div class="col">
-          <%= link_to user_path(user) do %>
+          <%= link_to (user_signed_in? ? user_path(user) : admin_user_path(user)) do %>
             <%= render "public/users/user_display", obj: user %>
           <% end %>
         </div>

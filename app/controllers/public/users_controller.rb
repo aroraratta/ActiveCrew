@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user_or_admin!, only: [:update]
+  before_action :authenticate_user!, except: [:update]
 
   def show
     if params[:id]
@@ -65,6 +66,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :introduction, :user_image)
+    params.require(:user).permit(:name, :email, :introduction, :user_image, :is_active)
   end
 end

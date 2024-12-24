@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update, :destroy]
-    resources :circles, only: [:index, :show, :update, :destroy]
+    resources :circles, only: [:index, :show, :update, :destroy] do
+    end
   end
 
   # 利用者用
