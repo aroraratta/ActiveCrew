@@ -1,4 +1,4 @@
-$("#js-circle-edit").html("<%=j render "public/circles/circle_edit", circle: @circle, prefectures: @prefectures %>");
+$("#js-circle-edit").html("<%=j render "public/circles/circle_edit", circle: @circle, prefectures: @prefectures, owner_route: admin_user_path(@circle.owner) %>");
 $("#flash-messages").html("<%= j render "layouts/flash" %>");
 
 <% if @circle.errors.any? %>

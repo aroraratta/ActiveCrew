@@ -32,9 +32,8 @@
     <% end %>
   </div>
 
-  
   <div id="js-circle-edit">
-    <%= render "circle_edit", circle: @circle, prefectures: @prefectures %>
+    <%= render "circle_edit", circle: @circle, prefectures: @prefectures, owner_route: user_path(@circle.owner) %>
   </div>
 
   <% if user_signed_in? %>

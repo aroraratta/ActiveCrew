@@ -1,5 +1,6 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user_or_admin!, only: [:update]
+  before_action :authenticate_user!, except: [:update]
   before_action :ensure_post, except: [:new, :create]
 
   def new
@@ -19,7 +20,6 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @circle = @post.circle
     @circles = @post.user.circles
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)

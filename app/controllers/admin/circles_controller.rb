@@ -11,16 +11,8 @@ class Admin::CirclesController < ApplicationController
     @prefectures = Prefecture.all
   end
 
-  def edit
-  end
-
-  def update
-    if @circle.update(circle_params)
-      redirect_to admin_circle_path(@circle)
-    else
-      render "edit"
-    end
-  end
+  # updateアクションはpublic側のコントローラーを流用する
+  # →非同期で実装しているため、jsファイルが増えて運用しにくくなることを防ぐため
   
   def destroy
     @circle.destroy

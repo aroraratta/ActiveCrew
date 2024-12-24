@@ -29,7 +29,7 @@
           <% circles.each do |circle| %>
             <div class="row">
               <div class="col blue-text">
-                <%= link_to circle_path(circle), class: "text-blue" do %>
+                <%= link_to (user_signed_in? ? circle_path(circle) : admin_circle_path(circle)), class: "text-blue"  do %>
                   <%= circle.circle_name %>
                 <% end %>
               </div>
@@ -73,6 +73,23 @@
     </div>
     <div class="col-9 my-auto">
       <div class="gray-border">
+        <% if admin_signed_in? %>
+          <div class="row my-3">
+            <div class="col">
+              <div class="row text-center">
+                <div class="col-3 my-auto"><p class= "text-gray" %>会員ステータス</p></div>
+                <div class="col my-auto text-gray">
+                  <%= f.radio_button :is_active, true, id: "is_active_true" %>
+                  <%= f.label :is_active, "有効", value: true, for: "is_active_true" %>
+                </div>
+                <div class="col my-auto text-gray">
+                  <%= f.radio_button :is_active, false, id: "is_active_false" %>
+                  <%= f.label :is_active, "退会", value: false, for: "is_active_false" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
         <div class="row my-3">
           <div class="col">
             <div class="row text-center">

@@ -1,6 +1,10 @@
 <% post_comments.each do |post_comment| %>
   <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
-    <%= render "public/posts/index", user_route: user_path(post_comment.user), obj: post_comment, post_route: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? circle_path(post_comment.post.circle) : nil %>
+    <% if user_signed_in? %>
+      <%= render "public/posts/index", user_route: user_path(post_comment.user), obj: post_comment, post_route: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? circle_path(post_comment.post.circle) : nil %>
+    <% elsif %>
+      <%= render "public/posts/index", user_route: admin_user_path(post_comment.user), obj: post_comment, post_route: admin_post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? admin_circle_path(post_comment.post.circle) : nil %>
+    <% end %>
       <% if post_comment.user == current_user || admin_signed_in? %>
         <div class="col-2 my-auto text-center">
           <button class="btn-custom-blue edit-comment-btn" data-comment-id="<%= post_comment.id %>">編集</button>
