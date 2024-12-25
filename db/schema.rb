@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
   end
 
   create_table "circles", force: :cascade do |t|
-    t.string "prefecture_id"
-    t.string "city_id"
+    t.integer "prefecture_id"
+    t.integer "city_id"
     t.integer "owner_id"
     t.string "circle_name", null: false
     t.text "circle_introduction"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["circle_introduction"], name: "index_circles_on_circle_introduction"
     t.index ["circle_name"], name: "index_circles_on_circle_name", unique: true
+    t.index ["city_id"], name: "index_circles_on_city_id"
+    t.index ["prefecture_id"], name: "index_circles_on_prefecture_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -85,6 +87,7 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
     t.string "city_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -171,6 +174,9 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "circle_users", "circles"
   add_foreign_key "circle_users", "users"
+  add_foreign_key "circles", "cities"
+  add_foreign_key "circles", "prefectures"
+  add_foreign_key "cities", "prefectures"
   add_foreign_key "entries", "rooms"
   add_foreign_key "entries", "users"
   add_foreign_key "messages", "rooms"
