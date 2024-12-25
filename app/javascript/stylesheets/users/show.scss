@@ -4,10 +4,6 @@
   font-size: 30px;
 }
 
-.user-introduction {
-  color: #46B1E1;
-}
-
 .btn-follow-position {
   position: absolute;
   bottom: 2px;
@@ -19,4 +15,24 @@
   background-color: #fff;
   border-radius: 15px;
   margin: 0 auto;
+}
+
+.user-introduciton p {
+  margin: 0;
+}
+
+#tab-menu .active {
+  background-color: #F2F2F2;
+  margin: 0 1px;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+#tab-menu .inactive {
+  background-color: #46B1E1;
+  margin: 0 1px;
+  padding: 10px 0;
+  font-weight: bold;
+  text-align: center;
 }

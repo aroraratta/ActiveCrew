@@ -4,139 +4,140 @@
       <div class="col-3 text-center">
         <h3 class="page-title my-auto">マイページ</h3>
       </div>
-      <div class="col-3 offset-4 text-right my-auto">
+      <div class="col-auto my-auto">
         <button class="btn-custom-blue edit-btn">プロフィール編集</button>
       </div>
-      <div class="col-2 ml-auto text-right my-auto">
+      <div class="col-auto my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
 
     <% else %>
-      <div class="col-3">
+      <div class="col-3 text-center">
         <h3 class="page-title my-auto">プロフィール</h3>
       </div>
-      <div class="col-2 offset-7 ml-auto text-right my-auto">
-        <%= link_to "DM", root_path, class: "btn-custom-blue" %>
-      </div>
+      <% if user_signed_in? %>
+        <% unless @user.id == current_user.id %>
+          <% if @is_room == true %>
+            <div class="col-auto my-auto">
+              <%= link_to "DM", room_path(@room_id), class: "btn-custom-blue" %>
+            </div>
+          <% else %>
+            <div class="col-auto my-auto">
+              <%= form_for @room do |f| %>
+                <%= fields_for @entry do |e| %>
+                  <%= e.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.submit "DMを始める", class: "btn-custom-blue" %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if current_user.following?(@user) %>
+            <div class="col-auto my-auto">
+              <%= link_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "btn-custom-red" %>
+            </div>
+            <% else %>
+              <div class="col-auto my-auto">
+              <%= link_to "フォロー", user_relationships_path(@user), method: :post, class: "btn-custom-blue" %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
   
-  <div class="row ml-3 my-3">
-    <%= render "layouts/errors", obj: @user %>
+  <div id="js-user-edit">
+    <%= render "user_edit", user: @user, circles: @circles, following_count: @following_count, follower_count: @follower_count %>
   </div>
-
-  <div class="row" id="content">
-    <div class="col-3 my-auto">
-      <div class="square">
-        <%= display_user_image(@user) %>
-      </div>
-    </div>
-    <div class="col-9">
-      <div class="blue-border">
-        <div class="row">
-          <p class="user-name"><%= @user.name %></p>
-        </div>
-        <div class="row user-introduction">
-          <div class="col-3 text-center">
-            <p><strong>紹介文</strong></p>
-          </div>
-          <div class="col-9">
-            <p><%= @user.introduction %></p>
-          </div>
-        </div>
-        <div class="row user-introduction">
-          <div class="col-3 text-center">
-            <p><strong>所属サークル</strong></p>
-          </div><div class="col-9">
-            <p>ここに所属サークル一覧(後で実装)</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3 mx-auto">
-            <div class="text-center">
-              <%= link_to root_path do %>
-                <p class="m-0 btn-custom-blue"><strong>フォロー</strong><br>100</p>
-              <% end %>
-            </div>
-          </div>
-          <div class="col-3 mx-auto">
-            <div class="text-center">
-              <%= link_to root_path do %>
-                <p class="m-0 btn-custom-blue"><strong>フォロワー</strong><br>100</p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <%= form_with model: @user, url: update_information_path(@user), method: :patch do |f| %>
-    <div class="row d-none" id="edit-form">
-      <div class="col-3 my-auto">
-        <div class="square">
-          <%= f.label :user_image, class: "image-label", for: "image_input" do %>
-            <%= image_tag (@user.user_image.attached? ? @user.user_image : "no_image.png"), id: "img_prev", class: "image-fluid" %>
-          <% end %>
-          <%= f.file_field :user_image, accept: "image/*", id: "image_input", class: "image_select" %>
-        </div>
-      </div>
-      <div class="col-9 my-auto">
-        <div class="gray-border">
-          <div class="row my-3">
-            <div class="col">
-              <div class="row text-center">
-                <div class="col-3 my-auto"><%= f.label :email, "メールアドレス", class: "text-gray" %></div>
-                <div class="col-9 my-auto"><%= f.text_field :email, placeholder: "example@gmail.com", class: "custom-form-gray" %></div>
-              </div>
-            </div>
-          </div>
-          <div class="row my-3">
-            <div class="col">
-              <div class="row text-center">
-                <div class="col-3 my-auto"><%= f.label :name, "ユーザー名", class: "text-gray" %></div>
-                <div class="col-9 my-auto"><%= f.text_field :name, placeholder: "サンプル太郎", class: "custom-form-gray" %></div>
-              </div>
-            </div>
-          </div>
-          <div class="row my-3">
-            <div class="col">
-              <div class="row text-center">
-                <div class="col-3 my-auto"><%= f.label :introduction, "紹介文", class: "text-gray" %></div>
-                <div class="col-9 my-auto"><%= f.text_area :introduction, placeholder: "紹介文を記入してください", class: "custom-form-gray", rows: 5 %></div>
-              </div>
-            </div>
-          </div>
-          <div class="row my-3">
-            <div class="col-6 text-center">
-              <%= f.submit "保存", class: "btn-custom-blue" %>
-            </div>
-            <div class="col-6 text-center">
-              <button type="button" class="btn-custom-red cancel-edit">戻る</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+  <% if current_user == @user %>
+    <div class="row" id="tab-menu">
+      <div class="col active"><a href="#tab1" class="text-blue">投稿一覧</a></div>
+      <div class="col inactive"><a href="#tab2" class="text-white">所属サークルの投稿</a></div>
+      <div class="col inactive"><a href="#tab3" class="text-white">フォローユーザー投稿</a></div>
+      <div class="col inactive"><a href="#tab4" class="text-white">DM</a></div>
     </div>
   <% end %>
 
-  <div class="row my-5 bg-gray">
+  <div class="row mb-5 bg-gray">
     <div class="col">
-      <div class="row my-3">
-        <div class="col text-center">
-          <p><strong>投稿一覧</strong></P>
-        </div>
-      </div>
 
-      <% @posts.each do |post| %>
-        <div class="row py-3 my-3 post-background">
-          <%= render "public/posts/index", obj: post, url: post_path(post), content: post.body %>
-          <div class="col-1 my-auto text-center">
-            <i class="fa-regular fa-comment small-icon"></i>
-            <%= post.post_comments.count %>
+      <div id="tab-contents">
+        <div id="tab1" class="tab">
+          <div class="row my-3">
+            <div class="col text-center">
+              <p class="font-weight-bold">投稿一覧</P>
+            </div>
           </div>
+          <% @posts.each do |post| %>
+            <div class="row py-3 my-3 post-background">
+              <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+              <div class="col-1 my-auto text-center">
+                <i class="fa-regular fa-comment small-icon"></i>
+                <%= post.post_comments.count %>
+              </div>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+
+        <% if current_user == @user %>
+          <div id="tab2" class="tab">
+            <% @circle_posts.each do |post| %>
+              <div class="row py-3 my-3 post-background">
+                <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+                <div class="col-1 my-auto text-center">
+                  <i class="fa-regular fa-comment small-icon"></i>
+                  <%= post.post_comments.count %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <div id="tab3" class="tab">
+            <% @following_posts.each do |post| %>
+              <div class="row py-3 my-3 post-background">
+                <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
+                <div class="col-1 my-auto text-center">
+                  <i class="fa-regular fa-comment small-icon"></i>
+                  <%= post.post_comments.count %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          
+          <div id="tab4" class="tab">
+            <% @rooms.each do |room| %>
+              <% if room.users.where.not(id: current_user.id).where(is_active: true).exists? %>
+                <div class="row my-3">
+                  <div class="col">
+                    <%= link_to room_path(room) do %>
+                      <div class="blue-border bg-white">
+                        <div class="row">
+                          <div class="col-1">
+                            <div class="square">
+                              <%= display_user_image(room.users.where.not(id: current_user.id).where(is_active: true).first) %>
+                            </div>
+                          </div>
+                          <div class="col my-auto font-weight-bold text-blue">
+                            <%= room.users.where.not(id: current_user.id).where(is_active: true).first&.name %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col my-2 text-gray">
+                            <p class="m-0"><%= room.messages.last&.message || "まだメッセージがありません" %></p>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-auto my-auto">
+                    <%= link_to "ユーザーページ", user_path(room.users.where.not(id: current_user.id).first), class: "btn-custom-blue" %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

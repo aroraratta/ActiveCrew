@@ -1,8 +1,11 @@
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
-                       admin_posts_index GET    /admin/posts/index(.:format)                                                                      admin/posts#index
                                     root GET    /                                                                                                 homes#about
                                      top GET    /top(.:format)                                                                                    homes#top
                                 searches GET    /searches(.:format)                                                                               searches#search
+                                  cities GET    /cities(.:format)                                                                                 cities#index
+                                messages POST   /messages(.:format)                                                                               messages#create
+                                   rooms POST   /rooms(.:format)                                                                                  rooms#create
+                                    room GET    /rooms/:id(.:format)                                                                              rooms#show
                        new_admin_session GET    /admins/sign_in(.:format)                                                                         admin/sessions#new
                            admin_session POST   /admins/sign_in(.:format)                                                                         admin/sessions#create
                    destroy_admin_session DELETE /admins/sign_out(.:format)                                                                        admin/sessions#destroy
@@ -15,7 +18,13 @@
                                          PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
-                          admin_searches GET    /admin/searches(.:format)                                                                         admin/searches#search
+               admin_circle_circle_users GET    /admin/circles/:circle_id/circle_users(.:format)                                                  admin/circle_users#index
+                           admin_circles GET    /admin/circles(.:format)                                                                          admin/circles#index
+                            admin_circle GET    /admin/circles/:id(.:format)                                                                      admin/circles#show
+                                         PATCH  /admin/circles/:id(.:format)                                                                      admin/circles#update
+                                         PUT    /admin/circles/:id(.:format)                                                                      admin/circles#update
+                                         DELETE /admin/circles/:id(.:format)                                                                      admin/circles#destroy
+                     users_guest_sign_in POST   /users/guest_sign_in(.:format)                                                                    public/sessions#guest_sign_in
                         new_user_session GET    /users/sign_in(.:format)                                                                          public/sessions#new
                             user_session POST   /users/sign_in(.:format)                                                                          public/sessions#create
                     destroy_user_session DELETE /users/sign_out(.:format)                                                                         public/sessions#destroy
@@ -26,6 +35,19 @@
                                          PUT    /users(.:format)                                                                                  public/registrations#update
                                          DELETE /users(.:format)                                                                                  public/registrations#destroy
                                          POST   /users(.:format)                                                                                  public/registrations#create
+                          circle_permits POST   /circles/:circle_id/permits(.:format)                                                             public/permits#create
+                           circle_permit DELETE /circles/:circle_id/permits/:id(.:format)                                                         public/permits#destroy
+                     circle_circle_users GET    /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#index
+                                         POST   /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#create
+                      circle_circle_user DELETE /circles/:circle_id/circle_users/:id(.:format)                                                    public/circle_users#destroy
+                                 circles GET    /circles(.:format)                                                                                public/circles#index
+                                         POST   /circles(.:format)                                                                                public/circles#create
+                              new_circle GET    /circles/new(.:format)                                                                            public/circles#new
+                             edit_circle GET    /circles/:id/edit(.:format)                                                                       public/circles#edit
+                                  circle GET    /circles/:id(.:format)                                                                            public/circles#show
+                                         PATCH  /circles/:id(.:format)                                                                            public/circles#update
+                                         PUT    /circles/:id(.:format)                                                                            public/circles#update
+                                         DELETE /circles/:id(.:format)                                                                            public/circles#destroy
                       post_post_comments POST   /posts/:post_id/post_comments(.:format)                                                           public/post_comments#create
                        post_post_comment PATCH  /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
                                          PUT    /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
@@ -43,7 +65,10 @@
                                     user GET    /users/information/:id(.:format)                                                                  public/users#show
                              unsubscribe GET    /users/unsubscribe(.:format)                                                                      public/users#unsubscribe
                                 withdraw PATCH  /users/withdraw(.:format)                                                                         public/users#withdraw
-                          users_searches GET    /users/searches(.:format)                                                                         public/searches#search
+                      user_relationships DELETE /users/:user_id/relationships(.:format)                                                           public/relationships#destroy
+                                         POST   /users/:user_id/relationships(.:format)                                                           public/relationships#create
+                         user_followings GET    /users/:user_id/followings(.:format)                                                              public/relationships#followings
+                          user_followers GET    /users/:user_id/followers(.:format)                                                               public/relationships#followers
            rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
            rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create

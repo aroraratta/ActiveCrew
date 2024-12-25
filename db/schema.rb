@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_11_020856) do
+ActiveRecord::Schema.define(version: 2024_12_21_004220) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2024_12_11_020856) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -52,6 +52,72 @@ ActiveRecord::Schema.define(version: 2024_12_11_020856) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "circle_addresses", force: :cascade do |t|
+    t.integer "circle_id", null: false
+    t.integer "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "circle_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "circle_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["circle_id"], name: "index_circle_users_on_circle_id"
+    t.index ["user_id"], name: "index_circle_users_on_user_id"
+  end
+
+  create_table "circles", force: :cascade do |t|
+    t.integer "prefecture_id"
+    t.integer "city_id"
+    t.integer "owner_id"
+    t.string "circle_name", null: false
+    t.text "circle_introduction"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["circle_introduction"], name: "index_circles_on_circle_introduction"
+    t.index ["circle_name"], name: "index_circles_on_circle_name", unique: true
+    t.index ["city_id"], name: "index_circles_on_city_id"
+    t.index ["prefecture_id"], name: "index_circles_on_prefecture_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.integer "prefecture_id", null: false
+    t.string "city_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "message", null: false
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "permits", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "circle_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["circle_id"], name: "index_permits_on_circle_id"
+    t.index ["user_id"], name: "index_permits_on_user_id"
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -62,11 +128,29 @@ ActiveRecord::Schema.define(version: 2024_12_11_020856) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "group_id"
+    t.integer "circle_id"
     t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["body"], name: "index_posts_on_body"
+  end
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string "prefecture_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -88,4 +172,15 @@ ActiveRecord::Schema.define(version: 2024_12_11_020856) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "circle_users", "circles"
+  add_foreign_key "circle_users", "users"
+  add_foreign_key "circles", "cities"
+  add_foreign_key "circles", "prefectures"
+  add_foreign_key "cities", "prefectures"
+  add_foreign_key "entries", "rooms"
+  add_foreign_key "entries", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "permits", "circles"
+  add_foreign_key "permits", "users"
 end

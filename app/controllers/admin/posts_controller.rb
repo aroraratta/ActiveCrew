@@ -1,11 +1,13 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   before_action :ensure_post, except: [:index]
+  
   def index
     @posts = Post.order(created_at: :desc)
   end
   
   def show
+    @circles = @post.user.circles
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.order(created_at: :desc)
   end

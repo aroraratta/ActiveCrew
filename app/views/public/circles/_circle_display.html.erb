@@ -1,0 +1,62 @@
+<%= link_to circle_route do %>
+  <div class="blue-border my-5">
+    <div class="row my-2">
+      <div class="col-2 my-auto">
+        <div class="circle">
+          <%= display_circle_image(obj) %>
+        </div>
+      </div>
+
+      <div class="col-10 my-auto">
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークル名</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.circle_name %></p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">紹介文</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.circle_introduction %></p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">活動場所</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.prefecture.prefecture_name %>/<%= obj.city.city_name %></p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">参加者</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.user_count %>人</p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">サークルに関する投稿</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.post_count %>件</p>
+          </div>
+        </div>
+        <div class="row my-3 bg-light">
+          <div class="col-3 text-center">
+            <p class="m-0 text-blue font-weight-bold">管理者</p>
+          </div>
+          <div class="col">
+            <p class="m-0 text-blue">:<%= obj.owner.name %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

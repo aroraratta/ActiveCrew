@@ -1,0 +1,14 @@
+$("#js-user-edit").html("<%=j render "public/users/user_edit", user: @user, circles: @circles, following_count: @following_count, follower_count: @follower_count %>");
+$("#flash-messages").html("<%= j render "layouts/flash" %>");
+
+<% if @user.errors.any? %>
+  var contentDiv = $("#content");
+  var formDiv = $("#edit-form");
+  contentDiv.addClass("d-none");
+  formDiv.removeClass("d-none");
+<% else %>
+  var contentDiv = $("#content");
+  var formDiv = $("#edit-form");
+  formDiv.addClass("d-none");
+  contentDiv.removeClass("d-none");
+<% end %>

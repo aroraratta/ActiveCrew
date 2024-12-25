@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'posts/index'
-  end
   # 共用
   root to: "homes#about"
   get "top" => "homes#top"
   get "searches" => "searches#search"
+  resources :cities, only: [:index]
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
 
   # 管理者用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
@@ -15,15 +15,23 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update, :destroy]
-    get "searches" => "searches#search"
+    resources :circles, only: [:index, :show, :update, :destroy] do
+    end
   end
 
   # 利用者用
+  devise_scope :user do
+    post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
   scope module: :public do
+    resources :circles do
+      resources :permits, only: [:create, :destroy]
+      resources :circle_users, only: [:index, :create, :destroy]
+    end
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]
     end
@@ -33,7 +41,11 @@ Rails.application.routes.draw do
     get "users/information/:id" => "users#show", as: "user"
     get "/users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
     patch "/users/withdraw" => "users#withdraw", as: "withdraw"
-    get "users/searches" => "searches#search"
+    resources :users, only: [] do
+      resource :relationships, only: [:create, :destroy]
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   

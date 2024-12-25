@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <div id="content">
+    <%= render "public/posts/post_display", obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post), circles: circles %>
+  </div>
+<% elsif admin_signed_in? %>
+  <div id="content">
+    <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: admin_post_path(post), circles: circles %>
+  </div>
+<% end %>
+
+<div class="d-none" id="edit-form">
+  <%= render "public/posts/form", post: post, submit_text: "保存", route: post_path, circles: circles, async: false %>
+  <div class="row ml-1">
+    <div class="col text-center">
+      <button type="button" class="btn-custom-red cancel-edit">編集画面を閉じる</button>
+    </div>
+  </div>
+</div>

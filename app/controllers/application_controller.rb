@@ -13,4 +13,16 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+
+  def reset_guest_data
+    guest_user = User.find_by(email: User::GUEST_USER_EMAIL)
+    guest_user.posts.destroy_all if guest_user.posts.any?
+    guest_user.post_comments.destroy_all if guest_user.post_comments.any?
+    guest_user.permits.destroy_all if guest_user.permits.any?
+    guest_user.circles.destroy_all if guest_user.circles.any?
+    guest_user.messages.destroy_all if guest_user.messages.any?
+    guest_user.rooms.destroy_all if guest_user.rooms.any?
+    guest_user.followings.destroy_all if guest_user.followings.any?
+    guest_user.followers.destroy_all if guest_user.followers.any?
+  end
 end

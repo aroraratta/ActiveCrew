@@ -47,8 +47,7 @@ $(document).on('turbolinks:load', function() {
     contentDiv.addClass('d-none');
     formDiv.removeClass('d-none');
   });
-
-  $('.cancel-edit').on('click', function() {
+  $(document).on('click', '.cancel-edit', function() {
     var contentDiv = $('#content');
     var formDiv = $('#edit-form');
 
@@ -68,12 +67,82 @@ $(document).on('turbolinks:load', function() {
     edit_formDiv.removeClass('d-none');
   });
 
-  $('.cancel-edit-comment').on('click', function() {
+  $(document).on('click', '.cancel-edit-comment', function() {
     var commentId = $(this).data('comment-id');
     var edit_contentDiv = $('#comment-content-' + commentId);
     var edit_formDiv = $('#edit-form-' + commentId);
 
     edit_formDiv.addClass('d-none');
     edit_contentDiv.removeClass('d-none');
+  });
+});
+
+// 活動場所選択フォーム
+$(document).on('change', '#circle_prefecture_id', function() {
+  var prefectureId = $(this).val();
+  var citySelect = $('#circle_city_id');
+
+  if (prefectureId) {
+    $.ajax({
+      url: '/cities',
+      data: { prefecture_id: prefectureId },
+      dataType: 'json',
+      success: function(data) {
+        citySelect.empty();
+        citySelect.append('<option value="">市を選択</option>');
+        $.each(data, function(index, city) {
+          citySelect.append('<option value="' + city.id + '">' + city.city_name + '</option>');
+        });
+      }
+    });
+  } else {
+    citySelect.empty();
+    citySelect.append('<option value="">市を選択</option>');
+  }
+});
+
+// マイページのタブ用
+$(document).on('turbolinks:load', function() {
+  $('#tab-contents .tab').not('#tab1').hide();
+  $('#tab-menu a').on('click', function(event) {
+    event.preventDefault();
+    const targetTab = $(this).attr('href');
+    $('#tab-contents .tab').hide();
+    $(targetTab).show();
+    $('#tab-menu .active a').removeClass('text-blue').addClass('text-white');
+    $('#tab-menu .active').removeClass('active').addClass('inactive');
+    $(this).parent().removeClass('inactive').addClass('active');
+    $(this).removeClass('text-white').addClass('text-blue');
+  });
+});
+
+// aboutページのスライドショー用
+document.addEventListener('turbolinks:load', function() {
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    pagination: { 
+      el: '.swiper-pagination',
+    },
+    navigation: { 
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
+  });
+});
+
+// aboutページのフェードイン用
+$(document).ready(function () {
+  function animateOnScroll() {
+    $(".hidden").each(function () {
+      const elementTop = $(this).offset().top;
+      const viewportBottom = $(window).scrollTop() + $(window).height();
+      if (elementTop < viewportBottom - 50) {
+        $(this).addClass("visible");
+      }
+    });
+  }
+  animateOnScroll();
+  $(window).on("scroll", function () {
+    animateOnScroll();
   });
 });

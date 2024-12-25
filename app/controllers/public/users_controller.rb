@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :update]
+  before_action :authenticate_user_or_admin!, only: [:update]
+  before_action :authenticate_user!, except: [:update]
 
   def show
     if params[:id]
@@ -8,6 +9,30 @@ class Public::UsersController < ApplicationController
       @user = current_user
     end
     @posts = @user.posts.order(created_at: :desc)
+    @circles = @user.circles
+    @circle_posts = Post.where(circle_id: @circles.pluck(:id)).order(created_at: :desc)
+    @following_posts = Post.where(user_id: @user.followings.pluck(:id)).order(created_at: :desc)
+    @rooms = @user.rooms.includes(:messages, :users)
+    @following_count = @user.followings.where(is_active: true).count
+    @follower_count = @user.followers.where(is_active: true).count
+
+    # 以下DM機能用コントローラー
+    @current_entry = Entry.where(user_id: current_user.id)
+    @another_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_entry.each do |current|
+        @another_entry.each do |another|
+          if current.room_id == another.room_id
+            @is_room = true
+            @room_id = current.room_id
+          end
+        end
+      end
+      unless @is_room
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def edit
@@ -15,18 +40,14 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    if admin_signed_in?
-      @user = User.find(params[:id])
-    elsif authenticate_user!
-      @user = current_user
-    end
-
+    @user = User.find(params[:id])
+    @circles = @user.circles
+    @following_count = @user.followings.where(is_active: true).count
+    @follower_count = @user.followers.where(is_active: true).count
     if @user.update(user_params)
-      flash[:notice] = "ユーザー情報を更新しました。"
-      redirect_to user_path(@user)
+      flash.now[:notice] = "ユーザー情報を更新しました"
     else
-      @posts = @user.posts.order(created_at: :desc)
-      render :show
+      @user.reload
     end
   end
 
@@ -45,6 +66,6 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :introduction, :user_image)
+    params.require(:user).permit(:name, :email, :introduction, :user_image, :is_active)
   end
 end

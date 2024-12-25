@@ -1,0 +1,14 @@
+$("#js-post-edit").html("<%=j render "public/posts/post_edit", post: @post, circles: @circles %>");
+$("#flash-messages").html("<%= j render "layouts/flash" %>");
+
+<% if @post.errors.any? %>
+  var contentDiv = $("#content");
+  var formDiv = $("#edit-form");
+  contentDiv.addClass("d-none");
+  formDiv.removeClass("d-none");
+<% else %>
+  var contentDiv = $("#content");
+  var formDiv = $("#edit-form");
+  formDiv.addClass("d-none");
+  contentDiv.removeClass("d-none");
+<% end %>

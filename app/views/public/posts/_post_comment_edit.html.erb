@@ -1,0 +1,32 @@
+<% post_comments.each do |post_comment| %>
+
+  <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
+    <% if user_signed_in? %>
+      <%= render "public/posts/index", user_route: user_path(post_comment.user), obj: post_comment, post_route: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? circle_path(post_comment.post.circle) : nil %>
+    <% elsif %>
+      <%= render "public/posts/index", user_route: admin_user_path(post_comment.user), obj: post_comment, post_route: admin_post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? admin_circle_path(post_comment.post.circle) : nil %>
+    <% end %>
+      <% if post_comment.user == current_user || admin_signed_in? %>
+        <div class="col-2 my-auto text-center">
+          <button class="btn-custom-blue edit-comment-btn" data-comment-id="<%= post_comment.id %>">編集</button>
+        </div>
+        <div class="col-2 my-auto text-center">
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn-custom-red" %>
+        </div>
+    <% end %>
+  </div>
+
+  <%= form_with(model: post_comment, url: post_post_comment_path(post_comment.post, post_comment), method: :patch) do |f| %>
+    <div class="row py-3 my-3 post-background d-none" id="edit-form-<%= post_comment.id %>">
+      <div class="col-8 my-auto text-right">
+        <%= f.text_area :comment, value: post_comment.comment, placeholder: "コメントを残す", class: "custom-form", rows: 3 %>
+      </div>
+      <div class="col-2 my-auto text-center">
+        <%= f.submit "保存", class: "btn-custom-blue" %>
+      </div>
+      <div class="col-2 my-auto text-center">
+        <button type="button" class="btn-custom-red cancel-edit-comment" data-comment-id="<%= post_comment.id %>">戻る</button>
+      </div>
+    </div>
+  <% end %>
+<% end %>

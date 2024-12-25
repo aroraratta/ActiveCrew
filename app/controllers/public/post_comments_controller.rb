@@ -1,5 +1,6 @@
 class Public::PostCommentsController < ApplicationController
-  before_action :authenticate_user_or_admin!, except: [:create]
+  before_action :authenticate_user_or_admin!, except: [:show]
+  before_action :authenticate_user!, only: [:show]
 
   def create
     post = Post.find(params[:post_id])
@@ -9,28 +10,23 @@ class Public::PostCommentsController < ApplicationController
       flash[:notice] = "コメントしました"
       redirect_to post_path(post)
     else
-      flash[:alert] = "コメントに失敗しました。"
+      flash[:alert] = "コメントに失敗しました"
       redirect_to post_path(post)
     end
   end
 
   def update
-    if admin_signed_in?
-      user = Post.find(params[:post_id]).user
-      route = admin_post_path(params[:post_id])
-    else
-      user = current_user
-      route = post_path(params[:post_id])
-    end
-  
-    comment = user.post_comments.find(params[:id])
+    route = post_path(params[:post_id])
+    post = Post.find(params[:id])
+    comment = PostComment.find(params[:id])
     if comment.update(post_comment_params)
       flash[:notice] = "コメントを編集しました"
-      redirect_to post_path(params[:post_id])
+      redirect_to request.referer
     else
-      flash[:alert] = "編集に失敗しました"
-      redirect_to route
+      flash[:alert] = "コメントの編集に失敗しました"
+      redirect_to request.referer
     end
+    # updateの非同期通信化は最後に実装
   end 
   
   def destroy

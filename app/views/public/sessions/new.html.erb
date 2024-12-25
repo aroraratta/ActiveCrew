@@ -16,5 +16,12 @@
       登録は<%= render "public/shared/links" %>から
     </p>
   </div>
+  
+  <div class="row my-3">
+    <p class="col text-blue text-center">
+      ゲストログインは
+        <%= link_to "こちら", users_guest_sign_in_path, method: :post %>から
+    </p>
+  </div>
 
 </div>

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">サークル一覧</h3>
+    </div>
+  </div>
+
+  <% @circles.each do |circle| %>
+    <%= render "public/circles/circle_display", obj: circle, circle_route: admin_circle_path(circle) %>
+  <% end %>
+
+</div>
