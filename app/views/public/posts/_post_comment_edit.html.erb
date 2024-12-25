@@ -1,4 +1,5 @@
 <% post_comments.each do |post_comment| %>
+
   <div class="row py-3 my-3 post-background" id="comment-content-<%= post_comment.id %>">
     <% if user_signed_in? %>
       <%= render "public/posts/index", user_route: user_path(post_comment.user), obj: post_comment, post_route: post_path(post_comment.post), content: post_comment.comment, circle: post_comment.post.circle, circle_route: post_comment.post.circle.present? ? circle_path(post_comment.post.circle) : nil %>

@@ -15,6 +15,7 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿しました"
       redirect_to mypage_path
     else
+      @circles = current_user.circles
       render :new
     end
   end

@@ -31,9 +31,9 @@ class Public::CirclesController < ApplicationController
   def update
     @prefectures = Prefecture.all
     if @circle.update(circle_params)
-      flash[:notice] = "サークルを編集しました"
+      flash.now[:notice] = "サークルを編集しました"
     else
-      flash[:alert] = "サークルの編集に失敗しました"
+      flash.now[:alert] = "サークルの編集に失敗しました"
     end
   end
   

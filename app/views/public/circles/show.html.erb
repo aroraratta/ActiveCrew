@@ -5,17 +5,17 @@
         <div class="col-auto text-center">
           <h3 class="page-title my-auto">管理サークル</h3>
         </div>
-        <div class="col-auto offset-5 text-right my-auto">
+        <div class="col-auto my-auto">
           <button class="btn-custom-blue edit-btn">編集</button>
         </div>
-        <div class="col-auto ml-auto text-right my-auto">
+        <div class="col-auto my-auto">
           <%= link_to "削除", circle_path(@circle), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
         </div>
       <% else %>
         <div class="col-3">
           <h3 class="page-title my-auto">サークル詳細</h3>
         </div>
-        <div class="col-2 offset-7 ml-auto text-right my-auto">
+        <div class="col-2 my-auto">
           <% if @circle.circle_users.exists?(user_id: current_user.id) %>
             <%= link_to "退出", circle_circle_user_path(circle_id: @circle, id: current_user), method: :delete, class: "btn-custom-red", data: { confirm: "サークルを退出しますか?" } %>
           <% elsif @circle.permits.exists?(user_id: current_user.id) %>
