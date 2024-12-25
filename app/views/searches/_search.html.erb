@@ -1,7 +1,7 @@
 <%= form_with url: searches_path, method: :get, class: "w-100" do |f| %>
   <div class="row">
     <div class="col-9 text-right my-auto">
-      <%= f.text_field :word, placeholder: "キーワードを入力", class: "custom-form-large" %>
+      <%= f.text_field :word, placeholder: "キーワードを入力(未入力で全件検索)", class: "custom-form-large" %>
     </div>
     <div class="col-3 text-left my-auto">
       <%= button_tag type: "submit", class: "btn-custom-blue" do %>
