@@ -13,21 +13,12 @@ class Circle < ApplicationRecord
   has_one_attached :circle_image
 
   # homes/topで使用する
-  def top_3_by_posts
+  scope :top_3_by_posts, -> {
     select("circles.*, COUNT(posts.id) AS posts_count")
     .joins(:posts)
     .group("circles.id")
     .order("posts_count DESC")
     .limit(3)
-  end
-
-  # homes/topで使用する
-  scope :top_3_by_posts, -> {
-    joins(:circle_users)
-      .select("circles.*, COUNT(circle_users.id) AS members_count")
-      .group("circles.id")
-      .order("members_count DESC")
-      .limit(3)
   }
   
   scope :top_3_by_members, -> {
