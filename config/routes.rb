@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     resources :circles do
       resources :permits, only: [:create, :destroy]
       resources :circle_users, only: [:index, :create, :destroy]
-      resources :events, only: [:new, :create, :show, :destroy]
+      resources :events, only: [:new, :create, :show, :destroy] do
+        resource :attends, only: [:create, :destroy]
+      end
     end
     get "/circles/:id/events" => "circles#show", defaults: { format: "json" }
     resources :posts, except: [:index] do
