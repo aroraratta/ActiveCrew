@@ -41,7 +41,7 @@
               <%= f.label :start, "開始日時", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
-              <%= f.datetime_local_field :start, class: "custom-form" %>
+              <%= f.datetime_local_field :start, value: Time.current.change(sec: 0).strftime("%Y-%m-%dT%H:%M"), class: "custom-form" %>
             </div>
           </div>
           <div class="row my-3 user-introduction">
@@ -49,7 +49,7 @@
               <%= f.label :start, "終了日時", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
-              <%= f.datetime_local_field :end, class: "custom-form" %>
+              <%= f.datetime_local_field :end, value: Time.current.change(sec: 0).strftime("%Y-%m-%dT%H:%M"), class: "custom-form" %>
             </div>
           </div>
           <div class="row my-3 user-introduction">

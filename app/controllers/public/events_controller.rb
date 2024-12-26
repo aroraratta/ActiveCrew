@@ -1,5 +1,6 @@
 class Public::EventsController < ApplicationController
   before_action:authenticate_user!
+  before_action:set_time_zone
 
   def new
     @circle = Circle.find(params[:circle_id])
@@ -43,12 +44,8 @@ class Public::EventsController < ApplicationController
     params.require(:event).permit(:event_title, :event_place, :event_memo, :start, :end)
   end
   
-  def ensure_correct_user
-    event = Event.find(params[:id])
-    user = book.user
-    unless user == current_user
-      redirect_to books_path
-    end
+  def set_time_zone
+    Time.zone = "Asia/Tokyo"
   end
   
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_26_063445) do
+ActiveRecord::Schema.define(version: 2024_12_26_124333) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2024_12_26_063445) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "attends", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_attends_on_event_id"
+    t.index ["user_id"], name: "index_attends_on_user_id"
   end
 
   create_table "circle_addresses", force: :cascade do |t|
@@ -184,6 +193,8 @@ ActiveRecord::Schema.define(version: 2024_12_26_063445) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attends", "events"
+  add_foreign_key "attends", "users"
   add_foreign_key "circle_users", "circles"
   add_foreign_key "circle_users", "users"
   add_foreign_key "circles", "cities"
