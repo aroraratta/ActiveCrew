@@ -9,6 +9,7 @@ class Admin::CirclesController < ApplicationController
   def show
     @circle_posts = @circle.posts
     @prefectures = Prefecture.all
+    @events = @circle.events
   end
 
   # updateアクションはpublic側のコントローラーを流用する

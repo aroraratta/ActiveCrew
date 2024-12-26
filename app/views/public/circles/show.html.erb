@@ -36,37 +36,55 @@
     <%= render "circle_edit", circle: @circle, prefectures: @prefectures, owner_route: user_path(@circle.owner) %>
   </div>
 
-  <% if user_signed_in? %>
-    <% if @circle.owner_id == current_user.id %>
-      <div class="row mt-5">
-        <div class="col">
-          <p class="join-circle text-center">参加申請者一覧</p>
-        </div>
+  <% if @circle.owner_id == current_user.id %>
+    <div class="row mt-5">
+      <div class="col">
+        <p class="join-circle text-center">参加申請者一覧</p>
       </div>
-      <% if @permits.present? %>
-        <% @permits.each do |permit| %>
-          <div class="row">
-            <div class="col">
-              <%= link_to user_path(permit.user) do %>
-                <%= render "public/users/user_display", obj: permit.user %>
-              <% end %>
-            </div>
-            <div class="col-auto my-auto">
-              <div class="d-flex flex-column align-items-start">
-                <%= link_to "参加許可", circle_circle_users_path(@circle, permit_id: permit.id), method: :post, class: "btn-custom-blue mb-2" %>
-                <%= link_to "参加拒否", circle_permit_path(@circle), method: :delete, class: "btn btn-custom-red" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="row mt-3">
+    </div>
+    <% if @permits.present? %>
+      <% @permits.each do |permit| %>
+        <div class="row">
           <div class="col">
-            <P class="m-0 text-center text-blue">承認待ちユーザーはいません。</P>
+            <%= link_to user_path(permit.user) do %>
+              <%= render "public/users/user_display", obj: permit.user %>
+            <% end %>
+          </div>
+          <div class="col-auto my-auto">
+            <div class="d-flex flex-column align-items-start">
+              <%= link_to "参加許可", circle_circle_users_path(@circle, permit_id: permit.id), method: :post, class: "btn-custom-blue mb-2" %>
+              <%= link_to "参加拒否", circle_permit_path(@circle), method: :delete, class: "btn btn-custom-red" %>
+            </div>
           </div>
         </div>
       <% end %>
+    <% else %>
+      <div class="row mt-3">
+        <div class="col">
+          <P class="m-0 text-center text-blue">承認待ちユーザーはいません。</P>
+        </div>
+      </div>
     <% end %>
+  <% end %>
+
+   <% if @circle.circle_users.exists?(user_id: current_user.id) %>
+    <div class="row mt-5">
+      <div class="col">
+        <p class="join-circle text-center">活動日</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-right">
+        <%= link_to new_circle_event_path(@circle) do %>
+          <i class="fa-regular fa-square-plus text-blue h2"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div id="calendar" data-circle-id="<%= @circle.id %>"></div>
+      </div>
+    </div>
   <% end %>
 
   <div class="row my-5 bg-gray">
