@@ -236,3 +236,25 @@ PostComment.find_or_create_by!(comment: "ビリヤードいいね!今度一緒�
   post_comment.user = ehime
   post_comment.post_id = 11
 end
+
+10.times do |i|
+  Event.create!(
+    circle_id: 1,
+    event_title: "サンプルイベント#{i+1}",
+    event_place: "練馬体育館",
+    event_memo: "待ちに待った練習です!",
+    start: Time.zone.now + i.days,
+    end: Time.zone.now + i.days + 1.hour
+  )
+end
+
+5.times do |i|
+  Event.create!(
+    circle_id: 4,
+    event_title: "サンプルイベント#{i+1}",
+    event_place: "練馬体育館",
+    event_memo: "待ちに待った練習です!",
+    start: Time.zone.now + i.days,
+    end: Time.zone.now + i.days + 1.hour
+  )
+end

@@ -26,6 +26,11 @@ class Public::CirclesController < ApplicationController
     @circle_posts = @circle.posts
     @prefectures = Prefecture.all
     @permits = @circle.permits
+    @events = @circle.events
+    respond_to do |format|
+      format.html
+      format.json { render "calendar" }
+    end
   end
 
   def update

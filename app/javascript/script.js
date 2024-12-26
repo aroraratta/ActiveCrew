@@ -146,3 +146,27 @@ $(document).ready(function () {
     animateOnScroll();
   });
 });
+
+// カレンダー用Jquery
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+document.addEventListener('turbolinks:load', function() {
+  var calendarEl = document.getElementById('calendar');
+  var circleId = calendarEl.getAttribute('data-circle-id');
+  var calendar = new Calendar(calendarEl, {
+    plugins: [dayGridPlugin],
+    initialView: 'dayGridMonth',
+    locale: 'jp',
+    events: '/circles/' + circleId + '/events',
+    timeZone: 'Asia/Tokyo',  // タイムゾーンを日本時間に設定
+    eventDisplay: 'block',
+    eventClick: function(info) {
+      var eventId = info.event.id;
+      var eventDetailUrl = '/circles/' + circleId + '/events/' + eventId;
+      window.location.href = eventDetailUrl;
+    }
+  });
+
+  calendar.render();
+});

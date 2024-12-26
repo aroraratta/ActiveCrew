@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_21_004220) do
+ActiveRecord::Schema.define(version: 2024_12_26_063445) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -99,6 +99,18 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.integer "circle_id", null: false
+    t.string "event_title", null: false
+    t.string "event_place"
+    t.string "event_memo"
+    t.datetime "start", null: false
+    t.datetime "end", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["circle_id"], name: "index_events_on_circle_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "message", null: false
     t.integer "room_id", null: false
@@ -179,6 +191,7 @@ ActiveRecord::Schema.define(version: 2024_12_21_004220) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "entries", "rooms"
   add_foreign_key "entries", "users"
+  add_foreign_key "events", "circles"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "permits", "circles"
