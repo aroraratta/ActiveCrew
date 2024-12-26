@@ -65,8 +65,35 @@
       </div>
     </div>
   </div>
+  <div class="row my-5">
+    <div class="col-auto">
+      <% if @event.attended_by?(current_user) %>
+        <%= link_to circle_event_attends_path(circle_id: @circle, event_id: @event), method: :delete, class: "text-danger" do %>
+          <i class="fa-solid fa-calendar"></i>参加中
+        <% end %>
+      <% else %>
+        <%= link_to circle_event_attends_path(circle_id: @circle, event_id: @event), method: :post, class: "text-muted" do %>
+          <i class="fa-regular fa-calendar"></i>参加する
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-auto">
+      <%= @attend_users.count %>人が参加中
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col">
+      <p class="join-circle text-center">参加者一覧</p>
+    </div>
+  </div>
   <div class="row">
-    <div class="col">     
+    <div class="col">
+      <% @attend_users.each do |attend_user| %>
+        <%= link_to user_path(attend_user.user) do %>
+          <%= render "public/users/user_display", obj: attend_user.user %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
