@@ -3,6 +3,7 @@ class Circle < ApplicationRecord
   has_many :users, through: :circle_users
   has_many :posts, dependent: :destroy
   has_many :permits, dependent: :destroy
+  has_many :events, dependent: :destroy
   
   belongs_to :owner, class_name: "User"
   belongs_to :city

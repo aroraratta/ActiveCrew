@@ -1,4 +1,5 @@
                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+                      public_events_show GET    /public/events/show(.:format)                                                                     public/events#show
                                     root GET    /                                                                                                 homes#about
                                      top GET    /top(.:format)                                                                                    homes#top
                                 searches GET    /searches(.:format)                                                                               searches#search
@@ -18,7 +19,6 @@
                                          PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
-               admin_circle_circle_users GET    /admin/circles/:circle_id/circle_users(.:format)                                                  admin/circle_users#index
                            admin_circles GET    /admin/circles(.:format)                                                                          admin/circles#index
                             admin_circle GET    /admin/circles/:id(.:format)                                                                      admin/circles#show
                                          PATCH  /admin/circles/:id(.:format)                                                                      admin/circles#update
@@ -40,6 +40,10 @@
                      circle_circle_users GET    /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#index
                                          POST   /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#create
                       circle_circle_user DELETE /circles/:circle_id/circle_users/:id(.:format)                                                    public/circle_users#destroy
+                           circle_events POST   /circles/:circle_id/events(.:format)                                                              public/events#create
+                        new_circle_event GET    /circles/:circle_id/events/new(.:format)                                                          public/events#new
+                            circle_event GET    /circles/:circle_id/events/:id(.:format)                                                          public/events#show
+                                         DELETE /circles/:circle_id/events/:id(.:format)                                                          public/events#destroy
                                  circles GET    /circles(.:format)                                                                                public/circles#index
                                          POST   /circles(.:format)                                                                                public/circles#create
                               new_circle GET    /circles/new(.:format)                                                                            public/circles#new
@@ -48,6 +52,7 @@
                                          PATCH  /circles/:id(.:format)                                                                            public/circles#update
                                          PUT    /circles/:id(.:format)                                                                            public/circles#update
                                          DELETE /circles/:id(.:format)                                                                            public/circles#destroy
+                                         GET    /circles/:id/events(.:format)                                                                     public/circles#show {:format=>"json"}
                       post_post_comments POST   /posts/:post_id/post_comments(.:format)                                                           public/post_comments#create
                        post_post_comment PATCH  /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update
                                          PUT    /posts/:post_id/post_comments/:id(.:format)                                                       public/post_comments#update

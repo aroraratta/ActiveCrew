@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'events/show'
+  end
   # 共用
   root to: "homes#about"
   get "top" => "homes#top"
@@ -31,7 +34,9 @@ Rails.application.routes.draw do
     resources :circles do
       resources :permits, only: [:create, :destroy]
       resources :circle_users, only: [:index, :create, :destroy]
+      resources :events, only: [:new, :create, :show, :destroy]
     end
+    get "/circles/:id/events" => "circles#show", defaults: { format: "json" }
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :update, :destroy]
     end
