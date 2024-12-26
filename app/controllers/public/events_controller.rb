@@ -22,6 +22,7 @@ class Public::EventsController < ApplicationController
   def show
     @circle = Circle.find(params[:circle_id])
     @event = Event.find(params[:id])
+    @attend_users = @event.attends
   end
 
   def destroy

@@ -40,6 +40,8 @@
                      circle_circle_users GET    /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#index
                                          POST   /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#create
                       circle_circle_user DELETE /circles/:circle_id/circle_users/:id(.:format)                                                    public/circle_users#destroy
+                    circle_event_attends DELETE /circles/:circle_id/events/:event_id/attends(.:format)                                            public/attends#destroy
+                                         POST   /circles/:circle_id/events/:event_id/attends(.:format)                                            public/attends#create
                            circle_events POST   /circles/:circle_id/events(.:format)                                                              public/events#create
                         new_circle_event GET    /circles/:circle_id/events/new(.:format)                                                          public/events#new
                             circle_event GET    /circles/:circle_id/events/:id(.:format)                                                          public/events#show
