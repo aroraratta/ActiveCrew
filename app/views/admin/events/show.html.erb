@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col-auto text-center">
+      <h3 class="page-title my-auto">活動詳細</h3>
+    </div>
+    <div class="col-auto my-auto">
+      <%= link_to "サークル詳細へ", admin_circle_path(@circle), class: "btn-custom-blue" %>
+    </div>
+    <div class="col-auto my-auto">
+      <%= link_to "削除", circle_event_path(circle_id: @circle, id: @event), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
+    </div>
+  </div>
+
+  <%= render "public/events/event", circle: @circle, event: @event %>
+
+  <div class="row mt-5">
+    <div class="col">
+      <p class="join-circle text-center">参加者一覧</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <% @attends.each do |attend| %>
+        <%= link_to user_path(attend.user) do %>
+          <%= render "public/users/user_display", obj: attend.user %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

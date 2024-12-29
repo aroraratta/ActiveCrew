@@ -19,6 +19,7 @@
                                          PATCH  /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          PUT    /admin/posts/:id(.:format)                                                                        admin/posts#update
                                          DELETE /admin/posts/:id(.:format)                                                                        admin/posts#destroy
+                      admin_circle_event GET    /admin/circles/:circle_id/events/:id(.:format)                                                    admin/events#show
                            admin_circles GET    /admin/circles(.:format)                                                                          admin/circles#index
                             admin_circle GET    /admin/circles/:id(.:format)                                                                      admin/circles#show
                                          PATCH  /admin/circles/:id(.:format)                                                                      admin/circles#update

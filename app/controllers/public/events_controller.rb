@@ -1,5 +1,6 @@
 class Public::EventsController < ApplicationController
-  before_action:authenticate_user!
+  before_action :authenticate_user_or_admin!, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :update, :destroy]
   before_action:set_time_zone
 
   def new
@@ -22,19 +23,19 @@ class Public::EventsController < ApplicationController
   def show
     @circle = Circle.find(params[:circle_id])
     @event = Event.find(params[:id])
-    @attend_users = @event.attends
+    @attends = @event.attends.includes(:user)
   end
 
   def destroy
     circle = Circle.find(params[:circle_id])
     event = Event.find(params[:id])
-    if event.circle.owner_id == current_user.id
+    if (user_signed_in? && event.circle.owner_id == current_user.id) || admin_signed_in?
       event.destroy
       flash[:notice] = "イベントを削除しました"
-      redirect_to circle_path(circle)
+      redirect_to user_signed_in? ? circle_path(circle) : admin_circle_path(circle)
     else
       flash[:alert] = "サークル管理者のみイベントを削除できます"
-      redirect_to circle_path(circle)
+      redirect_to circle_event(circle_id: circle, id: event)
     end
   end
 

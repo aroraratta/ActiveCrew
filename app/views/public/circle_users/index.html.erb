@@ -3,6 +3,9 @@
     <div class="col-auto text-center">
       <h3 class="page-title my-auto"><%= @circle.circle_name %>参加者一覧</h3>
     </div>
+    <div class="col-auto my-auto">
+      <%= link_to "サークル詳細へ", user_signed_in? ? circle_path(@circle) : admin_circle_path(@circle), class: "btn-custom-blue" %>
+    </div>
   </div>
 
   <% @circle_users.each do |user| %>

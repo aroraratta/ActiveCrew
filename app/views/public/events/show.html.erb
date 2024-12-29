@@ -3,6 +3,9 @@
     <div class="col-auto text-center">
       <h3 class="page-title my-auto">活動詳細</h3>
     </div>
+    <div class="col-auto my-auto">
+      <%= link_to "サークル詳細へ", circle_path(@circle), class: "btn-custom-blue" %>
+    </div>
     <% if current_user.id == @circle.owner_id %>
       <div class="col-auto my-auto">
         <%= link_to "削除", circle_event_path(circle_id: @circle, id: @event), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
@@ -10,61 +13,8 @@
     <% end %>
   </div>
 
-  <div class="row">
-    <div class="col-3 my-auto">
-      <div class="circle">
-        <%= display_circle_image(@circle) %>
-      </div>
-    </div>
-    <div class="col-9">
-      <div class="blue-border">
-        <div class="row">
-          <p class="m-0 text-blue user-name"><%= @circle.circle_name %></p>
-        </div>
-        <div class="row my-3 user-introduction bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 text-blue font-weight-bold">タイトル</p>
-          </div>
-          <div class="col-9 text-blue">
-            <%= simple_format(@event.event_title) %>
-          </div>
-        </div>
-        <div class="row my-3 user-introduction bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 text-blue font-weight-bold">内容</p>
-          </div>
-          <div class="col-9 text-blue">
-            <%= simple_format(@event.event_memo) %>
-          </div>
-        </div>
-        <div class="row my-3 user-introduction bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 text-blue font-weight-bold">場所</p>
-          </div>
-          <div class="col-9 text-blue">
-            <%= simple_format(@event.event_place) %>
-          </div>
-        </div>
-        <div class="row my-3 user-introduction bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 text-blue font-weight-bold">開始時刻</p>
-          </div>
-          <div class="col-9 text-blue">
-            <%= @event.start %>
-          </div>
-        </div>        
-        <div class="row my-3 user-introduction bg-light">
-          <div class="col-3 text-center my-auto">
-            <p class="m-0 text-blue font-weight-bold">終了時刻</p>
-          </div>
-          <div class="col-9 text-blue">
-            <%= @event.end %>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+  <%= render "event", circle: @circle, event: @event %>
+
   <div class="row my-5">
     <div class="col-auto">
       <% if @event.attended_by?(current_user) %>
@@ -78,7 +28,7 @@
       <% end %>
     </div>
     <div class="col-auto">
-      <%= @attend_users.count %>人が参加中
+      <%= @attends.count %>人が参加中
     </div>
   </div>
   
@@ -89,9 +39,9 @@
   </div>
   <div class="row">
     <div class="col">
-      <% @attend_users.each do |attend_user| %>
-        <%= link_to user_path(attend_user.user) do %>
-          <%= render "public/users/user_display", obj: attend_user.user %>
+      <% @attends.each do |attend| %>
+        <%= link_to user_path(attend.user) do %>
+          <%= render "public/users/user_display", obj: attend.user %>
         <% end %>
       <% end %>
     </div>
