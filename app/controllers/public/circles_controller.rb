@@ -1,7 +1,8 @@
 class Public::CirclesController < ApplicationController
-  before_action :authenticate_user_or_admin!, only: [:update]
-  before_action :authenticate_user!, except: [:update]
+  before_action :authenticate_user_or_admin!, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :update, :destroy]
   before_action :ensure_owner, only: [:edit, :update, :destroy]
+  # admin側もpublic/circles#showのjsonの記述を使用するためauthenticate_user_or_admin!にshowを追加
 
   def new
     @circle = Circle.new
@@ -44,8 +45,14 @@ class Public::CirclesController < ApplicationController
   
   def destroy
     @circle.destroy
-    flash[:notice] = "サークルを削除しました"
-    redirect_to mypage_path
+    if (user_signed_in? && @circle.owner_id == current_user.id) || admin_signed_in?
+      @circle.destroy
+      flash[:notice] = "サークルを削除しました"
+      redirect_to user_signed_in? ? mypage_path : admin_circles_path
+    else
+      flash[:alert] = "サークル管理者のみサークルを削除できます"
+      redirect_to circle_path(@circle)
+    end
   end
 
   private

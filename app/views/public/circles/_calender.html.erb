@@ -1,0 +1,23 @@
+<div class="row mt-5">
+  <div class="col">
+    <p class="join-circle text-center">活動日</p>
+  </div>
+</div>
+<% if user_signed_in? && circle.owner_id == current_user.id %>
+  <div class="row">
+    <div class="col text-right">
+      <%= link_to new_circle_event_path(circle) do %>
+        <i class="fa-regular fa-square-plus text-blue h2"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col">
+    <% if user_signed_in? %>
+      <div id="calendar" data-circle-id="<%= circle.id %>"></div>
+    <% elsif admin_signed_in? %>
+      <div id="calendar" data-circle-id="<%= circle.id %>" data-is-admin></div>
+    <% end %>
+  </div>
+</div>
