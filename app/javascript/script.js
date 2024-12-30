@@ -151,7 +151,7 @@ $(document).ready(function () {
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   var calendarEl = document.getElementById('calendar');
   var circleId = calendarEl.getAttribute('data-circle-id');
   var isAdmin = calendarEl.hasAttribute('data-is-admin');
@@ -176,4 +176,21 @@ document.addEventListener('turbolinks:load', function() {
   });
 
   calendar.render();
+});
+
+// 検索時にサークル以外が選択されるときに活動場所フォームを非表示にする用
+$(document).on('turbolinks:load', function () {
+  toggleLocationForm();
+  $("input[name='word[range]']").on('change', function () {
+    toggleLocationForm();
+  });
+
+  function toggleLocationForm() {
+    const selectedRange = $("input[name='word[range]']:checked").val();
+    if (selectedRange === 'circle') {
+      $('#location-form').show();
+    } else {
+      $('#location-form').hide();
+    }
+  }
 });

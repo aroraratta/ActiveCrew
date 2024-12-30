@@ -22,6 +22,7 @@ class Circle < ApplicationRecord
     .limit(3)
   }
   
+  # homes/topで使用する
   scope :top_3_by_members, -> {
     joins(:circle_users)
       .select("circles.*, COUNT(circle_users.id) AS members_count")
@@ -30,16 +31,30 @@ class Circle < ApplicationRecord
       .limit(3)
   }
 
+  # 検索機能にて使用する
+  SEARCH_COLUMNS = %w[circle_name circle_introduction].freeze
   def self.looks(search, word)
-    if search == "perfect_match"
-      @circle = Circle.where("circle_name = ? OR circle_introduction = ?", word, word)
-    elsif search == "forward_match"
-      @circle = Circle.where("circle_name LIKE ? OR circle_introduction LIKE ?", "#{word}%", "#{word}%")
-    elsif search == "partial_match"
-      @circle = Circle.where("circle_name LIKE ? OR circle_introduction LIKE ?", "%#{word}%", "%#{word}%")
+    case search
+    when "perfect_match"
+      query = SEARCH_COLUMNS.map { |col| "#{col} = :word" }.join(" OR ")
+      where(query, word: word)
+    when "forward_match"
+      query = SEARCH_COLUMNS.map { |col| "#{col} LIKE :word" }.join(" OR ")
+      where(query, word: "#{word}%")
+    when "partial_match"
+      query = SEARCH_COLUMNS.map { |col| "#{col} LIKE :word" }.join(" OR ")
+      where(query, word: "%#{word}%")
     else
-      @circle = Circle.all
+      all
     end
+  end
+
+  # サークル検索時に県と市を含めて検索する
+  def self.looks_with_location(search, word, prefecture_id = nil, city_id = nil)
+    results = looks(search, word)
+    results = results.joins(:city).where(cities: { prefecture_id: prefecture_id }) if prefecture_id.present?
+    results = results.where(city_id: city_id) if city_id.present?
+    results
   end
 
   def owner?(user)
