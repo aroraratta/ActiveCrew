@@ -24,5 +24,6 @@ class ApplicationController < ActionController::Base
     guest_user.rooms.destroy_all if guest_user.rooms.any?
     guest_user.followings.destroy_all if guest_user.followings.any?
     guest_user.followers.destroy_all if guest_user.followers.any?
+    guest_user.attends.destroy_all if guest_user.attends.any?
   end
 end
