@@ -30,15 +30,15 @@
         <div class="page-title">検索種類</div>
       </div>
       <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "circle", id: "range_circle", checked: true, name: "word[range]" %>
+        <%= f.radio_button :range, "circle", id: "range_circle", checked: true, name: "[range]" %>
         <%= f.label :range_circle, "サークル" %>
       </div>
       <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "post", id: "range_post", name: "word[range]" %>
+        <%= f.radio_button :range, "post", id: "range_post", name: "[range]" %>
         <%= f.label :range_post, "投稿" %>
       </div>
       <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "user", id: "range_user", name: "word[range]" %>
+        <%= f.radio_button :range, "user", id: "range_user", name: "[range]" %>
         <%= f.label :range_user, "ユーザー" %>
       </div>
     </div>
