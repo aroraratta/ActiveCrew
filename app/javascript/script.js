@@ -181,12 +181,12 @@ document.addEventListener('turbo:load', function() {
 // 検索時にサークル以外が選択されるときに活動場所フォームを非表示にする用
 $(document).on('turbolinks:load', function () {
   toggleLocationForm();
-  $("input[name='word[range]']").on('change', function () {
+  $("input[name='[range]']").on('change', function () {
     toggleLocationForm();
   });
 
   function toggleLocationForm() {
-    const selectedRange = $("input[name='word[range]']:checked").val();
+    const selectedRange = $("input[name='[range]']:checked").val();
     if (selectedRange === 'circle') {
       $('#location-form').show();
     } else {
