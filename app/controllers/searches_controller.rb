@@ -2,45 +2,38 @@ class SearchesController < ApplicationController
 
   def search
     @range = params[:range]
-
-    # 管理者であればすべて検索可能、ユーザーであればis_activeのユーザーのみ検索可能
-    if admin_signed_in?
-      case @range
-      when "user"
-        @users = User.looks(params[:search], params[:word]).order(created_at: :desc)
-      when "post"
-        @posts = Post.looks(params[:search], params[:word]).order(created_at: :desc)
-      when "circle"
-        @circles = Circle.looks_with_location(
-          params[:search],
-          params[:word],
-          params[:prefecture_id],
-          params[:city_id]
-        ).order(created_at: :desc)
-      else
-        flash[:alert] = "不正な検索範囲が指定されました。"
-        redirect_to top_path
-      end
+    case @range
+    when "user"
+      search_users
+    when "post"
+      search_posts
+    when "circle"
+      search_circles
     else
-      case @range
-      when "user"
-        @users = User.looks(params[:search], params[:word])
-                      .where(is_active: true).order(created_at: :desc)
-      when "post"
-        @posts = Post.looks(params[:search], params[:word])
-                      .joins(:user).where(users: { is_active: true }).order(created_at: :desc)
-      when "circle"
-        @circles = Circle.looks_with_location(
-          params[:search],
-          params[:word],
-          params[:prefecture_id],
-          params[:city_id]
-        ).order(created_at: :desc)
-      else
-        flash[:alert] = "不正な検索範囲が指定されました。"
-        redirect_to top_path
-      end
+      nil
     end
+  end
+
+  private
+
+  # 管理者であればすべて検索可能、エンドユーザーであればis_activeのユーザーのみ検索可能
+  def search_users
+    scope = admin_signed_in? ? User : User.where(is_active: true)
+    @users = scope.looks(params[:search], params[:word]).order(created_at: :desc)
+  end
+
+  def search_posts
+    scope = admin_signed_in? ? Post : Post.joins(:user).where(users: { is_active: true })
+    @posts = scope.looks(params[:search], params[:word]).order(created_at: :desc)
+  end
+
+  def search_circles
+    @circles = Circle.looks_with_location(
+                params[:search],
+                params[:word],
+                params[:prefecture_id],
+                params[:city_id]
+              ).order(created_at: :desc)
   end
 
 end
