@@ -8,29 +8,29 @@
       <%= display_user_image(user) %>
     </div>
   </div>
-  <div class="col-9">
-    <div class="blue-border">
+  <div class="col-md-9 col-sm-12">
+    <div class="fit-blue-border">
       <div class="row">
         <p class="m-0 user-name"><%= user.name %></p>
       </div>
       <div class="row my-3 text-blue bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5 text-center my-auto">
           <p class="m-0 font-weight-bold">紹介文</p>
         </div>
-        <div class="col-9 user-introduciton">
+        <div class="col-md-9 col-sm-7 user-introduciton">
           <%= simple_format(user.introduction) %>
         </div>
       </div>
       <div class="row my-3 text-blue bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5 text-center my-auto">
           <p class="m-0 font-weight-bold">所属サークル</p>
         </div>
-        <div class="col-9">
+        <div class="col-md-9 col-sm-7">
           <% circles.each do |circle| %>
             <div class="row">
-              <div class="col blue-text">
+              <div class="col blue-text profile-center">
                 <%= link_to (user_signed_in? ? circle_path(circle) : admin_circle_path(circle)), class: "text-blue"  do %>
-                  <%= circle.circle_name %>
+                  @<%= circle.circle_name %>
                 <% end %>
               </div>
             </div>
@@ -38,20 +38,20 @@
         </div>
       </div>
       <div class="row my-3 text-blue bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5 text-center my-auto">
           <p class="m-0 font-weight-bold">フォロー</p>
         </div>
-        <div class="col-9">
+        <div class="col-md-9 col-sm-7 profile-center">
           <%= link_to user_followings_path(user), class: "text-blue" do %>
             <span><%= following_count %></span>
           <% end %>
         </div>
       </div>
       <div class="row my-3 text-blue bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5 text-center my-auto">
           <p class="m-0 font-weight-bold">フォロワー</p>
         </div>
-        <div class="col-9">
+        <div class="col-md-9 col-sm-7 profile-center">
           <%= link_to user_followers_path(user), class: "text-blue" do %>
             <span><%= follower_count %></span>
           <% end %>
