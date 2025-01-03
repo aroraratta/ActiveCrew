@@ -1,7 +1,7 @@
 <div class="col">
   <%= link_to (current_user == obj.user ? mypage_path : user_route) do %>
     <div class="row mb-3">
-      <div class="col-1">
+      <div class="col-md-1 col-2 my-auto">
         <div class="square my-auto">
           <%= display_user_image(obj.user) %>
         </div>
@@ -12,7 +12,7 @@
     </div>
   <% end %>
   <div class="row mb-3">
-    <div class="col">
+    <div class="col-md col-sm-12">
       <div class="row">
         <%= link_to post_route, class: "text-dark" do %>
           <div class="col">
@@ -21,8 +21,8 @@
         <% end %>
       </div>
       <% if circle.present? %>
-        <div class="row text-muted">
-          <div class="col">
+        <div class="row">
+          <div class="col text-truncate">
             <%= link_to circle_route, class: "small-btn-custom-blue" do %>
               @<%= circle.circle_name %>
             <% end %>
@@ -36,7 +36,7 @@
       </div>
     </div>
     <% if obj.post_image.attached? %>
-      <div class="col-3 my-auto">
+      <div class="col-md-3 col-5 my-auto">
         <div class="square">
           <%= display_post_image(obj) %>
         </div>

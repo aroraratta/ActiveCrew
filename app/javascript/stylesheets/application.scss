@@ -74,6 +74,11 @@
   border: 1px solid #46B1E1;
   transition: all 0.4s ease;
   text-decoration: none;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .small-btn-custom-blue:hover {

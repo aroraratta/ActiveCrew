@@ -10,8 +10,8 @@ class Public::UsersController < ApplicationController
     end
     @posts = @user.posts.order(created_at: :desc)
     @circles = @user.circles
-    @circle_posts = Post.where(circle_id: circles.ids).order(created_at: :desc)
-    @following_posts = Post.joins(:user).where(users: { id: user.followings.ids }).order(created_at: :desc)
+    @circle_posts = Post.where(circle_id: @circles.ids).order(created_at: :desc)
+    @following_posts = Post.joins(:user).where(users: { id: @user.followings.ids }).order(created_at: :desc)
     # 新しいメッセージがあるDMルームをソートするため必要
     @rooms = @user.rooms.joins(:messages).select('rooms.*, MAX(messages.created_at) as last_message_time').group('rooms.id').order('last_message_time DESC').includes(:messages)
     @following_count = @user.followings.where(is_active: true).count
