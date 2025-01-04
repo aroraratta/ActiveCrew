@@ -366,3 +366,9 @@ body.menu-open .down-move {
 .image_select {
   display: none;
 }
+
+@media screen and (max-width:768px) {  
+  .large-icon {
+    font-size: 8vh;
+  }
+}

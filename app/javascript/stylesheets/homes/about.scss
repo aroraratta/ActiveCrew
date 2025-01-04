@@ -21,23 +21,23 @@
     padding: 20px 70px;
     border: 3px solid transparent;
   }
-  
   .btn:hover {
     background-color: white;
     border: 3px solid #83CBEB;
     color: #83CBEB;
+  }
+  p {
+    white-space: nowrap;
+    overflow-wrap: break-word;
   }
 }
 
 .ranking {
   height: 200px;
 }
-.how-to-use-title {
-  margin-bottom: 50px;
-}
 
 .how-to-use-row {
-  margin-bottom: 200px;
+  margin-bottom: 15%;
 }
 
 .how-to-use {
@@ -59,6 +59,8 @@
 .how-to-use-body {
   font-size: 15px;
   color: #000;
+  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .paragraph-background {
@@ -69,7 +71,7 @@
 }
 
 .about-content {
-  margin: 10% 10%;
+  margin: 200px 200px;
 }
 
 .crown-1 {
@@ -104,4 +106,10 @@
 .visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+@media screen and (max-width:768px) {
+  .about-content {
+    margin: 50px 0px;
+  }
 }
