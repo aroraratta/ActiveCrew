@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row my-5">
-    <div class="col-2 text-center">
+    <div class="col-md-auto col-sm-12 text-center mb-2">
       <h3 class="page-title my-auto">投稿</h3>
     </div>
     <% if @post.user == current_user %>
-      <div class="col-2 my-auto">
+      <div class="col-auto my-auto">
         <button class="btn-custom-blue edit-btn">投稿編集</button>
       </div>
-      <div class="col-2 my-auto">
+      <div class="col-auto my-auto">
         <%= link_to "削除", post_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
       </div>
     <% end %>
@@ -26,11 +26,11 @@
       </div>
       <%= form_with model: [@post, @post_comment] do |f| %>
         <% if user_signed_in? %>
-          <div class="row my-5">
-            <div class="col-10 my-auto text-right">
+          <div class="row my-3 comment-form">
+            <div class="col my-auto text-right">
               <%= f.text_area :comment, placeholder: "コメントを残す", class: "custom-form", rows: 1 %>
             </div>
-            <div class="col-2 my-auto text-left">
+            <div class="col-auto my-auto text-left">
               <%= f.submit "送信", class: "btn-custom-blue" %>
             </div>
           </div>
