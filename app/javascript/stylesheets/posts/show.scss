@@ -1,0 +1,9 @@
+.comment-form {
+  margin: 10% 5%;
+}
+
+@media screen and (max-width:768px) {
+  .comment-form {
+    text-align: center;
+  }
+}
