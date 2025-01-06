@@ -6,6 +6,7 @@
 @import "users/unsubscribe";
 @import "posts/show";
 @import "circles/show";
+@import "circles/calendar";
 @import "rooms/show";
 @import "sessions_registration/new";
 
@@ -370,6 +371,11 @@ body.menu-open .down-move {
 
 @media screen and (max-width:768px) {  
   .large-icon {
-    font-size: 8vh;
+    font-size: 7vh;
   }
+  
+  .profile-center {
+    text-align: center;
+  }
+  
 }
