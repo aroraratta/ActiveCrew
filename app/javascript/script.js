@@ -151,7 +151,7 @@ $(document).ready(function () {
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-document.addEventListener('turbo:load', function() {
+document.addEventListener('turbolinks:load', function() {
   var calendarEl = document.getElementById('calendar');
   var circleId = calendarEl.getAttribute('data-circle-id');
   var isAdmin = calendarEl.hasAttribute('data-is-admin');
@@ -172,9 +172,11 @@ document.addEventListener('turbo:load', function() {
         eventDetailUrl = '/circles/' + circleId + '/events/' + eventId;
       }
       window.location.href = eventDetailUrl;
+    },
+    dayCellContent: function(arg) {
+      return arg.date.getDate();
     }
   });
-
   calendar.render();
 });
 

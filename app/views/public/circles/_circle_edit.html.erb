@@ -4,50 +4,50 @@
       <%= display_circle_image(circle) %>
     </div>
   </div>
-  <div class="col-9">
-    <div class="blue-border">
+  <div class="col-md-9 col-sm-12">
+    <div class="fit-blue-border">
       <div class="row">
         <p class="m-0 text-blue user-name"><%= circle.circle_name %></p>
       </div>
       <div class="row my-3 user-introduction bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5  text-center my-auto">
           <p class="m-0 text-blue font-weight-bold">紹介文</p>
         </div>
-        <div class="col-9 text-blue">
+        <div class="col text-blue">
           <%= simple_format(circle.circle_introduction) %>
         </div>
       </div>
       <div class="row my-3 user-introduction bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5  text-center my-auto">
           <p class="m-0 text-blue font-weight-bold">活動場所</p>
         </div>
-        <div class="col-9">
+        <div class="col profile-center">
           <p class="m-0 text-blue"><%= circle.prefecture.prefecture_name %>/<%= @circle.city.city_name %></p>
         </div>
       </div>
       <div class="row my-3 user-introduction bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5  text-center my-auto">
           <p class="m-0 text-blue font-weight-bold">参加者</p>
         </div>
-        <div class="col-9 text-blue">
+        <div class="col text-blue profile-center">
           <%= link_to circle_circle_users_path(@circle) do %>
             <p class="m-0 text-blue"><%= circle.user_count %></p>
           <% end %>
         </div>
       </div>
       <div class="row my-3 user-introduction bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5  text-center my-auto">
           <p class="m-0 text-blue font-weight-bold">サークルに関する投稿</p>
         </div>
-        <div class="col-9">
+        <div class="col profile-center">
           <p class="m-0 text-blue"><%= circle.post_count %></p>
         </div>
       </div>
       <div class="row my-3 user-introduction bg-light">
-        <div class="col-3 text-center my-auto">
+        <div class="col-md-3 col-sm-5  text-center my-auto">
           <p class="m-0 text-blue font-weight-bold">管理者</p>
         </div>
-        <div class="col-9">
+        <div class="col profile-center">
           <%= link_to owner_route do %>
             <p class="m-0 text-blue"><%= circle.owner.name %></p>
           <% end %>
