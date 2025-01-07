@@ -171,7 +171,7 @@
 .custom-form {
   width: 100%;
   border: 2px solid #46B1E1;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
 }
 
@@ -376,6 +376,41 @@ body.menu-open .down-move {
   
   .profile-center {
     text-align: center;
+  }
+  
+  .header-custom {
+    background-color: #46B1E1;
+    height: 100px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  #sp-menu {
+    top: 100px;
+  }
+
+  .menu-trigger {
+    width: 30px;
+    height: 26px;
+  }
+
+  .menu-trigger span:nth-child(2) {
+    top: 11px;
+  }
+  
+  .menu-trigger.active span:nth-child(1) {
+    -webkit-transform: translateY(11px) rotate(-45deg);
+    transform: translateY(11px) rotate(-45deg);
+    background-color: #fff;
+  }
+
+  .menu-trigger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-trigger.active span:nth-child(3) {
+    -webkit-transform: translateY(-11px) rotate(45deg);
+    transform: translateY(-11px) rotate(45deg);
   }
   
 }
