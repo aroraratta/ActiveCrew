@@ -1,9 +1,9 @@
 <%= form_with url: searches_path, method: :get, class: "w-100" do |f| %>
-  <div class="row">
-    <div class="col-9 text-right my-auto">
-      <%= f.text_field :word, placeholder: "キーワードを入力 (未入力で全件出力)", class: "custom-form-large" %>
+  <div class="row mx-1">
+    <div class="col p-0 my-auto mx-1">
+      <%= f.text_field :word, placeholder: "キーワードを入力 (未入力で全件出力)", class: "custom-form" %>
     </div>
-    <div class="col-3 text-left my-auto">
+    <div class="col-auto p-0 my-auto">
       <%= button_tag type: "submit", class: "btn-custom-blue" do %>
         <i class="fa-solid fa-magnifying-glass"></i>
       <% end %>
@@ -14,20 +14,20 @@
     <div class="col text-center">
       <% @lines.each_with_index do |line, index| %>
           <% if index == 0 %>
-            <span class="text-blue h2"><%= line %><br></span>
+            <span class="text-blue splash-text"><%= line %><br></span>
           <% elsif index == 1 %>
-            <span class="text-blue h2"><%= line %><br></span>
+            <span class="text-blue splash-text"><%= line %><br></span>
           <% else %>
-            <span class="text-blue"><%= line %></span>
+            <span class="text-blue splash-person"><%= line %></span>
           <% end %>
       <% end %>
     </div>
   </div>
 
-  <div class="fit-blue-border my-5 p-5">
-    <div class="row">
-      <div class="col-2 my-auto text-center">
-        <div class="page-title">検索種類</div>
+  <div class="fit-blue-border my-5">
+    <div class="row search-box">
+      <div class="col-md-2 col-sm-12 my-auto text-center">
+        <div class="search-title">検索種類</div>
       </div>
       <div class="col my-auto text-center text-blue">
         <%= f.radio_button :range, "circle", id: "range_circle", checked: true, name: "[range]" %>
@@ -44,10 +44,10 @@
     </div>
   </div>
   
-  <div class="fit-blue-border my-5 p-5" id="location-form">
-    <div class="row">
-      <div class="col-2 my-auto text-center">
-        <div class="page-title">活動場所</div>
+  <div class="fit-blue-border my-5" id="location-form">
+    <div class="row search-box">
+      <div class="col-md-2 col-sm-12 my-auto text-center">
+        <div class="search-title">活動場所</div>
       </div>
       <div class="col my-auto text-blue">
         <%= f.collection_select :prefecture_id, prefectures, :id, :prefecture_name, { prompt: "県を選択" }, { id: "circle_prefecture_id", class: "custom-form" } %>
@@ -58,10 +58,10 @@
     </div>
   </div>
 
-  <div class="fit-blue-border my-5 p-5">
-    <div class="row">
-      <div class="col-2 my-auto text-center">
-        <div class="page-title">検索範囲</div>
+  <div class="fit-blue-border my-5">
+    <div class="row search-box">
+      <div class="col-md-2 col-sm-12 my-auto text-center">
+        <div class="search-title">検索範囲</div>
       </div>
       <div class="col my-auto text-center text-blue">
         <%= f.radio_button :search, "partial_match", id: "search_partial_match", checked: true %>
