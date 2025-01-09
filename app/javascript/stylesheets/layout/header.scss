@@ -1,0 +1,60 @@
+// 追従ヘッダー用CSS
+.hidden-header-custom {
+  height: 70px;
+  background-color: #fff;
+}
+
+.border-custom {
+  border-style: solid;
+  border-color: #46B1E1;
+  border-top-width: thick;
+  border-width: medium medium medium 20px;
+
+  .fixed-header-content {
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    text-decoration: none;
+    color: #46B1E1;
+    font-weight: bold;
+    transition: all 0.4s ease;
+  }
+
+  .fixed-header-content:hover {
+    color: #ffffff;
+    background-color: #46B1E1;
+    border-radius: 8px;
+  }
+
+  .fixed-header-content-icon {
+    font-size: 30px;
+    text-align: right;
+  }
+}
+
+.fixed-header {
+  width: 100%;
+  position: fixed;
+  top: -80px;
+  left: 0;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+}
+
+.fixed-header.is-show {
+  top: 0;
+  visibility: visible;
+}
+
+@media screen and (max-width:768px) {  
+  .border-custom {
+    .fixed-header-content-icon {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .fixed-header-content-text {
+      font-size: 12px;
+    }
+  }
+}
