@@ -1,0 +1,10 @@
+<% if user_signed_in? %>
+  <%= link_to new_post_path, class: "new_post_btn" do %>
+    <span class="new_post_btn_icon"><i class="fa-solid fa-pen-nib"></i></span>
+    <span class="new_post_btn_text">新規投稿</span>
+  <% end %>
+  <%= link_to new_circle_path, class: "new_circle_btn" do %>
+    <span class="new_circle_btn_icon"><i class="fa-solid fa-person-circle-plus"></i></span>
+    <span class="new_circle_btn_text">サークル作成</span>
+  <% end %>
+<% end %>

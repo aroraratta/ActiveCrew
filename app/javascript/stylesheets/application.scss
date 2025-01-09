@@ -2,6 +2,7 @@
 @import "homes/about";
 @import "homes/top";
 @import "layout/footer";
+@import "layout/header";
 @import "users/show";
 @import "users/unsubscribe";
 @import "posts/show";
@@ -315,47 +316,6 @@ body.menu-open .down-move {
   background-color: #46B1E1;
 }
 
-// 追従ヘッダー用CSS
-.hidden-header-custom {
-  height: 70px;
-  background-color: #fff;
-}
-
-.border-custom {
-  border-style: solid;
-  border-color: #46B1E1;
-  border-top-width: thick;
-  border-width: medium medium medium 20px;
-
-  .col {
-    text-decoration: none;
-    color: #46B1E1;
-    font-weight: bold;
-    transition: all 0.4s ease;
-  }
-
-  .col:hover {
-    color: #ffffff;
-    background-color: #46B1E1;
-    border-radius: 8px;
-  }
-}
-
-.fixed-header {
-  width: 100%;
-  position: fixed;
-  top: -80px;
-  left: 0;
-  z-index: 1;
-  transition: all 0.3s ease-in-out;
-  visibility: hidden;
-}
-
-.fixed-header.is-show {
-  top: 0;
-  visibility: visible;
-}
-
 // users#edit
 .image-label {
   cursor: pointer;
@@ -367,6 +327,78 @@ body.menu-open .down-move {
 
 .image_select {
   display: none;
+}
+
+.new_post_btn {
+  position: fixed;
+  bottom: 20px;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+  background-color: #48e2b4;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.3s ease;
+
+  .new_post_btn_icon {
+    margin: 0 auto;
+  }
+
+  .new_post_btn_text {
+    white-space: nowrap;
+    display: none;
+  }
+}
+
+.new_post_btn:hover {
+  text-decoration: none;
+  width: 130px;
+  color: #fff;
+
+  .new_post_btn_text {
+    display: inline;
+  }
+}
+
+.new_circle_btn {
+  position: fixed;
+  bottom: 80px;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+  background-color: #55e248;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.3s ease;
+
+  .new_circle_btn_icon {
+    margin: 0 auto;
+  }
+
+  .new_circle_btn_text {
+    white-space: nowrap;
+    display: none;
+  }
+}
+
+.new_circle_btn:hover {
+  text-decoration: none;
+  width: 150px;
+  color: #fff;
+
+  .new_circle_btn_text {
+    display: inline;
+  }
 }
 
 @media screen and (max-width:768px) {  
@@ -413,8 +445,13 @@ body.menu-open .down-move {
     transform: translateY(-11px) rotate(45deg);
   }
   
-  .fit-blue-border {
-    padding: 10px 10px;
+  .search {
+    .fit-blue-border {
+      padding: 10px 10px;
+    }
   }
-  
+
+  .header-logo {
+    display: none;
+  }
 }

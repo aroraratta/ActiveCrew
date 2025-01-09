@@ -24,56 +24,57 @@
     </div>
   </div>
 
-  <div class="fit-blue-border my-5">
-    <div class="row search-box">
-      <div class="col-md-2 col-sm-12 my-auto text-center">
-        <div class="search-title">検索種類</div>
-      </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "circle", id: "range_circle", checked: true, name: "[range]" %>
-        <%= f.label :range_circle, "サークル" %>
-      </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "post", id: "range_post", name: "[range]" %>
-        <%= f.label :range_post, "投稿" %>
-      </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :range, "user", id: "range_user", name: "[range]" %>
-        <%= f.label :range_user, "ユーザー" %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="fit-blue-border my-5" id="location-form">
-    <div class="row search-box">
-      <div class="col-md-2 col-sm-12 my-auto text-center">
-        <div class="search-title">活動場所</div>
-      </div>
-      <div class="col my-auto text-blue">
-        <%= f.collection_select :prefecture_id, prefectures, :id, :prefecture_name, { prompt: "県を選択" }, { id: "circle_prefecture_id", class: "custom-form" } %>
-      </div>
-      <div class="col my-auto text-blue">
-        <%= f.collection_select :city_id, [], :id, :city_name, { prompt: "市を選択" }, { id: "circle_city_id", class: "custom-form" } %>
+  <div class="search">
+    <div class="fit-blue-border my-5">
+      <div class="row search-box">
+        <div class="col-md-2 col-sm-12 my-auto text-center">
+          <div class="search-title">検索種類</div>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :range, "circle", id: "range_circle", checked: true, name: "[range]" %>
+          <%= f.label :range_circle, "サークル" %>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :range, "post", id: "range_post", name: "[range]" %>
+          <%= f.label :range_post, "投稿" %>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :range, "user", id: "range_user", name: "[range]" %>
+          <%= f.label :range_user, "ユーザー" %>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="fit-blue-border my-5">
-    <div class="row search-box">
-      <div class="col-md-2 col-sm-12 my-auto text-center">
-        <div class="search-title">検索範囲</div>
+    
+    <div class="fit-blue-border my-5" id="location-form">
+      <div class="row search-box">
+        <div class="col-md-2 col-sm-12 my-auto text-center">
+          <div class="search-title">活動場所</div>
+        </div>
+        <div class="col my-auto text-blue">
+          <%= f.collection_select :prefecture_id, prefectures, :id, :prefecture_name, { prompt: "県を選択" }, { id: "circle_prefecture_id", class: "custom-form" } %>
+        </div>
+        <div class="col my-auto text-blue">
+          <%= f.collection_select :city_id, [], :id, :city_name, { prompt: "市を選択" }, { id: "circle_city_id", class: "custom-form" } %>
+        </div>
       </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :search, "partial_match", id: "search_partial_match", checked: true %>
-        <%= f.label :search_partial_match, "部分一致 (おすすめ)" %>
-      </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :search, "perfect_match", id: "search_perfect_match" %>
-        <%= f.label :search_perfect_match, "完全一致" %>
-      </div>
-      <div class="col my-auto text-center text-blue">
-        <%= f.radio_button :search, "forward_match", id: "search_forward_match" %>
-        <%= f.label :search_forward_match, "前方一致" %>
+    </div>
+    <div class="fit-blue-border my-5">
+      <div class="row search-box">
+        <div class="col-md-2 col-sm-12 my-auto text-center">
+          <div class="search-title">検索範囲</div>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :search, "partial_match", id: "search_partial_match", checked: true %>
+          <%= f.label :search_partial_match, "部分一致 (おすすめ)" %>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :search, "perfect_match", id: "search_perfect_match" %>
+          <%= f.label :search_perfect_match, "完全一致" %>
+        </div>
+        <div class="col my-auto text-center text-blue">
+          <%= f.radio_button :search, "forward_match", id: "search_forward_match" %>
+          <%= f.label :search_forward_match, "前方一致" %>
+        </div>
       </div>
     </div>
   </div>
