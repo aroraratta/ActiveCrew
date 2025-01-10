@@ -1,6 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 @import "homes/about";
 @import "homes/top";
+@import "searches/search";
 @import "layout/footer";
 @import "layout/header";
 @import "users/show";
@@ -207,6 +208,11 @@
 
 .small-icon {
   font-size: 3vh;
+}
+
+.wbr {
+  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .field_with_errors input{
