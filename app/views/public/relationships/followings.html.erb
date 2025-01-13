@@ -1,32 +1,28 @@
 <div class="container">
   <div class="row my-5">
-    <div class="col-auto text-center">
-      <h3 class="page-title my-auto">フォロー一覧:<%= @user.name %></h3>
+    <div class="col-md-auto col-sm-12 text-center mb-3">
+      <h4 class="page-title my-auto wbr">フォロー一覧:<wbr><%= @user.name %></h3>
     </div>
     <div class="col-auto my-auto">
-      <% if user_signed_in? %>
-        <%= link_to "ユーザー詳細へ", user_path(@user), class: "btn-custom-blue" %>
-      <% elsif admin_signed_in? %>
-        <%= link_to "ユーザー詳細へ", admin_user_path(@user), class: "btn-custom-blue" %>
-      <% end %>
+      <%= link_to "ユーザー詳細へ", user_path(@user), class: "btn-custom-blue" %>
     </div>
   </div>
 
   <%if @users.exists? %>
     <% @users.each do |user| %>
-      <div class="row">
-        <div class="col">
+      <div class="row mb-4">
+        <div class="col-md-9 col-sm-12">
           <%= link_to (user_signed_in? ? user_path(user) : admin_user_path(user)) do %>
             <%= render "public/users/user_display", obj: user %>
           <% end %>
         </div>
         <% if user_signed_in? %>
           <% if current_user.following?(user) %>
-            <div class="col-3 my-auto">
+            <div class="col-auto my-auto">
               <%= link_to "フォロー解除", user_relationships_path(user), method: :delete, class: "btn-custom-red" %>
             </div>
             <% else %>
-              <div class="col-3 my-auto">
+              <div class="col-auto my-auto">
               <%= link_to "フォロー", user_relationships_path(user), method: :post, class: "btn-custom-blue" %>
             </div>
           <% end %>
