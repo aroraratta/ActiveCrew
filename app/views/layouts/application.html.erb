@@ -11,6 +11,8 @@
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- modal用bootstrapのJsを読み込む記述 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -24,7 +26,14 @@
         <%= yield %>
       </div>
     </div>
-    <%= render "layouts/footer" %>
+    
+    <!-- モーダル表示用 -->
+    <%= render "layouts/post_modal" %>
+
+    <!-- 新規作成用ボタン表示用 -->
     <%= render "layouts/new_post_circle_btn" %>
+
+    <!-- フッター表示用 -->
+    <%= render "layouts/footer" %>
   </body>
 </html>

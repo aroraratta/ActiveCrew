@@ -147,7 +147,7 @@ $(document).ready(function () {
   });
 });
 
-// カレンダー用Jquery
+// カレンダー用
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
@@ -195,4 +195,15 @@ $(document).on('turbolinks:load', function () {
       $('#location-form').hide();
     }
   }
+});
+
+// Postモーダル用
+$(document).on('turbolinks:load', function() {
+  $('#openPostModalButton').on('click', function() {
+    $.ajax({
+      url: '/posts/new', 
+      type: 'GET',
+      dataType: 'script', 
+    });
+  });
 });
