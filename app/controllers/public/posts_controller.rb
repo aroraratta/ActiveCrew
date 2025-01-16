@@ -20,7 +20,6 @@ class Public::PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       @circles = current_user.circles
-      render :new
     end
   end
 

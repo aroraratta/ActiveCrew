@@ -4,6 +4,5 @@ FactoryBot.define do
     circle_introduction { Faker::Lorem.characters(number: 20) }
     city
     prefecture
-    owner
   end
 end
