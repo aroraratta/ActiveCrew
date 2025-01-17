@@ -207,3 +207,14 @@ $(document).on('turbolinks:load', function() {
     });
   });
 });
+
+// Circleモーダル用
+$(document).on('turbolinks:load', function() {
+  $('#openCircleModalButton').on('click', function() {
+    $.ajax({
+      url: '/circles/new', 
+      type: 'GET',
+      dataType: 'script', 
+    });
+  });
+});

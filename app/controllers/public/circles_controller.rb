@@ -7,6 +7,9 @@ class Public::CirclesController < ApplicationController
   def new
     @circle = Circle.new
     @prefectures = Prefecture.all
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -18,7 +21,9 @@ class Public::CirclesController < ApplicationController
       flash[:notice] = "サークルを作成しました"
       redirect_to circle_path(@circle)
     else
-      render "new"
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
