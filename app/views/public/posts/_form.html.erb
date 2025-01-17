@@ -1,14 +1,16 @@
-<div class="fit-blue-border">
-  <div class="row ml-3 my-3 test">
+<div class="row ml-3 my-3 test">
+  <div class="col">
     <%= render "layouts/errors", obj: post %>
   </div>
+</div>
 
+<div class="fit-blue-border">
   <div class="row my-2">
     <div class="col">
       <%= form_with model: post, url: route, local: async do |f| %>
         <div class="row text-center">
-          <div class="col-3 my-auto"><%= f.label :post_image, "投稿画像", class: "font-weight-bold text-blue" %></div>
-          <div class="col-3 my-auto mx-auto">
+          <div class="col-md-3 col-sm-12 my-auto"><%= f.label :post_image, "投稿画像", class: "font-weight-bold text-blue" %></div>
+          <div class="col-5 my-auto mx-auto">
             <%= f.label :post_image, class: "image-label square", for: "image_input" do %>
               <%= image_tag (post.post_image.attached? ? post.post_image : "no_image.png"), id: "img_prev", class: "image-fluid" %>
             <% end %>
@@ -16,12 +18,12 @@
           </div>
         </div>
         <div class="row text-center mt-5">
-          <div class="col-3 my-auto"><%= f.label :body, "投稿内容", class: "font-weight-bold text-blue" %></div>
-          <div class="col-9 my-auto"><%= f.text_area :body, placeholder: "入力してください", class: "custom-form", rows: 5 %></div>
+          <div class="col-md-3 col-sm-12 my-auto"><%= f.label :body, "投稿内容", class: "font-weight-bold text-blue" %></div>
+          <div class="col-md-9 col-12 my-auto"><%= f.text_area :body, placeholder: "入力してください", class: "custom-form", rows: 5 %></div>
         </div>
         <div class="row text-center mt-5">
-          <div class="col-3 my-auto"><%= f.label :circle_id, "活動サークル", class: "font-weight-bold text-blue" %></div>
-          <div class="col-9 my-auto"><%= f.collection_select :circle_id, circles, :id, :circle_name, { prompt: "サークルを選択" }, { class: "custom-form" } %></div>
+          <div class="col-md-3 col-sm-12 my-auto"><%= f.label :circle_id, "活動サークル", class: "font-weight-bold text-blue" %></div>
+          <div class="col-md-9 col-12 my-auto"><%= f.collection_select :circle_id, circles, :id, :circle_name, { prompt: "サークルを選択" }, { class: "custom-form" } %></div>
         </div>
         <div class="row mx-auto mt-5">
           <div class="col-auto mx-auto">
