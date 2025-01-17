@@ -33,7 +33,39 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
       end
     end
   end
-  
+
+  describe "ユーザーのテスト" do
+    before do
+      visit mypage_path
+    end
+    context 'ユーザ編集成功のテスト' do
+      before do
+        @user_old_name = user.name
+        @user_old_email = user.email
+        @user_old_intrpduction = user.introduction
+        click_button '編集'
+      end
+      it 'マイページの編集リンクを押下すると編集フォームが出現する' do
+        expect(page).to have_css('label[for="image_input"]')
+        expect(page).to have_field 'user[email]'
+        expect(page).to have_field 'user[name]'
+        expect(page).to have_field 'user[introduction]'
+      end
+      it 'ユーザ編集後にフラッシュメッセージが表示され、正しく更新される' do
+        attach_file('image_input', Rails.root.join('spec/images/logo.png'), make_visible: true)
+        fill_in 'user[email]', with: "b" + user.email # 確実にuser, other_userと違う文字列にするため
+        fill_in 'user[name]', with: Faker::Lorem.characters(number: 9)
+        fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 9)
+        click_button '保存'
+        expect(page).to have_content 'ユーザー情報を更新しました'
+        expect(user.reload.user_image).to be_attached
+        expect(user.reload.name).not_to eq @user_old_name
+        expect(user.reload.email).not_to eq @user_old_email
+        expect(user.reload.introduction).not_to eq @user_old_introduction
+      end
+    end
+  end
+
   describe "投稿のテスト" do
     context '投稿成功のテスト' do
       before do
@@ -96,3 +128,5 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
     end
   end
 end
+
+# bundle exec rspec spec/system/02_after_login_spec.rb:37 --format documentation

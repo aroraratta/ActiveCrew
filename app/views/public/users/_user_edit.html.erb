@@ -71,13 +71,13 @@
         <%= f.file_field :user_image, accept: "image/*", id: "image_input", class: "image_select" %>
       </div>
     </div>
-    <div class="col-9 my-auto">
+    <div class="col-md-9 col-sm-12 my-auto">
       <div class="gray-border">
         <% if admin_signed_in? %>
           <div class="row my-3">
             <div class="col">
               <div class="row text-center">
-                <div class="col-3 my-auto"><p class= "text-gray" %>会員ステータス</p></div>
+                <div class="col-md-3 col-12 my-auto"><p class= "text-gray" %>会員ステータス</p></div>
                 <div class="col my-auto text-gray">
                   <%= f.radio_button :is_active, true, id: "is_active_true" %>
                   <%= f.label :is_active, "有効", value: true, for: "is_active_true" %>
@@ -93,24 +93,24 @@
         <div class="row my-3">
           <div class="col">
             <div class="row text-center">
-              <div class="col-3 my-auto"><%= f.label :email, "メールアドレス", class: "text-gray" %></div>
-              <div class="col-9 my-auto"><%= f.text_field :email, placeholder: "example@gmail.com", class: "custom-form-gray" %></div>
+              <div class="col-md-3 col-12 my-auto"><%= f.label :email, "メールアドレス", class: "text-gray" %></div>
+              <div class="col-md-9 col-12 my-auto"><%= f.text_field :email, placeholder: "example@gmail.com", class: "custom-form-gray" %></div>
             </div>
           </div>
         </div>
         <div class="row my-3">
           <div class="col">
             <div class="row text-center">
-              <div class="col-3 my-auto"><%= f.label :name, "ユーザー名", class: "text-gray" %></div>
-              <div class="col-9 my-auto"><%= f.text_field :name, placeholder: "サンプル太郎", class: "custom-form-gray" %></div>
+              <div class="col-md-3 col-12 my-auto"><%= f.label :name, "ユーザー名", class: "text-gray" %></div>
+              <div class="col-md-9 col-12 my-auto"><%= f.text_field :name, placeholder: "サンプル太郎", class: "custom-form-gray" %></div>
             </div>
           </div>
         </div>
         <div class="row my-3">
           <div class="col">
             <div class="row text-center">
-              <div class="col-3 my-auto"><%= f.label :introduction, "紹介文", class: "text-gray" %></div>
-              <div class="col-9 my-auto"><%= f.text_area :introduction, placeholder: "紹介文を記入してください", class: "custom-form-gray", rows: 5 %></div>
+              <div class="col-md-3 col-12 my-auto"><%= f.label :introduction, "紹介文", class: "text-gray" %></div>
+              <div class="col-md-9 col-12 my-auto"><%= f.text_area :introduction, placeholder: "紹介文を記入してください", class: "custom-form-gray", rows: 5 %></div>
             </div>
           </div>
         </div>

@@ -6,8 +6,8 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     
-    after(:build) do |user|
-      user.user_image.attach(io: File.open("spec/images/logo.png"), filename: "logo.png")
-    end
+    # after(:build) do |user|
+    #   user.user_image.attach(io: File.open("spec/images/logo.png"), filename: "logo.png")
+    # end
   end
 end
