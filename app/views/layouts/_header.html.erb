@@ -27,8 +27,6 @@
           <p><strong>ログイン中です。<%= current_user.name %>さん</strong></p>
           <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
           <%= link_to mypage_path do %><li class="header-content">マイページ</li><% end %>
-          <%= link_to new_post_path do %><li class="header-content">新規投稿</li><% end %>
-          <%= link_to new_circle_path do %><li class="header-content">サークル作成</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
           <%= link_to destroy_user_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% else %>
