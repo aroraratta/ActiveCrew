@@ -24,15 +24,43 @@ document.addEventListener('turbolinks:load', function() {
 
 // ファイルプレビュー用jquery
 document.addEventListener('turbolinks:load', function() {
-  $(document).ready(function () {
-    $('#image_input').on('change', function (e) {
+  function setupFilePreview(inputSelector, previewSelector) {
+    $(document).on('change', inputSelector, function(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function (event) {
-          $('#img_prev').attr('src', event.target.result);
+        reader.onload = function(event) {
+          $(previewSelector).attr('src', event.target.result);
         };
         reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  setupFilePreview('#image_input', '#img_prev');
+  setupFilePreview('#circle_image_input', '#circle_img_prev');
+  setupFilePreview('#post_image_input', '#post_img_prev');
+
+  // Circleモーダルを開く際の設定
+  $(document).on('click', '#openCircleModalButton', function() {
+    $.ajax({
+      url: '/circles/new',
+      type: 'GET',
+      dataType: 'script',
+      success: function() {
+        setupFilePreview('#circle_image_input', '#circle_img_prev');
+      }
+    });
+  });
+
+  // Postモーダルを開く際の設定
+  $(document).on('click', '#openPostModalButton', function() {
+    $.ajax({
+      url: '/posts/new',
+      type: 'GET',
+      dataType: 'script',
+      success: function() {
+        setupFilePreview('#post_image_input', '#post_img_prev');
       }
     });
   });
@@ -195,26 +223,4 @@ $(document).on('turbolinks:load', function () {
       $('#location-form').hide();
     }
   }
-});
-
-// Postモーダル用
-$(document).on('turbolinks:load', function() {
-  $('#openPostModalButton').on('click', function() {
-    $.ajax({
-      url: '/posts/new', 
-      type: 'GET',
-      dataType: 'script', 
-    });
-  });
-});
-
-// Circleモーダル用
-$(document).on('turbolinks:load', function() {
-  $('#openCircleModalButton').on('click', function() {
-    $.ajax({
-      url: '/circles/new', 
-      type: 'GET',
-      dataType: 'script', 
-    });
-  });
 });

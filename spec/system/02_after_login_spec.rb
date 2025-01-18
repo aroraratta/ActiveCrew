@@ -3,8 +3,10 @@ require "rails_helper"
 describe "[STEP2] ユーザログイン後のテスト", js: true do
   let(:user) { create(:user) }
   let!(:other_user) { create(:user) }
-  let!(:prefecture) { create(:prefecture) }
-  let!(:city) { create(:city) }
+  let!(:prefecture) { create(:prefecture, prefecture_name: "テスト県") }
+  let!(:prefecture2) { create(:prefecture, prefecture_name: "テスト県2") }
+  let!(:city) { create(:city, city_name: "テスト市", prefecture: prefecture) }
+  let!(:city2) { create(:city, city_name: "テスト市2", prefecture: prefecture2) }
   let!(:circle) { create(:circle, prefecture: prefecture, city: city, owner: user) }
   let!(:circle_user) { create(:circle_user, circle: circle, user: user) }
   let!(:post) { create(:post, user: user, circle: circle) }
@@ -124,6 +126,47 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
       end
       it '投稿の削除後、フラッシュメッセージが表示される' do
         expect(page).to have_content '投稿を削除しました'
+      end
+    end
+  end
+
+  describe "サークルのテスト" do
+    context 'サークル作成成功のテスト' do
+      before do
+        find('#openCircleModalButton').click
+      end
+      it 'サークル作成ボタンを押下するとフォームが表示される' do
+        expect(page).to have_css('label[for="image_input"]')
+        expect(page).to have_field 'circle[circle_name]'
+        expect(page).to have_field 'circle[circle_introduction]'
+        expect(page).to have_select('circle_prefecture_id')
+        expect(page).to have_select('circle_city_id')
+        expect(page).to have_button "作成"
+      end
+      it '選択した件によって市の選択肢が変わる' do
+        expect(page).to have_select('circle_prefecture_id', with_options: ['県を選択', 'テスト県'])
+        select 'テスト県', from: 'circle_prefecture_id'
+        expect(page).to have_select('circle_city_id', with_options: ['市を選択', 'テスト市'])
+        expect(page).not_to have_select('circle_city_id', with_options: ['テスト市2'])
+        expect(page).to have_button "作成"
+      end
+    end
+    context 'サークル作成成功のテスト' do
+      before do
+        visit root_path
+        find('#openCircleModalButton').click
+        fill_in 'circle[circle_name]', with: Faker::Lorem.characters(number: 10)
+        fill_in 'circle[circle_introduction]', with: Faker::Lorem.characters(number: 10)
+        select "テスト県", from: "circle_prefecture_id"
+        select "テスト市", from: "circle_city_id"
+        attach_file('circle[circle_image]', Rails.root.join('spec/images/logo.png'), visible: false)
+        click_button '作成'
+      end
+      it "サークル作成後、サークル詳細画面へ遷移する" do
+        expect(page).to have_current_path"/circles/2"
+      end
+      it "サークル作成後、フラッシュメッセージが表示される" do
+        expect(page).to have_content 'サークルを作成しましたaa'
       end
     end
   end
