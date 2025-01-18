@@ -24,15 +24,43 @@ document.addEventListener('turbolinks:load', function() {
 
 // ファイルプレビュー用jquery
 document.addEventListener('turbolinks:load', function() {
-  $(document).ready(function () {
-    $('#image_input').on('change', function (e) {
+  function setupFilePreview(inputSelector, previewSelector) {
+    $(document).on('change', inputSelector, function(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function (event) {
-          $('#img_prev').attr('src', event.target.result);
+        reader.onload = function(event) {
+          $(previewSelector).attr('src', event.target.result);
         };
         reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  setupFilePreview('#image_input', '#img_prev');
+  setupFilePreview('#circle_image_input', '#circle_img_prev');
+  setupFilePreview('#post_image_input', '#post_img_prev');
+
+  // Circleモーダルを開く際の設定
+  $(document).on('click', '#openCircleModalButton', function() {
+    $.ajax({
+      url: '/circles/new',
+      type: 'GET',
+      dataType: 'script',
+      success: function() {
+        setupFilePreview('#circle_image_input', '#circle_img_prev');
+      }
+    });
+  });
+
+  // Postモーダルを開く際の設定
+  $(document).on('click', '#openPostModalButton', function() {
+    $.ajax({
+      url: '/posts/new',
+      type: 'GET',
+      dataType: 'script',
+      success: function() {
+        setupFilePreview('#post_image_input', '#post_img_prev');
       }
     });
   });
@@ -147,26 +175,52 @@ $(document).ready(function () {
   });
 });
 
-// カレンダー用Jquery
+// カレンダー用
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 document.addEventListener('turbolinks:load', function() {
   var calendarEl = document.getElementById('calendar');
   var circleId = calendarEl.getAttribute('data-circle-id');
+  var isAdmin = calendarEl.hasAttribute('data-is-admin');
   var calendar = new Calendar(calendarEl, {
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
     locale: 'jp',
     events: '/circles/' + circleId + '/events',
-    timeZone: 'Asia/Tokyo',  // タイムゾーンを日本時間に設定
+    timeZone: 'Asia/Tokyo',
     eventDisplay: 'block',
     eventClick: function(info) {
       var eventId = info.event.id;
-      var eventDetailUrl = '/circles/' + circleId + '/events/' + eventId;
+      var eventDetailUrl;
+      if (isAdmin) {
+        eventDetailUrl = '/admin/circles/' + circleId + '/events/' + eventId;
+      }
+      else {
+        eventDetailUrl = '/circles/' + circleId + '/events/' + eventId;
+      }
       window.location.href = eventDetailUrl;
+    },
+    dayCellContent: function(arg) {
+      return arg.date.getDate();
     }
   });
-
   calendar.render();
+});
+
+// 検索時にサークル以外が選択されるときに活動場所フォームを非表示にする用
+$(document).on('turbolinks:load', function () {
+  toggleLocationForm();
+  $("input[name='[range]']").on('change', function () {
+    toggleLocationForm();
+  });
+
+  function toggleLocationForm() {
+    const selectedRange = $("input[name='[range]']:checked").val();
+    if (selectedRange === 'circle') {
+      $('#location-form').show();
+    } else {
+      $('#location-form').hide();
+    }
+  }
 });

@@ -1,0 +1,73 @@
+.new_post_btn {
+  position: fixed;
+  bottom: 20px;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+  background-color: #48e2b4;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  border: none;
+
+  .new_post_btn_icon {
+    margin: 0 auto;
+  }
+
+  .new_post_btn_text {
+    white-space: nowrap;
+    display: none;
+  }
+}
+
+.new_post_btn:hover {
+  text-decoration: none;
+  width: 130px;
+  color: #fff;
+
+  .new_post_btn_text {
+    display: inline;
+  }
+}
+
+.new_circle_btn {
+  position: fixed;
+  bottom: 80px;
+  right: 10%;
+  width: 50px;
+  height: 50px;
+  background-color: #55e248;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  border: none;
+
+  .new_circle_btn_icon {
+    margin: 0 auto;
+  }
+
+  .new_circle_btn_text {
+    white-space: nowrap;
+    display: none;
+  }
+}
+
+.new_circle_btn:hover {
+  text-decoration: none;
+  width: 150px;
+  color: #fff;
+
+  .new_circle_btn_text {
+    display: inline;
+  }
+}

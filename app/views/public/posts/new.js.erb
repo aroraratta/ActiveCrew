@@ -1,0 +1,2 @@
+$('#modalFormContent').html('<%= j render "form", post: @post, submit_text: "投稿", route: posts_path, circles: @circles, async: false  %>');
+$('#PostModal').modal('show');

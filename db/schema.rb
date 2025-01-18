@@ -61,13 +61,6 @@ ActiveRecord::Schema.define(version: 2024_12_26_124333) do
     t.index ["user_id"], name: "index_attends_on_user_id"
   end
 
-  create_table "circle_addresses", force: :cascade do |t|
-    t.integer "circle_id", null: false
-    t.integer "city_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "circle_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "circle_id"

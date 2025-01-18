@@ -6,6 +6,10 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     @circles = current_user.circles
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -13,10 +17,9 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "投稿しました"
-      redirect_to mypage_path
+      redirect_to post_path(@post)
     else
       @circles = current_user.circles
-      render :new
     end
   end
 

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  namespace :public do
+  namespace :admin do
     get 'events/show'
   end
+  namespace :public do
+    end
   # 共用
   root to: "homes#about"
   get "top" => "homes#top"
@@ -18,7 +20,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update, :destroy]
-    resources :circles, only: [:index, :show, :update, :destroy] do
+    resources :circles, only: [:index, :show] do
+      resources :events, only: [:show]
     end
   end
 

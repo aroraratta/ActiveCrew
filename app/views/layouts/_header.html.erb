@@ -18,7 +18,7 @@
       <ul>
         <% if admin_signed_in? %>
           <p><strong>管理者ログイン中。</strong></p>
-          <%= link_to admin_circles_path do %><li class="header-content">サークル一覧</li><% end %>
+          <%= link_to admin_circles_path do %><li class="header-content"><i class="fa-solid fa-people-group"></i>サークル一覧</li><% end %>
           <%= link_to admin_users_path do %><li class="header-content">会員一覧</li><% end %>
           <%= link_to admin_posts_path do %><li class="header-content">投稿一覧</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
@@ -27,8 +27,6 @@
           <p><strong>ログイン中です。<%= current_user.name %>さん</strong></p>
           <%= link_to root_path do %><li class="header-content">サイト概要</li><% end %>
           <%= link_to mypage_path do %><li class="header-content">マイページ</li><% end %>
-          <%= link_to new_post_path do %><li class="header-content">新規投稿</li><% end %>
-          <%= link_to new_circle_path do %><li class="header-content">サークル作成</li><% end %>
           <%= link_to top_path do %><li class="header-content">検索</li><% end %>
           <%= link_to destroy_user_session_path, method: :delete do %><li class="header-content">ログアウト</li><% end %>
         <% else %>
@@ -46,27 +44,142 @@
 <div id="hidden-header" class="fixed-header">
   <div class="container-fluid">
     <div class="row m-1 text-center hidden-header-custom border-custom">
-      <%= link_to top_path, class: "h-100" do %>
+      <%= link_to top_path, class: "h-100 header-logo" do %>
         <%= image_tag "logo.png", class: "h-100" %>
       <% end %>
       <% if admin_signed_in? %>
-        <%= link_to "サークル一覧", admin_circles_path, class: "col my-auto" %>
-        <%= link_to "会員一覧", admin_users_path, class: "col my-auto" %>
-        <%= link_to "投稿一覧", admin_posts_path, class: "col my-auto" %>
-        <%= link_to "検索", top_path, class: "col my-auto" %>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "col my-auto" %>
+        <div class="col my-auto mx-1">
+          <%= link_to admin_circles_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">サークル<wbr>一覧</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to root_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+            <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">会員<wbr>一覧</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to root_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-regular fa-clone"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">投稿<wbr>一覧</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to top_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">検索</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to destroy_admin_session_path, method: :delete, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">ログ<wbr>アウト</p>
+            </div>
+          <% end %>
+        </div>
       <% elsif user_signed_in? %>
-        <%= link_to "サイト概要", root_path, class: "col my-auto" %>
-        <%= link_to "マイページ", mypage_path, class: "col my-auto" %>
-        <%= link_to "新規投稿", new_post_path, class: "col my-auto" %>
-        <%= link_to "サークル作成", new_circle_path, class: "col my-auto" %>
-        <%= link_to "検索", top_path, class: "col my-auto" %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "col my-auto" %>
+        <div class="col my-auto mx-1">
+          <%= link_to root_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">サイト<wbr>概要</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to mypage_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">マイ<wbr>ページ</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to top_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">検索</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to root_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">ログ<wbr>アウト</p>
+            </div>
+          <% end %>
+        </div>
       <% else %>
-        <%= link_to "サイト概要", root_path, class: "col my-auto" %>
-        <%= link_to "検索", top_path, class: "col my-auto" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "col my-auto" %>
-        <%= link_to "ログイン", new_user_session_path, class: "col my-auto" %>
+        <div class="col my-auto mx-1">
+          <%= link_to root_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">サイト<wbr>概要</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to top_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">検索</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to new_user_registration_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-person-circle-plus"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">新規<wbr>登録</p>
+            </div>
+          <% end %>
+        </div>
+        <div class="col my-auto mx-1">
+          <%= link_to new_user_session_path, class: "row fixed-header-content" do %>
+            <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </div>
+            <div class="col-md-auto col-sm-12 my-auto fixed-header-content-text">
+              <p class="m-0">ログ<wbr>イン</p>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -36,3 +36,19 @@
   font-weight: bold;
   text-align: center;
 }
+
+#tab-menu a {
+  white-space: nowrap;
+  overflow-wrap: break-word;
+}
+
+.truncate-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width:768px) {
+  .large-icon {
+    font-size: 8vh;
+  }
+}

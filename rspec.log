@@ -1,0 +1,22 @@
+
+[STEP3] 仕上げのテスト
+  サクセスメッセージのテスト
+[31m    ユーザ新規登録成功時 (FAILED - 1)[0m
+
+Failures:
+
+  1) [STEP3] 仕上げのテスト サクセスメッセージのテスト ユーザ新規登録成功時
+     [31mFailure/Error: user.profile_image.attach(io: File.open("spec/images/logo.jpeg"), filename: "logo.jpeg", content_type: "application/xlsx")[0m
+     [31m[0m
+     [31mNoMethodError:[0m
+     [31m  undefined method `profile_image' for #<User id: nil, email: "tristan_beatty@marks.test", name: "g2ax1lpbk1", introduction: "hwvahrtpmh2lf2868nvt", is_active: true, created_at: nil, updated_at: nil>[0m
+     [36m# ./spec/factories/users.rb:10:in `block (3 levels) in <main>'[0m
+     [36m# ./spec/system/03_finishing_touches_spec.rb:5:in `block (2 levels) in <main>'[0m
+
+Finished in 0.51349 seconds (files took 13.15 seconds to load)
+[31m1 example, 1 failure[0m
+
+Failed examples:
+
+[31mrspec ./spec/system/03_finishing_touches_spec.rb:14[0m [36m# [STEP3] 仕上げのテスト サクセスメッセージのテスト ユーザ新規登録成功時[0m
+

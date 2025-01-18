@@ -1,18 +1,18 @@
 <div class="container">
-  <div class="row my-5">
+  <div class="row my-4">
     <% if @user == current_user %>
-      <div class="col-3 text-center">
+      <div class="col-md-auto col-sm-12 text-center mb-2">
         <h3 class="page-title my-auto">マイページ</h3>
       </div>
       <div class="col-auto my-auto">
-        <button class="btn-custom-blue edit-btn">プロフィール編集</button>
+        <button class="btn-custom-blue edit-btn">編集</button>
       </div>
       <div class="col-auto my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
 
     <% else %>
-      <div class="col-3 text-center">
+      <div class="col-md-auto col-12 text-center mb-2">
         <h3 class="page-title my-auto">プロフィール</h3>
       </div>
       <% if user_signed_in? %>
@@ -50,11 +50,11 @@
   </div>
   
   <% if current_user == @user %>
-    <div class="row" id="tab-menu">
-      <div class="col active"><a href="#tab1" class="text-blue">投稿一覧</a></div>
-      <div class="col inactive"><a href="#tab2" class="text-white">所属サークルの投稿</a></div>
-      <div class="col inactive"><a href="#tab3" class="text-white">フォローユーザー投稿</a></div>
-      <div class="col inactive"><a href="#tab4" class="text-white">DM</a></div>
+    <div class="row text-center" id="tab-menu">
+      <div class="col active d-flex justify-content-center"><a href="#tab1" class="text-blue my-auto">投稿<wbr>一覧</a></div>
+      <div class="col inactive d-flex justify-content-center"><a href="#tab2" class="text-white my-auto">所属サークル<wbr>の投稿</a></div>
+      <div class="col inactive d-flex justify-content-center"><a href="#tab3" class="text-white my-auto">フォロー<wbr>ユーザー投稿</a></div>
+      <div class="col inactive d-flex justify-content-center"><a href="#tab4" class="text-white my-auto">DM<wbr>一覧</a></div>
     </div>
   <% end %>
 
@@ -71,7 +71,7 @@
           <% @posts.each do |post| %>
             <div class="row py-3 my-3 post-background">
               <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
-              <div class="col-1 my-auto text-center">
+              <div class="col-1 mx-1 my-auto text-center text-blue">
                 <i class="fa-regular fa-comment small-icon"></i>
                 <%= post.post_comments.count %>
               </div>
@@ -84,7 +84,7 @@
             <% @circle_posts.each do |post| %>
               <div class="row py-3 my-3 post-background">
                 <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
-                <div class="col-1 my-auto text-center">
+                <div class="col-1 mx-1 my-auto text-center text-blue text-center">
                   <i class="fa-regular fa-comment small-icon"></i>
                   <%= post.post_comments.count %>
                 </div>
@@ -96,7 +96,7 @@
             <% @following_posts.each do |post| %>
               <div class="row py-3 my-3 post-background">
                 <%= render "public/posts/index", obj: post, user_route: user_path(post.user), post_route: post_path(post), content: post.body, circle: post.circle, circle_route: post.circle.present? ? circle_path(post.circle) : nil %>
-                <div class="col-1 my-auto text-center">
+                <div class="col-1 mx-1 my-auto text-center text-blue text-center">
                   <i class="fa-regular fa-comment small-icon"></i>
                   <%= post.post_comments.count %>
                 </div>
@@ -109,10 +109,10 @@
               <% if room.users.where.not(id: current_user.id).where(is_active: true).exists? %>
                 <div class="row my-3">
                   <div class="col">
-                    <%= link_to room_path(room) do %>
-                      <div class="blue-border bg-white">
+                    <div class="blue-border bg-white">
+                      <%= link_to user_path(room.users.where.not(id: current_user.id).first) do %>
                         <div class="row">
-                          <div class="col-1">
+                          <div class="col-md-1 col-2">
                             <div class="square">
                               <%= display_user_image(room.users.where.not(id: current_user.id).where(is_active: true).first) %>
                             </div>
@@ -121,16 +121,15 @@
                             <%= room.users.where.not(id: current_user.id).where(is_active: true).first&.name %>
                           </div>
                         </div>
+                      <% end %>
+                      <%= link_to room_path(room) do %>
                         <div class="row">
                           <div class="col my-2 text-gray">
                             <p class="m-0"><%= room.messages.last&.message || "まだメッセージがありません" %></p>
                           </div>
                         </div>
-                      </div>
-                    <% end %>
-                  </div>
-                  <div class="col-auto my-auto">
-                    <%= link_to "ユーザーページ", user_path(room.users.where.not(id: current_user.id).first), class: "btn-custom-blue" %>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               <% end %>

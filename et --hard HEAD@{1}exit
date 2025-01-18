@@ -1,0 +1,203 @@
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m28f3c5a[m[33m ([m[1;31morigin/feature-phase5_rspec_devise[m[33m)[m HEAD@{1}: commit: [Add]RSpec導入、git lfsを使用してgoogle-chromeをpush
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{2}: reset: moving to HEAD
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{3}: reset: moving to HEAD~5
+[33m0f465a0[m HEAD@{4}: commit: [Add]RSpec導入、git lfsを使用してgoogle-chromeをpush
+[33m2adc458[m HEAD@{5}: reset: moving to HEAD
+[33m2adc458[m HEAD@{6}: reset: moving to HEAD~4
+[33m3ac0f7b[m HEAD@{7}: commit: [Add]lfsの追加
+[33m8a183cc[m HEAD@{8}: reset: moving to HEAD
+[33m8a183cc[m HEAD@{9}: reset: moving to HEAD~1
+[33md2da553[m HEAD@{10}: commit: [Add]rspec導入
+[33m8a183cc[m HEAD@{11}: commit: [Add]google-chrome-stable_current_x86_64.rpmをLFSに追加
+[33mf126118[m HEAD@{12}: reset: moving to HEAD
+[33mf126118[m HEAD@{13}: reset: moving to HEAD~1
+[33m443ef61[m HEAD@{14}: commit: [Add]rspec導入
+[33mf126118[m HEAD@{15}: reset: moving to HEAD~2
+[33m0e52864[m HEAD@{16}: reset: moving to HEAD
+[33m0e52864[m HEAD@{17}: commit: [Add]rspec導入
+[33m18f0659[m HEAD@{18}: reset: moving to HEAD
+[33m18f0659[m HEAD@{19}: commit: [Add]rspec導入
+[33mf126118[m HEAD@{20}: commit: [Add]rspec導入
+[33m8583d0b[m HEAD@{21}: commit: [Add]rspec導入
+[33m2adc458[m HEAD@{22}: checkout: moving from develop to feature-phase5_rspec_devise
+[33mf2c14e7[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{23}: pull origin develop: Fast-forward
+[33md382a30[m HEAD@{24}: checkout: moving from feature-phase5_responsive_searches_search to develop
+[33m4867178[m[33m ([m[1;31morigin/feature-phase5_responsive_searches_search[m[33m, [m[1;32mfeature-phase5_responsive_searches_search[m[33m)[m HEAD@{25}: commit: [Updata]検索結果画面レスポンシブ対応
+[33md382a30[m HEAD@{26}: checkout: moving from develop to feature-phase5_responsive_searches_search
+[33md382a30[m HEAD@{27}: pull origin develop: Fast-forward
+[33md28cd54[m HEAD@{28}: checkout: moving from feature-phase5_responsive_header to develop
+[33m4c19d64[m[33m ([m[1;31morigin/feature-phase5_responsive_header[m[33m, [m[1;32mfeature-phase5_responsive_header[m[33m)[m HEAD@{29}: commit: [Update]ヘッダーのレスポンシブ対応
+[33md28cd54[m HEAD@{30}: checkout: moving from develop to feature-phase5_responsive_header
+[33md28cd54[m HEAD@{31}: pull origin develop: Fast-forward
+[33m56f4f2b[m HEAD@{32}: checkout: moving from feature-phase5_responsive_search to develop
+[33m766d3e4[m[33m ([m[1;31morigin/feature-phase5_responsive_search[m[33m, [m[1;32mfeature-phase5_responsive_search[m[33m)[m HEAD@{33}: commit: [Update]Topページレスポンシブ対応
+[33m56f4f2b[m HEAD@{34}: Branch: renamed refs/heads/feature-phase5_responsive_posts_search to refs/heads/feature-phase5_responsive_search
+[33m56f4f2b[m HEAD@{36}: Branch: renamed refs/heads/feature-phase5_responsive_posts_new to refs/heads/feature-phase5_responsive_posts_search
+[33m56f4f2b[m HEAD@{38}: checkout: moving from develop to feature-phase5_responsive_posts_new
+[33m56f4f2b[m HEAD@{39}: checkout: moving from feature-phase5_rspec_devise to develop
+[33m2adc458[m HEAD@{40}: commit: [Add]rspec導入
+[33m56f4f2b[m HEAD@{41}: checkout: moving from develop to feature-phase5_rspec_devise
+[33m56f4f2b[m HEAD@{42}: checkout: moving from feature-phase5_rspec_devise to develop
+[33m56f4f2b[m HEAD@{43}: checkout: moving from develop to feature-phase5_rspec_devise
+[33m56f4f2b[m HEAD@{44}: pull origin develop: Fast-forward
+[33m23c02fe[m HEAD@{45}: checkout: moving from feature-phase5_responsive_devise to develop
+[33m9252584[m[33m ([m[1;31morigin/feature-phase5_responsive_devise[m[33m, [m[1;32mfeature-phase5_responsive_devise[m[33m)[m HEAD@{46}: commit: [Updata]サインイン、サインアップ画面レスポンシブ対応
+[33m23c02fe[m HEAD@{47}: checkout: moving from develop to feature-phase5_responsive_devise
+[33m23c02fe[m HEAD@{48}: pull origin develop: Fast-forward
+[33m3c3c852[m HEAD@{49}: checkout: moving from feature-phase5_responsive_circles_show to develop
+[33m2f21bd9[m[33m ([m[1;31morigin/feature-phase5_responsive_circles_show[m[33m, [m[1;32mfeature-phase5_responsive_circles_show[m[33m)[m HEAD@{50}: commit: [Update]circles#showのレスポンシブ対応
+[33m3c3c852[m HEAD@{51}: checkout: moving from develop to feature-phase5_responsive_circles_show
+[33m3c3c852[m HEAD@{52}: checkout: moving from main to develop
+[33mfceac92[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{53}: checkout: moving from develop to main
+[33m3c3c852[m HEAD@{54}: pull origin develop: Fast-forward
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{55}: checkout: moving from feature-phase5_responsive_posts_show to develop
+[33mea51d7d[m[33m ([m[1;31morigin/feature-phase5_responsive_posts_show[m[33m, [m[1;32mfeature-phase5_responsive_posts_show[m[33m)[m HEAD@{56}: commit: [Updata]posts#show画面のレスポンシブ対応
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{57}: checkout: moving from develop to feature-phase5_responsive_posts_show
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{58}: checkout: moving from main to develop
+[33mfceac92[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{59}: checkout: moving from develop to main
+[33m965a496[m[33m ([m[1;36mHEAD -> [m[1;32mfeature-phase5_rspec_devise[m[33m)[m HEAD@{60}: pull origin develop: Fast-forward
+[33m48ce509[m HEAD@{61}: checkout: moving from feature-phase5_responsive_homes_about to develop
+[33mfc15a7c[m[33m ([m[1;31morigin/feature-phase5_responsive_homes_about[m[33m, [m[1;32mfeature-phase5_responsive_homes_about[m[33m)[m HEAD@{62}: commit: [Updata]about画面のレスポンシブ対応
+[33m48ce509[m HEAD@{63}: Branch: renamed refs/heads/feature-phase5_responsive_homes_top to refs/heads/feature-phase5_responsive_homes_about
+[33m48ce509[m HEAD@{65}: checkout: moving from develop to feature-phase5_responsive_homes_top
+[33m48ce509[m HEAD@{66}: pull origin develop: Fast-forward
+[33m053d81b[m HEAD@{67}: checkout: moving from feature-phase5_responsive_users_show to develop
+[33mf04974b[m[33m ([m[1;31morigin/feature-phase5_responsive_users_show[m[33m, [m[1;32mfeature-phase5_responsive_users_show[m[33m)[m HEAD@{68}: commit: [Update]users/showのレスポンシブ対応
+[33m053d81b[m HEAD@{69}: checkout: moving from develop to feature-phase5_responsive_users_show
+[33m053d81b[m HEAD@{70}: pull origin develop: Fast-forward
+[33mb018901[m HEAD@{71}: checkout: moving from refactor-phase5_admin_controller to develop
+[33m027a9af[m[33m ([m[1;31morigin/refactor-phase5_admin_controller[m[33m, [m[1;32mrefactor-phase5_admin_controller[m[33m)[m HEAD@{72}: commit: [Refactor]adminコントローラー,searchコントローラーリファクタリング
+[33mb018901[m HEAD@{73}: checkout: moving from develop to refactor-phase5_admin_controller
+[33mb018901[m HEAD@{74}: pull origin develop: Fast-forward
+[33m88043bf[m HEAD@{75}: checkout: moving from refactor-phase5_search to develop
+[33md3165fd[m[33m ([m[1;31morigin/refactor-phase5_search[m[33m, [m[1;32mrefactor-phase5_search[m[33m)[m HEAD@{76}: commit: [Fix]検索機能のエラー解消
+[33m88043bf[m HEAD@{77}: checkout: moving from develop to refactor-phase5_search
+[33m88043bf[m HEAD@{78}: pull origin develop: Fast-forward
+[33mcc06af2[m HEAD@{79}: checkout: moving from refactor-phase5_controller to develop
+[33mae2ff1d[m[33m ([m[1;31morigin/refactor-phase5_controller[m[33m, [m[1;32mrefactor-phase5_controller[m[33m)[m HEAD@{80}: checkout: moving from develop to refactor-phase5_controller
+[33mcc06af2[m HEAD@{81}: checkout: moving from refactor-phase5_controller to develop
+[33mae2ff1d[m[33m ([m[1;31morigin/refactor-phase5_controller[m[33m, [m[1;32mrefactor-phase5_controller[m[33m)[m HEAD@{82}: commit: [Update]publicコントローラーリファクタリング
+[33m6c2d1f4[m HEAD@{83}: commit: [Update]users_controllerのn+1問題解消
+[33mcc06af2[m HEAD@{84}: checkout: moving from develop to refactor-phase5_controller
+[33mcc06af2[m HEAD@{85}: checkout: moving from feature-phase5_test_code to develop
+[33mcc06af2[m HEAD@{86}: checkout: moving from develop to feature-phase5_test_code
+[33mcc06af2[m HEAD@{87}: checkout: moving from refactor-phase5_controller to develop
+[33mcc06af2[m HEAD@{88}: checkout: moving from develop to refactor-phase5_controller
+[33mcc06af2[m HEAD@{89}: pull origin develop: Fast-forward
+[33mc5a2444[m HEAD@{90}: checkout: moving from feature-phase1-search_update to develop
+[33m27dcfad[m[33m ([m[1;31morigin/feature-phase1-search_update[m[33m, [m[1;32mfeature-phase1-search_update[m[33m)[m HEAD@{91}: commit: [Add]検索機能で活動場所で検索できる機能実装
+[33mc5a2444[m HEAD@{92}: checkout: moving from develop to feature-phase1-search_update
+[33mc5a2444[m HEAD@{93}: pull origin develop: Fast-forward
+[33mbc7dec9[m HEAD@{94}: checkout: moving from feature-phase5_admin_layout to develop
+[33mc9f9124[m[33m ([m[1;31morigin/feature-phase5_admin_layout[m[33m, [m[1;32mfeature-phase5_admin_layout[m[33m)[m HEAD@{95}: commit: [Updata]管理者側レイアウト更新
+[33mbc7dec9[m HEAD@{96}: checkout: moving from develop to feature-phase5_admin_layout
+[33mbc7dec9[m HEAD@{97}: pull origin develop: Fast-forward
+[33m80f61a9[m HEAD@{98}: checkout: moving from refactor-phase5_about to develop
+[33mbcffb2d[m[33m ([m[1;31morigin/refactor-phase5_about[m[33m, [m[1;32mrefactor-phase5_about[m[33m)[m HEAD@{99}: commit: [Update]top画面修正
+[33m80f61a9[m HEAD@{100}: checkout: moving from develop to refactor-phase5_about
+[33m80f61a9[m HEAD@{101}: pull origin develop: Fast-forward
+[33m6e54a52[m HEAD@{102}: checkout: moving from feature-phase5_attend to develop
+[33m697298d[m[33m ([m[1;31morigin/feature-phase5_attend[m[33m, [m[1;32mfeature-phase5_attend[m[33m)[m HEAD@{103}: commit: [Add]イベント参加機能実装
+[33m6e54a52[m HEAD@{104}: checkout: moving from develop to feature-phase5_attend
+[33m6e54a52[m HEAD@{105}: pull origin develop: Fast-forward
+[33md02e803[m HEAD@{106}: checkout: moving from refactor-phase4_calendar to develop
+[33m700151e[m[33m ([m[1;31morigin/refactor-phase4_calendar[m[33m, [m[1;32mrefactor-phase4_calendar[m[33m)[m HEAD@{107}: commit: [Add]イベント登録時のバグ修正
+[33md02e803[m HEAD@{108}: checkout: moving from develop to refactor-phase4_calendar
+[33md02e803[m HEAD@{109}: pull origin develop: Fast-forward
+[33m9b297f6[m HEAD@{110}: checkout: moving from feature-phase4_calendar to develop
+[33md6deed6[m[33m ([m[1;31morigin/feature-phase4_calendar[m[33m, [m[1;32mfeature-phase4_calendar[m[33m)[m HEAD@{111}: commit: [Add]カレンダーのタイトル表示
+[33m4729c66[m HEAD@{112}: commit: [Add]カレンダー機能実装
+[33m9b297f6[m HEAD@{113}: checkout: moving from develop to feature-phase4_calendar
+[33m9b297f6[m HEAD@{114}: pull origin develop: Fast-forward
+[33m4e45be9[m HEAD@{115}: checkout: moving from refactor-phase3_add_gemfile to develop
+[33m418f3e5[m[33m ([m[1;31morigin/refactor-phase3_add_gemfile[m[33m, [m[1;32mrefactor-phase3_add_gemfile[m[33m)[m HEAD@{116}: commit: [Add]rubyzip導入
+[33m4e45be9[m HEAD@{117}: checkout: moving from develop to refactor-phase3_add_gemfile
+[33m4e45be9[m HEAD@{118}: pull origin develop: Fast-forward
+[33m6953ba0[m HEAD@{119}: checkout: moving from refactor-phase3_migratefile_2 to develop
+[33m065fec2[m[33m ([m[1;31morigin/refactor-phase3_migratefile_2[m[33m, [m[1;32mrefactor-phase3_migratefile_2[m[33m)[m HEAD@{120}: commit: [Update]migrateファイルの順番修正
+[33m6953ba0[m HEAD@{121}: checkout: moving from develop to refactor-phase3_migratefile_2
+[33m6953ba0[m HEAD@{122}: pull origin develop: Fast-forward
+[33md63253e[m HEAD@{123}: checkout: moving from refactor-phase3_migratefile to develop
+[33m6f49959[m[33m ([m[1;31morigin/refactor-phase3_migratefile[m[33m, [m[1;32mrefactor-phase3_migratefile[m[33m)[m HEAD@{124}: commit: [Add]migrateファイルの順番修正
+[33md63253e[m HEAD@{125}: checkout: moving from develop to refactor-phase3_migratefile
+[33md63253e[m HEAD@{126}: pull origin develop: Fast-forward
+[33m1869a9d[m HEAD@{127}: checkout: moving from feature-phase3_test_data to develop
+[33ma447782[m[33m ([m[1;31morigin/feature-phase3_test_data[m[33m, [m[1;32mfeature-phase3_test_data[m[33m)[m HEAD@{128}: commit: [Add]テストデータ作成
+[33m1869a9d[m HEAD@{129}: checkout: moving from develop to feature-phase3_test_data
+[33m1869a9d[m HEAD@{130}: pull origin develop: Fast-forward
+[33m60fe3a4[m HEAD@{131}: checkout: moving from refactor-phase3_layout to develop
+[33m99056bc[m[33m ([m[1;31morigin/refactor-phase3_layout[m[33m, [m[1;32mrefactor-phase3_layout[m[33m)[m HEAD@{132}: commit: [Add]レイアウト調整
+[33m60fe3a4[m HEAD@{133}: checkout: moving from develop to refactor-phase3_layout
+[33m60fe3a4[m HEAD@{134}: pull origin develop: Fast-forward
+[33mafe44fd[m HEAD@{135}: checkout: moving from feature-phase3_layout_admin to develop
+[33m3986f48[m[33m ([m[1;31morigin/feature-phase3_layout_admin[m[33m, [m[1;32mfeature-phase3_layout_admin[m[33m)[m HEAD@{136}: commit: [Add]管理者側レイアウト調整
+[33mafe44fd[m HEAD@{137}: checkout: moving from develop to feature-phase3_layout_admin
+[33mafe44fd[m HEAD@{138}: pull origin develop: Fast-forward
+[33mce4453e[m HEAD@{139}: checkout: moving from feature-phase3_guest_sign_in to develop
+[33m5c09c8a[m[33m ([m[1;31morigin/feature-phase3_guest_sign_in[m[33m, [m[1;32mfeature-phase3_guest_sign_in[m[33m)[m HEAD@{140}: commit: [Add]ゲストログイン機能実装
+[33mce4453e[m HEAD@{141}: checkout: moving from develop to feature-phase3_guest_sign_in
+[33mce4453e[m HEAD@{142}: pull origin develop: Fast-forward
+[33me4a3302[m HEAD@{143}: checkout: moving from feature-phase3_layout_top to develop
+[33m082e1a8[m[33m ([m[1;31morigin/feature-phase3_layout_top[m[33m, [m[1;32mfeature-phase3_layout_top[m[33m)[m HEAD@{144}: commit: [Add]トップページレイアウト調整
+[33me4a3302[m HEAD@{145}: checkout: moving from develop to feature-phase3_layout_top
+[33me4a3302[m HEAD@{146}: checkout: moving from feature-phase3_layout_top to develop
+[33me4a3302[m HEAD@{147}: checkout: moving from develop to feature-phase3_layout_top
+[33me4a3302[m HEAD@{148}: pull origin develop: Fast-forward
+[33m6008782[m HEAD@{149}: checkout: moving from feature-phase3_async to develop
+[33m5402617[m[33m ([m[1;31morigin/feature-phase3_async[m[33m, [m[1;32mfeature-phase3_async[m[33m)[m HEAD@{150}: commit: [Add]ユーザー側非同期通信化
+[33ma7c662e[m HEAD@{151}: commit: git commit -m
+[33m6008782[m HEAD@{152}: checkout: moving from develop to feature-phase3_async
+[33m6008782[m HEAD@{153}: pull origin develop: Fast-forward
+[33m9685cb9[m HEAD@{154}: checkout: moving from feature-phase3_layout_mypage_tab to develop
+[33mc0c58d8[m[33m ([m[1;31morigin/feature-phase3_layout_mypage_tab[m[33m, [m[1;32mfeature-phase3_layout_mypage_tab[m[33m)[m HEAD@{155}: commit: [Add]マイページのレイアウト調整
+[33m9685cb9[m HEAD@{156}: checkout: moving from develop to feature-phase3_layout_mypage_tab
+[33m9685cb9[m HEAD@{157}: pull origin develop: Fast-forward
+[33m79b28ba[m HEAD@{158}: checkout: moving from feature-phase3_follow to develop
+[33m646b845[m[33m ([m[1;31morigin/feature-phase3_follow[m[33m, [m[1;32mfeature-phase3_follow[m[33m)[m HEAD@{159}: commit: [Add]follow機能実装
+[33m79b28ba[m HEAD@{160}: checkout: moving from develop to feature-phase3_follow
+[33m79b28ba[m HEAD@{161}: pull origin develop: Fast-forward
+[33m0fca841[m HEAD@{162}: checkout: moving from feature-phase3_dm to develop
+[33mffdb102[m[33m ([m[1;31morigin/feature-phase3_dm[m[33m, [m[1;32mfeature-phase3_dm[m[33m)[m HEAD@{163}: commit: [Add]DM機能実装
+[33m0fca841[m HEAD@{164}: checkout: moving from develop to feature-phase3_dm
+[33m0fca841[m HEAD@{165}: pull origin develop: Fast-forward
+[33maf867a8[m HEAD@{166}: checkout: moving from feature-phase3_join_circle to develop
+[33m3b5a6eb[m[33m ([m[1;31morigin/feature-phase3_join_circle[m[33m, [m[1;32mfeature-phase3_join_circle[m[33m)[m HEAD@{167}: commit: [Add]サークル参加機能実装
+[33maf867a8[m HEAD@{168}: checkout: moving from develop to feature-phase3_join_circle
+[33maf867a8[m HEAD@{169}: pull origin develop: Fast-forward
+[33me649a7c[m HEAD@{170}: checkout: moving from feature-phase3_circle_crud to develop
+[33m42ab32d[m[33m ([m[1;31morigin/feature-phase3_circle_crud[m[33m, [m[1;32mfeature-phase3_circle_crud[m[33m)[m HEAD@{171}: commit: [Add]管理者側CRUD作成
+[33m8d0a0cf[m HEAD@{172}: commit: [Add]ユーザー側サークルCRUD機能実装
+[33mb32e3b0[m HEAD@{173}: Branch: renamed refs/heads/feature-phase3_circle to refs/heads/feature-phase3_circle_crud
+[33mb32e3b0[m HEAD@{175}: commit: [Add]検索機能仮実装
+[33mdbd72a5[m HEAD@{176}: commit: [Add]サークル作成機能、編集機能、削除機能実装
+[33m840e29c[m HEAD@{177}: commit: [Add]circle作成機能実装
+[33me649a7c[m HEAD@{178}: checkout: moving from develop to feature-phase3_circle
+[33me649a7c[m HEAD@{179}: checkout: moving from main to develop
+[33mfceac92[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{180}: checkout: moving from refactor-phase1_user_migration to main
+[33md2b1336[m[33m ([m[1;31morigin/refactor-phase1_user_migration[m[33m, [m[1;32mrefactor-phase1_user_migration[m[33m)[m HEAD@{181}: checkout: moving from develop to refactor-phase1_user_migration
+[33me649a7c[m HEAD@{182}: checkout: moving from main to develop
+[33mfceac92[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{183}: pull origin main: Fast-forward
+[33m2174342[m HEAD@{184}: commit: [Update]コンフリクト解消
+[33m78f3210[m HEAD@{185}: checkout: moving from develop to main
+[33me649a7c[m HEAD@{186}: checkout: moving from main to develop
+[33m78f3210[m HEAD@{187}: commit: [Update]コンフリクト解消
+[33m7b3a461[m HEAD@{188}: commit: [Update]コンフリクト解消用]
+[33meeaa03e[m HEAD@{189}: checkout: moving from develop to main
+[33me649a7c[m HEAD@{190}: pull origin develop: Fast-forward
+[33mc9c33a4[m HEAD@{191}: checkout: moving from update-gemfile to develop
+[33mf6afcdb[m[33m ([m[1;31morigin/update-gemfile[m[33m, [m[1;32mupdate-gemfile[m[33m)[m HEAD@{192}: commit: [Update]コンフリクト解消用に修正
+[33mc9c33a4[m HEAD@{193}: checkout: moving from develop to update-gemfile
+[33mc9c33a4[m HEAD@{194}: checkout: moving from main to develop
+[33meeaa03e[m HEAD@{195}: checkout: moving from develop to main
+[33mc9c33a4[m HEAD@{196}: pull origin develop: Fast-forward
+[33mcf1352d[m HEAD@{197}: checkout: moving from refactor-phase2_admin_crud to develop
+[33me31386e[m[33m ([m[1;31morigin/refactor-phase2_admin_crud[m[33m, [m[1;32mrefactor-phase2_admin_crud[m[33m)[m HEAD@{198}: commit: [Add]管理者側のCRUS機能修正
+[33mcf1352d[m HEAD@{199}: checkout: moving from develop to refactor-phase2_admin_crud
+[33mcf1352d[m HEAD@{200}: pull origin develop: Fast-forward
+[33mda13c4f[m HEAD@{201}: checkout: moving from feature-phase2_layout to develop
+[33m477bdcf[m[33m ([m[1;31morigin/feature-phase2_layout[m[33m, [m[1;32mfeature-phase2_layout[m[33m)[m HEAD@{202}: commit: [Add]レイアウト調整
+[33mda13c4f[m HEAD@{203}: checkout: moving from develop to feature-phase2_layout
+[33mda13c4f[m HEAD@{204}: pull origin develop: Fast-forward
+[33m2dfc3e0[m HEAD@{205}: checkout: moving from cleanup-history to develop
+[33m36b924a[m[33m ([m[1;31morigin/cleanup-history[m[33m, [m[1;32mcleanup-history[m[33m)[m HEAD@{206}: commit: [Cleanup]envファイル抹消

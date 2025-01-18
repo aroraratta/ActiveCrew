@@ -7,13 +7,15 @@
       <button class="btn-custom-blue edit-btn">編集</button>
     </div>
     <div class="col-auto my-auto">
-      <%= link_to "削除", admin_circle_path(@circle), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
+      <%= link_to "削除", circle_path(@circle), method: :delete, data: { confirm: "本当に消しますか?" }, class: "btn-custom-red" %>
     </div>
   </div>
   
   <div id="js-circle-edit">
     <%= render "public/circles/circle_edit", circle: @circle, prefectures: @prefectures, owner_route: admin_user_path(@circle.owner) %>
   </div>
+
+  <%= render "public/circles/calender", circle: @circle %>
 
   <div class="row my-5 bg-gray">
     <div class="col">
@@ -34,6 +36,4 @@
       <% end %>
     </div>
   </div>
-</div>
-
 </div>

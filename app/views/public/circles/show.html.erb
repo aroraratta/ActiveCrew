@@ -2,20 +2,20 @@
   <div class="row my-5">
     <% if user_signed_in? %>
       <% if current_user.id == @circle.owner_id %>
-        <div class="col-auto text-center">
+        <div class="col-md-auto col-sm-12 text-center mb-2">
           <h3 class="page-title my-auto">管理サークル</h3>
         </div>
         <div class="col-auto my-auto">
           <button class="btn-custom-blue edit-btn">編集</button>
         </div>
         <div class="col-auto my-auto">
-          <%= link_to "削除", circle_path(@circle), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-custom-red" %>
+          <%= link_to "削除", circle_path(@circle), method: :delete, data: { confirm: "本当に消しますか?" }, class: "btn-custom-red" %>
         </div>
       <% else %>
-        <div class="col-3">
+        <div class="col-md-auto col-sm-12 ">
           <h3 class="page-title my-auto">サークル詳細</h3>
         </div>
-        <div class="col-2 my-auto">
+        <div class="col-auto my-auto">
           <% if @circle.circle_users.exists?(user_id: current_user.id) %>
             <%= link_to "退出", circle_circle_user_path(circle_id: @circle, id: current_user), method: :delete, class: "btn-custom-red", data: { confirm: "サークルを退出しますか?" } %>
           <% elsif @circle.permits.exists?(user_id: current_user.id) %>
@@ -67,24 +67,8 @@
     <% end %>
   <% end %>
 
-   <% if @circle.circle_users.exists?(user_id: current_user.id) %>
-    <div class="row mt-5">
-      <div class="col">
-        <p class="join-circle text-center">活動日</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col text-right">
-        <%= link_to new_circle_event_path(@circle) do %>
-          <i class="fa-regular fa-square-plus text-blue h2"></i>
-        <% end %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div id="calendar" data-circle-id="<%= @circle.id %>"></div>
-      </div>
-    </div>
+  <% if @circle.circle_users.exists?(user_id: current_user.id) %>
+    <%= render "calender", circle: @circle %>
   <% end %>
 
   <div class="row my-5 bg-gray">

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row my-5">
-    <div class="col-auto text-center">
+    <div class="col-md-auto col-sm-12 text-center">
       <h3 class="page-title my-auto">会員登録</h3>
     </div>
   </div>
@@ -10,59 +10,67 @@
   </div>
 
   <%= form_with model: resource, scope: resource_name, url: registration_path(resource_name) do |f| %>
-    <div class="fit-blue-border">
-      <div class="row">
-        <div class="col">
+    <div class="row mt-3">
+      <div class="col-md-2 col-4  field-title text-center ml-2">
+        <%= f.label :name, "名前", class: "my-auto" %>
+      </div>
+      <div class="col text-center">
+        <%= f.text_field :name, autofocus: true, :placeholder =>"サンプル太郎", class: "custom-form" %>
+      </div>
+    </div>    
+    <div class="row mb-3">
+      <div class="col text-left text-blue">
+        <p class="m-0">※後から変更可能</p>
+      </div>
+    </div>
 
-          <div class="row my-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :name, "名前", class: "my-auto" %>
-            </div>
-            <div class="col-10 text-center">
-              <%= f.text_field :name, autofocus: true, :placeholder =>"サンプル太郎", class: "custom-form-small" %>
-            </div>
-          </div>
+    <div class="row mt-3">
+      <div class="col-md-2 col-4 field-title text-center ml-2">
+        <%= f.label :email, "メール", class: "my-auto" %>
+      </div>
+      <div class="col text-center">
+        <%= f.email_field :email, autocomplete: "email", :placeholder =>'example@gmail.com', class: "custom-form" %>
+      </div>
+    </div>    
+    <div class="row mb-3">
+      <div class="col text-left text-blue">
+        <p class="m-0">※後から変更可能</p>
+      </div>
+    </div>
 
-          <div class="row my-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :email, "メール", class: "my-auto" %>
-            </div>
-            <div class="col-10 text-center">
-              <%= f.email_field :email, autocomplete: "email", :placeholder =>'example@gmail.com', class: "custom-form-small" %>
-            </div>
-          </div>
+    <div class="row mt-3">
+      <div class="col-md-2 col-4 field-title text-center ml-2">
+        <%= f.label :password, "パスワード", class: "my-auto" %>
+      </div>
+      <div class="col text-center">
+        <%= f.password_field :password, autocomplete: "new-password", class: "custom-form" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col text-left text-blue">
+        <% if @minimum_password_length %>
+          <em>※パスワードは<%= @minimum_password_length %>文字以上</em>
+        <% end %>
+      </div>
+    </div>
 
-          <div class="row mt-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :password, "パスワード", class: "my-auto" %>
-            </div>
-            <div class="col-10 text-center">
-              <%= f.password_field :password, autocomplete: "new-password", class: "custom-form-small" %>
-            </div>
-          </div>
-          
-          <div class="row mb-3">
-            <div class="col-2 text-center text-blue">
-              <% if @minimum_password_length %>
-              <em>パスワードは<br><%= @minimum_password_length %>文字以上</em>
-              <% end %>
-            </div>
-          </div>
+    <div class="row mt-3">
+      <div class="col-md-2 col-4  field-title text-center ml-2">
+        <%= f.label :password_confirmation, "再入力", class: "my-auto" %>
+      </div>
+      <div class="col text-center">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "custom-form" %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col text-left text-blue">
+        <p class="m-0">※パスワードを再入力</p>
+      </div>
+    </div>
 
-          <div class="row my-3">
-            <div class="col-2 field-title text-center">
-              <%= f.label :password_confirmation, "パスワード(確認)", class: "my-auto" %>
-            </div>
-            <div class="col-10 text-center">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "custom-form-small" %>
-          </div>
-
-          <div class="row mx-auto mt-5">
-            <div class="col text-center">
-              <%= f.submit "登録", class: "btn-custom-blue" %>
-            </div>
-          </div>
-        </div>
+    <div class="row mx-auto mt-5">
+      <div class="col text-center">
+        <%= f.submit "登録", class: "btn-custom-blue" %>
       </div>
     </div>
   <% end %>
