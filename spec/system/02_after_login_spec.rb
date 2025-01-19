@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe "[STEP2] ユーザログイン後のテスト", js: true do
-  let(:user) { create(:user) }
-  let!(:other_user) { create(:user) }
+  let(:user) { create(:user, name: "ユーザー") }
+  let!(:other_user) { create(:user, name: "ユーザー2") }
   let!(:prefecture) { create(:prefecture, prefecture_name: "テスト県") }
   let!(:prefecture2) { create(:prefecture, prefecture_name: "テスト県2") }
   let!(:city) { create(:city, city_name: "テスト市", prefecture: prefecture) }
@@ -11,7 +11,8 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
   let!(:circle2) { create(:circle, circle_name: "テストサークル2", prefecture: prefecture, city: city, owner: other_user) }
   let!(:circle_user) { create(:circle_user, circle: circle, user: user) }
   let!(:circle_user2) { create(:circle_user, circle: circle2, user: other_user) }
-  let!(:post) { create(:post, user: user, circle: circle) }
+  let!(:post) { create(:post, body: "投稿", user: user, circle: circle) }
+  let!(:post2) { create(:post, body: "投稿2", user: other_user, circle: circle2) }
 
   before do
     visit new_user_session_path
@@ -259,6 +260,130 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
       end
       it 'サークルの削除後、フラッシュメッセージが表示される' do
         expect(page).to have_content 'サークルを削除しました'
+      end
+    end
+  end
+
+  describe "検索のテスト" do
+    before do
+      visit top_path
+    end
+    context '検索フォームのテスト' do
+      it "検索フォームが表示されている" do
+        expect(page).to have_selector('input.custom-form[type="text"][name="word"][id="word"]')
+        expect(page).to have_selector('input#range_circle[type="radio"][name="[range]"][value="circle"]')
+        expect(find('#range_circle')).to be_checked
+        expect(page).to have_selector('input#range_post[type="radio"][name="[range]"][value="post"]')
+        expect(find('#range_post')).not_to be_checked
+        expect(page).to have_selector('input#range_user[type="radio"][name="[range]"][value="user"]')
+        expect(find('#range_user')).not_to be_checked
+        expect(page).to have_selector('input#search_partial_match[type="radio"][name="search"][value="partial_match"]')
+        expect(find('#search_partial_match')).to be_checked
+        expect(page).to have_selector('input#search_perfect_match[type="radio"][name="search"][value="perfect_match"]')
+        expect(find('#search_perfect_match')).not_to be_checked
+        expect(page).to have_selector('input#search_forward_match[type="radio"][name="search"][value="forward_match"]')
+        expect(find('#search_forward_match')).not_to be_checked
+      end
+      it "サークル検索時に活動場所選択フォームが出現し、県を選択すると動的に市が変化する" do
+        choose('range_circle')
+        expect(page).to have_select('circle_prefecture_id', with_options: ['県を選択', 'テスト県', 'テスト県2'])
+        select 'テスト県', from: 'circle_prefecture_id'
+        expect(page).to have_select('circle_city_id', with_options: ['市を選択', 'テスト市'])
+        expect(page).not_to have_select('circle_city_id', with_options: ['テスト市2'])
+      end
+      it "投稿検索時に活動場所選択フォームが出現しない" do
+        choose('range_post')
+        expect(page).not_to have_select('circle_prefecture_id', with_options: ['県を選択', 'テスト県', 'テスト県2'])
+        expect(page).not_to have_select('circle_city_id', with_options: ['市を選択'])
+      end
+      it "ユーザー検索時に活動場所選択フォームが出現しない" do
+        choose('range_user')
+        expect(page).not_to have_select('circle_prefecture_id', with_options: ['県を選択', 'テスト県', 'テスト県2'])
+        expect(page).not_to have_select('circle_city_id', with_options: ['市を選択'])
+      end
+
+      context '部分一致検索のテスト' do
+        it "サークルの部分一致検索ができる" do
+          fill_in 'word', with: 'スト'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'サークル 検索結果'
+          expect(page).to have_content 'テストサークル'
+          expect(page).to have_content 'テストサークル2'
+        end
+        it "投稿の部分一致検索ができる" do
+          choose('range_post')
+          fill_in 'word', with: '稿'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content '投稿 検索結果'
+          expect(page).to have_content '投稿'
+          expect(page).to have_content '投稿2'
+        end
+        it "ユーザーの部分一致検索ができる" do
+          choose('range_user')
+          fill_in 'word', with: 'ザー'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'ユーザー 検索結果'
+          expect(page).to have_content 'ユーザー'
+          expect(page).to have_content 'ユーザー2'
+        end
+      end
+
+      context '完全一致検索のテスト' do
+        before do
+          choose('search_perfect_match')
+        end
+        it "サークルの完全一致検索ができる" do
+          fill_in 'word', with: 'テストサークル'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'サークル 検索結果'
+          expect(page).to have_content 'テストサークル'
+          expect(page).not_to have_content 'テストサークル2'
+        end
+        it "投稿の完全一致検索ができる" do
+          choose('range_post')
+          fill_in 'word', with: '投稿'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content '投稿 検索結果'
+          expect(page).to have_content '投稿'
+          expect(page).not_to have_content '投稿2'
+        end
+        it "ユーザーの完全一致検索ができる" do
+          choose('range_user')
+          fill_in 'word', with: 'ユ―ザー'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'ユーザー 検索結果'
+          expect(page).to have_content 'ユーザー'
+          expect(page).not_to have_content 'ユーザー2'
+        end
+      end
+      
+      context '前方一致検索のテスト' do
+        before do
+          choose('search_forward_match')
+        end
+        it "サークルの前方一致検索ができる" do
+          fill_in 'word', with: 'テスト'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'サークル 検索結果'
+          expect(page).to have_content 'テストサークル'
+          expect(page).to have_content 'テストサークル2'
+        end
+        it "投稿の前方一致検索ができる" do
+          choose('range_post')
+          fill_in 'word', with: '投稿'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content '投稿 検索結果'
+          expect(page).to have_content '投稿'
+          expect(page).to have_content '投稿2'
+        end
+        it "ユーザーの前方一致検索ができる" do
+          choose('range_user')
+          fill_in 'word', with: 'ユーザー'
+          click_button(class: 'btn-custom-blue')
+          expect(page).to have_content 'ユーザー 検索結果'
+          expect(page).to have_content 'ユーザー'
+          expect(page).to have_content 'ユーザー2'
+        end
       end
     end
   end
