@@ -10,37 +10,32 @@
       <div class="col-auto my-auto">
         <%= link_to "退会", unsubscribe_path, class: "btn-custom-red" %>
       </div>
-
     <% else %>
-      <div class="col-md-auto col-12 text-center mb-2">
+      <div class="col-md-auto col-12 text-center mb-3">
         <h3 class="page-title my-auto">プロフィール</h3>
       </div>
-      <% if user_signed_in? %>
-        <% unless @user.id == current_user.id %>
-          <% if @is_room == true %>
-            <div class="col-auto my-auto">
-              <%= link_to "DM", room_path(@room_id), class: "btn-custom-blue" %>
-            </div>
-          <% else %>
-            <div class="col-auto my-auto">
-              <%= form_for @room do |f| %>
-                <%= fields_for @entry do |e| %>
-                  <%= e.hidden_field :user_id, value: @user.id %>
-                <% end %>
-                <%= f.submit "DMを始める", class: "btn-custom-blue" %>
-              <% end %>
-            </div>
+      <% if @is_room == true %>
+        <div class="col-auto my-auto">
+          <%= link_to "DM", room_path(@room_id), class: "btn-custom-blue" %>
+        </div>
+      <% else %>
+        <div class="col-auto my-auto">
+          <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "DM開始", class: "btn-custom-blue" %>
           <% end %>
-          <% if current_user.following?(@user) %>
-            <div class="col-auto my-auto">
-              <%= link_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "btn-custom-red" %>
-            </div>
-            <% else %>
-              <div class="col-auto my-auto">
-              <%= link_to "フォロー", user_relationships_path(@user), method: :post, class: "btn-custom-blue" %>
-            </div>
-          <% end %>
-        <% end %>
+        </div>
+      <% end %>
+      <% if current_user.following?(@user) %>
+        <div class="col-auto my-auto">
+          <%= link_to "フォロー解除", user_relationships_path(@user), method: :delete, class: "btn-custom-red" %>
+        </div>
+      <% else %>
+        <div class="col-auto my-auto">
+          <%= link_to "フォロー", user_relationships_path(@user), method: :post, class: "btn-custom-blue" %>
+        </div>
       <% end %>
     <% end %>
   </div>

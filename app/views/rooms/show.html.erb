@@ -3,10 +3,7 @@
     <% @entries.each do |entry| %>
       <% if current_user != entry.user %>
         <div class="col-auto text-center">
-          <h3 class="page-title my-auto">DM:<%= entry.user.name %></h3>
-        </div>
-        <div class="col-auto my-auto ml-auto">
-          <%= link_to "マイページへ", mypage_path, class: "btn-custom-blue" %>
+          <h3 class="page-title my-auto text-truncate">DM: <%= entry.user.name %></h3>
         </div>
       <% end %>
     <% end %>
@@ -31,13 +28,13 @@
         </div>
       <% else %>
         <div class="row my-3">
-            <div class="col-1">
-              <%= link_to user_path(message.user) do %>
-                <div class="square">
-                  <%= display_user_image(message.user) %>
-                </div>
-              <% end %>
-            </div>
+          <div class="col-md-1 col-3">
+            <%= link_to user_path(message.user) do %>
+              <div class="square">
+                <%= display_user_image(message.user) %>
+              </div>
+            <% end %>
+          </div>
           <div class="col my-auto text-dark">
             <div class="row">
               <div class="col">
@@ -58,15 +55,29 @@
         </div>
       <% end %>
     <% end %>
+  <% else %>
+    <p class="m-0">まだ会話がありません。</p>
+    <p class="m-0">
+      <% @entries.each do |entry| %>
+        <% if current_user != entry.user %>
+          <%= link_to user_path(entry.user) do %>
+            <%= entry.user.name %>
+          <% end %>
+          と会話を始めましょう。</p>
+        <% end %>
+      <% end %>
+    </p>
   <% end %>
    
-  <div class="row">
-    <div class="col text-center">
-      <%= form_for @message do |f| %>
-        <%= f.text_field :message, placeholder: "メッセージを入力", class:"custom-form" %>
+  <%= form_for @message do |f| %>
+    <div class="row">
+      <div class="col text-center">
+        <%= f.text_area :message, placeholder: "メッセージを入力", class:"custom-form", rows: 1 %>
         <%= f.hidden_field :room_id, value: @room.id %>
+      </div>
+      <div class="col-auto p-0 mr-2 text-center">
         <%= f.submit "送信",class: "my-auto small-btn-custom-blue"%>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
