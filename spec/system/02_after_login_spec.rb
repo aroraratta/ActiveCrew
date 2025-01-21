@@ -13,6 +13,9 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
   let!(:circle_user2) { create(:circle_user, circle: circle2, user: other_user) }
   let!(:post) { create(:post, body: "投稿", user: user, circle: circle) }
   let!(:post2) { create(:post, body: "投稿2", user: other_user, circle: circle2) }
+  let(:room) { create(:room) }
+  let(:entry) { create(:entry, room: room, user: user) }
+  let(:other_entry) { create(:entry, room: room, user: other_user) }
 
   before do
     visit new_user_session_path
@@ -384,6 +387,57 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
           expect(page).to have_content 'ユーザー'
           expect(page).to have_content 'ユーザー2'
         end
+      end
+    end
+  end
+  
+  describe "DMのテスト" do
+    context 'DMルーム作成のテスト' do
+      before do
+        visit user_path(other_user)
+      end
+      it "DM開始ボタンを押下するとルームが作成される" do
+        expect {click_button 'DM開始'}.to change { Room.count }.by(1)
+      end
+      it "DMルーム作成作成後、DMルームへ遷移する" do
+        click_button 'DM開始'
+        room = Room.last
+        expect(page).to have_current_path room_path(room)
+      end
+      it "DM開始ボタンを押下するとDMルームへのリンクへボタンが変化する" do
+        click_button 'DM開始'
+        visit user_path(other_user)
+        expect(page).to have_link 'DM'
+      end
+      it "DMルーム作成作成後、マイページにDMへのリンクが表示される" do
+        click_button 'DM開始'
+        fill_in 'message[message]', with: 'テストメッセージ'
+        click_button '送信'
+        visit mypage_path
+        click_link 'DM一覧'
+        room = Room.last
+        expect(page).to have_link(href: room_path(room))
+        expect(page).to have_content 'テストメッセージ'
+      end
+    end
+
+    context 'DM送受信のテスト' do
+      before do
+        room
+        entry
+        other_entry
+        visit room_path(room)
+        fill_in 'message[message]', with: 'テストメッセージ'
+        click_button '送信'
+      end
+      it "自身が送信したメッセージが表示される" do
+        expect(page).to have_css('.send-message', text: 'テストメッセージ')
+      end
+      it "相手から送信されたメッセージが表示される" do
+        sign_out user
+        sign_in other_user
+        visit room_path(room)
+        expect(page).to have_css('.sent-message', text: 'テストメッセージ')
       end
     end
   end
