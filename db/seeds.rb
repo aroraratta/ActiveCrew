@@ -10,6 +10,12 @@ Admin.find_or_create_by!(email: ENV["ADMIN_EMAIL"]) do |admin|
   admin.password = ENV["ADMIN_PASSWORD"]
 end
 
+User.find_or_create_by!(email: "guest@example.com") do |user|
+  user.name = "ゲストユーザー"
+  user.password = SecureRandom.urlsafe_base64
+  user.introduction = "ゲストユーザーでログイン中です。各種機能をお試しください。(ゲストユーザーで行った投稿はログアウト後に削除されます。)"
+end
+
 kanagawa = User.find_or_create_by!(email: "kanagawa@example.com") do |user|
   user.name = "神奈川太郎"
   user.password = ENV["USER_PASSWORD"]
