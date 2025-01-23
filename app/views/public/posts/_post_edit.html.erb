@@ -9,8 +9,14 @@
 <% end %>
 
 <div class="d-none" id="edit-form">
-  <%= render "public/posts/form", post: post, submit_text: "保存", route: post_path, circles: circles, async: false %>
-  <div class="row ml-1">
+  <%= render "public/posts/form", post:         post,
+                                  submit_text:  "保存",
+                                  route:        post_path,
+                                  circles:      circles,
+                                  async:        false,
+                                  input_id:     "image_input",
+                                  prev_id:      "img_prev" %>
+  <div class="row">
     <div class="col text-center">
       <button type="button" class="btn-custom-red cancel-edit">編集画面を閉じる</button>
     </div>
