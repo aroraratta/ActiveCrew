@@ -1,2 +1,8 @@
-$('#modalCircleFormContent').html('<%= j render "form", circle: @circle, route: circles_path, prefectures: @prefectures, submit_text: "作成", async: false  %>');
+$('#modalCircleFormContent').html('<%= j render "form", circle:       @circle,
+                                                        route:        circles_path,
+                                                        prefectures:  @prefectures,
+                                                        submit_text:  "作成",
+                                                        async:        false,
+                                                        input_id:     "circle_image_input",
+                                                        prev_id:      "circle_img_prev" %>');
 $('#CircleModal').modal('show');
