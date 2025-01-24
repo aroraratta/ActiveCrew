@@ -39,7 +39,6 @@
                           circle_permits POST   /circles/:circle_id/permits(.:format)                                                             public/permits#create
                            circle_permit DELETE /circles/:circle_id/permits/:id(.:format)                                                         public/permits#destroy
                      circle_circle_users GET    /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#index
-                                         POST   /circles/:circle_id/circle_users(.:format)                                                        public/circle_users#create
                       circle_circle_user DELETE /circles/:circle_id/circle_users/:id(.:format)                                                    public/circle_users#destroy
                     circle_event_attends DELETE /circles/:circle_id/events/:event_id/attends(.:format)                                            public/attends#destroy
                                          POST   /circles/:circle_id/events/:event_id/attends(.:format)                                            public/attends#create
