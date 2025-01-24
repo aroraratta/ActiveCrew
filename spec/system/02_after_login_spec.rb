@@ -11,6 +11,7 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
   let!(:circle2) { create(:circle, circle_name: "テストサークル2", prefecture: prefecture, city: city, owner: other_user) }
   let!(:circle_user) { create(:circle_user, circle: circle, user: user) }
   let!(:circle_user2) { create(:circle_user, circle: circle2, user: other_user) }
+  let(:circle_user3) { create(:circle_user, circle: circle, user: other_user) }
   let!(:post) { create(:post, body: "投稿", user: user, circle: circle) }
   let!(:post2) { create(:post, body: "投稿2", user: other_user, circle: circle2) }
   let(:room) { create(:room) }
@@ -523,6 +524,99 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
       it "フォロー解除ボタンを押下するとフォロー解除できる" do
         click_link "フォロー" 
         expect { click_link "フォロー解除" }.to change { other_user.followings.count }.by(-1)
+      end
+    end
+  end
+  
+  describe "サークル参加のテスト" do
+    before do
+      visit circle_path(circle2)
+    end
+    context "参加申請のテスト" do
+      it "参加申請を押下すると参加申請できる" do
+        expect { click_link "参加申請" }.to change { Permit.count }.by(1)
+      end
+      it "参加申請を押下すると申請取り消しボタンに変化する" do
+        click_link "参加申請" 
+        expect(page).to have_link "申請取消"
+      end
+      it "参加申請を押下すると申請取り消しボタンに変化する" do
+        click_link "参加申請" 
+        expect { click_link "申請取消" }.to change { Permit.count }.by(-1)
+      end
+    end
+
+    context "管理サークルの参加許可のテスト" do
+      before do
+        click_link "参加申請" 
+        sign_out user
+        sign_in other_user
+        visit circle_path(circle2)
+      end
+      it "参加申請者が表示されている" do
+        expect(page).to have_link(href: user_path(user))
+      end
+      it "参加許可ボタン、参加拒否ボタンが表示されている" do
+        expect(page).to have_link("参加許可", href: circle_circle_users_path(circle2, permit_id: Permit.last))
+        expect(page).to have_link("参加拒否", href: circle_permit_path(circle2, id: Permit.last))
+      end
+      it "参加許可ボタンを押下するとサークルに参加させられる" do
+        expect { click_link "参加許可" }.to change { CircleUser.count }.by(1)
+      end
+      it "参加拒否ボタンを押下するとサークル参加申請を拒否できる" do
+        expect { click_link "参加拒否" }.to change { Permit.count }.by(-1)
+      end
+    end
+  
+    context "サークル参加者数のテスト" do
+      before do
+        circle_user3
+        visit circle_path(circle)
+      end
+      it "サークル詳細に参加者一覧のリンクを持った参加申請者が表示されている" do
+        expect(page).to have_link(circle.users.count.to_s, href: circle_circle_users_path(circle))
+      end
+      it "参加者一覧にすべての参加申請者が表示されている" do
+        visit circle_circle_users_path(circle)
+        expect(page).to have_link(href: user_path(user))
+        expect(page).to have_link(href: user_path(other_user))
+      end
+    end
+
+    context "サークル退出のテスト" do
+      before do
+        circle_user3
+        old_circle_user_count = circle.users.count
+      end
+      it "サークル管理者は参加者一覧に退出ボタンが表示されている" do
+        visit circle_circle_users_path(circle)
+        expect(page).to have_link "退出"
+      end
+      it "サークル管理者以外は参加者一覧に退出ボタンが表示されない" do
+        sign_out user
+        sign_in other_user
+        visit circle_circle_users_path(circle)
+        expect(page).not_to have_link "退出"
+      end
+      it "参加者一覧の退出ボタンを押下するとそのユーザーが退出される" do
+        visit circle_circle_users_path(circle)
+        old_circle_user_count = circle.users.count
+        accept_confirm "ユーザーを退出させますか?" do
+          click_link "退出"
+        end
+        visit current_path
+        expect(circle.users.count).to eq(old_circle_user_count - 1)
+      end
+      it "参加サークルの退出ボタンを押下すると退出できる" do
+        sign_out user
+        sign_in other_user
+        visit circle_path(circle)
+        old_circle_user_count = circle.users.count
+        accept_confirm "サークルを退出しますか?" do
+          click_link "退出"
+        end
+        visit circle_path(circle)
+        expect(circle.users.count).to eq(old_circle_user_count - 1)
       end
     end
   end

@@ -53,7 +53,7 @@
           <div class="col-auto my-auto">
             <div class="d-flex flex-column align-items-start">
               <%= link_to "参加許可", circle_circle_users_path(@circle, permit_id: permit.id), method: :post, class: "btn-custom-blue mb-2" %>
-              <%= link_to "参加拒否", circle_permit_path(@circle), method: :delete, class: "btn btn-custom-red" %>
+              <%= link_to "参加拒否", circle_permit_path(@circle, permit), method: :delete, class: "btn btn-custom-red" %>
             </div>
           </div>
         </div>
