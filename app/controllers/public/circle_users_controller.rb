@@ -4,7 +4,7 @@ class Public::CircleUsersController < ApplicationController
 
   def index
     @circle = Circle.find(params[:circle_id])
-    @circle_users = @circle.users
+    @circle_users = @circle.users.where.not(id: @circle.owner_id)
   end
 
   def create
