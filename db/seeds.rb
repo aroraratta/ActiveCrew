@@ -10,6 +10,12 @@ Admin.find_or_create_by!(email: ENV["ADMIN_EMAIL"]) do |admin|
   admin.password = ENV["ADMIN_PASSWORD"]
 end
 
+User.find_or_create_by!(email: "guest@example.com") do |user|
+  user.name = "ゲストユーザー"
+  user.password = SecureRandom.urlsafe_base64
+  user.introduction = "ゲストユーザーでログイン中です。各種機能をお試しください。(ゲストユーザーで行った投稿はログアウト後に削除されます。)"
+end
+
 kanagawa = User.find_or_create_by!(email: "kanagawa@example.com") do |user|
   user.name = "神奈川太郎"
   user.password = ENV["USER_PASSWORD"]
@@ -97,7 +103,7 @@ puts "サークル活動場所選択肢作成完了"
 badminton = Circle.find_or_create_by!(circle_name: "バドミントンサークル") do |circle|
   circle.prefecture_id = 14
   circle.city_id = 717
-  circle.owner_id = 1
+  circle.owner_id = 2
   circle.circle_introduction = "こんにちわ!バドミントンサークルです。毎週土曜日の19:00~21:30まで活動しています!まずは見学からでも参加可能なので、気になる方は管理者までDMをお願いします!"
 end
 
@@ -105,7 +111,7 @@ kanagawa_cycling = Circle.find_or_create_by!(circle_name: "サイクリング好
   circle.circle_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/post_bike.jpg"), filename:"post-bike.jpg")
   circle.prefecture_id = 14
   circle.city_id = 717
-  circle.owner_id = 1
+  circle.owner_id = 2
   circle.circle_introduction = "サイクリング好きよ、集まれ!本気の人も趣味程度の人も気軽に参加してください!毎週日曜日の13:00~18:00まで神奈川県や東京あたりを走っています!たくさんの参加者待っています!"
 end
 
@@ -113,7 +119,7 @@ ehime_cycling = Circle.find_or_create_by!(circle_name: "愛媛サイクリング
   circle.circle_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/post_sunset.jpg"), filename:"post-sunset.jpg")
   circle.prefecture_id = 38
   circle.city_id = 1548
-  circle.owner_id = 2
+  circle.owner_id = 3
   circle.circle_introduction = "一緒にしまなみ海道をサイクリングしませんか!半年に1回程度の活動ですが、誰でも楽しめるような活動を心がけています!参加希望者はDMをください!"
 end
 
@@ -121,7 +127,7 @@ training = Circle.find_or_create_by!(circle_name: "オンライントレーニ�
   circle.circle_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/post_tennis.jpg"), filename:"post-tennis.jpg")
   circle.prefecture_id = 13
   circle.city_id = 673
-  circle.owner_id = 3
+  circle.owner_id = 4
   circle.circle_introduction = "全国どこにいても参加可能!トレーニングの記録を投稿して切磋琢磨しよう!たくさんの参加待っています!"
 end
 

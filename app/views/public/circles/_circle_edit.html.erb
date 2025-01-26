@@ -22,7 +22,9 @@
           <p class="m-0 text-blue font-weight-bold">活動場所</p>
         </div>
         <div class="col profile-center">
-          <p class="m-0 text-blue"><%= circle.prefecture.prefecture_name %>/<%= @circle.city.city_name %></p>
+          <p class="m-0 text-blue">
+            <%= circle.prefecture.prefecture_name %>/
+          <%= @circle.city.city_name %></p>
         </div>
       </div>
       <div class="row my-3 user-introduction bg-light">
@@ -58,10 +60,14 @@
 </div>
 
 <div class="d-none" id="edit-form">
-  <%= render "public/circles/form", circle: circle, route: circle_path(circle), prefectures: prefectures, submit_text: "変更を保存", async: false %>
-  <div class="row ml-1">
-    <div class="col-3">
-    </div>
+  <%= render "public/circles/form", circle:       circle,
+                                    route:        circle_path(circle),
+                                    prefectures:  prefectures,
+                                    submit_text:  "変更を保存",
+                                    async:        false,
+                                    input_id:     "image_input",
+                                    prev_id:      "img_prev" %>
+  <div class="row">
     <div class="col-auto mx-auto text-center">
       <button type="button" class="btn-custom-red cancel-edit">編集画面を閉じる</button>
     </div>

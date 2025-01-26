@@ -34,7 +34,7 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    reset_guest_data if current_user.email == User::GUEST_USER_EMAIL
+    reset_guest_data if current_user.id == 1
     super
    end
 

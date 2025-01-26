@@ -15,39 +15,63 @@
   </div>
   <% if admin_signed_in? %>
     <% if @range == "user" %>
-      <% @users.each do |user| %>
-        <%= link_to admin_user_path(user) do %>
-          <%= render "public/users/user_display", obj: user %>
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <%= link_to admin_user_path(user) do %>
+            <%= render "public/users/user_display", obj: user %>
+          <% end %>
         <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
 
     <% elsif @range == "post" %>
-      <% @posts.each do |post| %>
-        <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: admin_post_path(post) %>
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <%= render "public/posts/post_display", obj: post, user_route: admin_user_path(post.user), post_route: admin_post_path(post) %>
+        <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
 
     <% elsif @range == "circle" %>
-      <% @circles.each do |circle| %>
-        <%= render "public/circles/circle_display", obj: circle, circle_route: admin_circle_path(circle) %>
+      <% if @circles.any? %>
+        <% @circles.each do |circle| %>
+          <%= render "public/circles/circle_display", obj: circle, circle_route: admin_circle_path(circle) %>
+        <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
     <% end %>
     
   <% else %>
     <% if @range == "user" %>
-      <% @users.each do |user| %>
-        <%= link_to (current_user == user ? mypage_path : user_path(user)) do %>
-          <%= render "public/users/user_display", obj: user %>
+      <% if @users.any? %>
+        <% @users.each do |user| %>
+          <%= link_to (current_user == user ? mypage_path : user_path(user)) do %>
+            <%= render "public/users/user_display", obj: user %>
+          <% end %>
         <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
 
     <% elsif @range == "post" %>
-      <% @posts.each do |post| %>
-        <%= render "public/posts/post_display", obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post) %>
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <%= render "public/posts/post_display", obj: post, user_route: (current_user == post.user ? mypage_path : user_path(post.user)), post_route: post_path(post) %>
+        <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
 
     <% elsif @range == "circle" %>
-      <% @circles.each do |circle| %>
-        <%= render "public/circles/circle_display", obj: circle, circle_route: circle_path(circle) %>
+      <% if @circles.any? %>
+        <% @circles.each do |circle| %>
+          <%= render "public/circles/circle_display", obj: circle, circle_route: circle_path(circle) %>
+        <% end %>
+      <% else %>
+        <p>検索結果がありません</p>
       <% end %>
     <% end %>
   <% end %>

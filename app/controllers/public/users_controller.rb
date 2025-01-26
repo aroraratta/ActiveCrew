@@ -57,11 +57,16 @@ class Public::UsersController < ApplicationController
   end
 
   def withdraw
-    @user = current_user
-    @user.update(is_active: false)
-    reset_session
-    flash[:notice] = "退会処理を実行しました"
-    redirect_to root_path
+    if current_user.id != 1
+      @user = current_user
+      @user.update(is_active: false)
+      reset_session
+      flash[:notice] = "退会処理を実行しました"
+      redirect_to root_path
+    else
+      redirect_to unsubscribe_path
+      flash[:alert] = "ゲストユーザーは退会できません。"
+    end
   end
 
   private

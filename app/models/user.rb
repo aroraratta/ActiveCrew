@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
 
   has_many :posts
   has_many :post_comments
@@ -62,7 +62,7 @@ class User < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+    find_or_create_by!(id: 1) do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー"
       user.introduction = "ゲストユーザーでログイン中です。各種機能をお試しください。(ゲストユーザーで行った投稿はログアウト後に削除されます。)"
