@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row my-5">
-    <div class="col-auto text-center">
+    <div class="col-md-auto col-12 text-center">
       <h3 class="page-title my-auto">活動登録</h3>
     </div>
   </div>
@@ -8,12 +8,12 @@
   <%= form_with(model: [@circle, @event], local: true) do |f| %>
     <div class="row">
       <div class="col">
-        <div class="blue-border">
+        <div class="fit-blue-border">
           <div class="row my-3">
             <%= render "layouts/errors", obj: @circle %>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center my-auto">
+            <div class="col-3 p-0 text-center my-auto">
               <%= f.label :event_title, "タイトル", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col-9 text-blue">
@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center my-auto">
+            <div class="col-3 p-0 text-center my-auto">
               <%= f.label :event_memo, "内容", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col-9 text-blue">
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center my-auto">
+            <div class="col-3 p-0 text-center my-auto">
               <%= f.label :event_place, "場所", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center my-auto">
+            <div class="col-3 p-0 text-center my-auto">
               <%= f.label :start, "開始日時", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center my-auto">
+            <div class="col-3 p-0 text-center my-auto">
               <%= f.label :start, "終了日時", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="row my-3 user-introduction">
-            <div class="col-3 text-center mx-auto">
+            <div class="col-auto text-center mx-auto">
               <%= f.submit "登録", class: "btn-custom-blue" %>
             </div>
           </div>
