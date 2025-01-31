@@ -59,7 +59,7 @@
           <% end %>
         </div>
         <div class="col my-auto mx-1">
-          <%= link_to root_path, class: "row fixed-header-content" do %>
+          <%= link_to admin_users_path, class: "row fixed-header-content" do %>
             <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
             <i class="fa-solid fa-user-plus"></i>
             </div>
@@ -69,7 +69,7 @@
           <% end %>
         </div>
         <div class="col my-auto mx-1">
-          <%= link_to root_path, class: "row fixed-header-content" do %>
+          <%= link_to admin_posts_path, class: "row fixed-header-content" do %>
             <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
               <i class="fa-regular fa-clone"></i>
             </div>
@@ -88,7 +88,7 @@
             </div>
           <% end %>
         </div>
-        <div class="col my-auto mx-1">
+        <div class="col my-auto mx-1 fixed-header-logout">
           <%= link_to destroy_admin_session_path, method: :delete, class: "row fixed-header-content" do %>
             <div class="col-md-4 col-sm-12 p-0 fixed-header-content-icon">
               <i class="fa-solid fa-right-from-bracket"></i>
