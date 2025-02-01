@@ -9,12 +9,12 @@ class Public::EventsController < ApplicationController
   end
   
   def create
-    circle = Circle.find(params[:circle_id])
-    event = circle.events.build(event_params)
+    @circle = Circle.find(params[:circle_id])
+    @event = @circle.events.build(event_params)
   
-    if event.save
+    if @event.save
       flash[:notice] = "イベントを作成しました"
-      redirect_to circle_path(circle)
+      redirect_to circle_path(@circle)
     else
       render :new
     end

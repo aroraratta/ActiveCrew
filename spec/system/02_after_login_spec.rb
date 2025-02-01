@@ -18,6 +18,7 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
   let(:entry) { create(:entry, room: room, user: user) }
   let(:other_entry) { create(:entry, room: room, user: other_user) }
   let(:relationship) { create(:relationship, follower: user, followed: other_user) }
+  let(:event) { create(:event, event_title: "テストイベント", circle: circle, start: Time.current + 1.hour, end: Time.current + 2.hour) }
 
   before do
     visit new_user_session_path
@@ -617,6 +618,95 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
         end
         visit circle_path(circle)
         expect(circle.users.count).to eq(old_circle_user_count - 1)
+      end
+    end
+  end
+  
+  describe "イベント作成のテスト" do
+    context "イベント作成ボタンのテスト" do
+      before do
+        visit circle_path(circle)
+      end
+      it "サークル管理者はイベント作成ボタンが表示される" do
+        expect(page).to have_link(href: new_circle_event_path(circle))
+      end
+      it "イベント作成ボタンを押下するとイベント作成ページへ遷移する" do
+        click_link(href: new_circle_event_path(circle))
+        expect(current_path).to eq(new_circle_event_path(circle))
+      end
+      it "サークル管理者以外はイベント作成ボタンが表示されない" do
+        circle_user3
+        sign_out user
+        sign_in other_user
+        visit circle_path(circle)
+        expect(page).not_to have_link(href: new_circle_event_path(circle))
+      end
+    end
+  
+    context "イベント作成のテスト" do
+      before do
+        visit new_circle_event_path(circle)
+      end
+      it "未入力で登録ボタンを押下するとエラーメッセージが表示される" do
+        click_button "登録"
+        expect(page).to have_content "件のエラーが発生しました。"
+        expect(page).to have_content "タイトル を入力してください"
+      end
+      it "イベントが正常に保存され、フラッシュメッセージが表示される" do
+        fill_in "event[event_title]", with: "テストイベント"
+        fill_in "event_start", with: Time.current.change(sec: 0).strftime("%Y-%m-%dT%H:%M")
+        fill_in "event_end", with: Time.current.change(sec: 0).strftime("%Y-%m-%dT%H:%M")
+        expect {click_button "登録"}.to change { Event.count }.by(1)
+        expect(page).to have_content "イベントを作成しました"
+        expect(current_path).to eq(circle_path(circle))
+      end
+    end
+
+    context "イベント参加のテスト" do
+      before do
+        visit circle_event_path(event, circle)
+      end
+      it "イベント詳細画面の参加するボタンを押下すると参加が保存される" do
+        expect {click_link "参加する"}.to change { Attend.count }.by(1)
+      end
+      it "イベント詳細画面の参加中ボタンを押下すると参加が削除される" do
+        click_link "参加する"
+        expect {click_link "参加中"}.to change { Attend.count }.by(-1)
+      end
+    end
+
+    context "イベント削除のテスト" do
+      before do
+        visit circle_event_path(circle, event)
+      end
+      it "サークル管理者はイベント詳細画面に削除ボタンが表示される" do
+        expect(page).to have_link("削除", href: circle_event_path(circle, event))
+      end
+      it "削除ボタンを押下するとイベントが削除される" do
+        @old_event_count = Event.count
+        accept_confirm "本当に消しますか？" do
+          click_link("削除", href: circle_event_path(circle, event))
+        end
+        visit circle_path(circle)
+        expect(Event.count).to eq(@old_event_count - 1)
+      end
+      it "イベントを削除するとフラッシュメッセージが表示される" do
+        accept_confirm "本当に消しますか？" do
+          click_link("削除", href: circle_event_path(circle, event))
+        end
+        expect(page).to have_content "イベントを削除しました"
+      end
+      it "イベントを削除するとサークル詳細へ遷移する" do
+        accept_confirm "本当に消しますか？" do
+          click_link("削除", href: circle_event_path(circle, event))
+        end
+        expect(current_path).to eq(circle_path(circle))
+      end
+      it "サークル管理者以外はイベント詳細画面に削除ボタンが表示されない" do
+        sign_out user
+        sign_in other_user
+        visit circle_event_path(circle, event)
+        expect(page).not_to have_link("削除", href: circle_event_path(circle, event))
       end
     end
   end
