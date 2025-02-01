@@ -32,6 +32,8 @@ ja:
         circle_name: サークル名
         prefecture: 県
         city: 市
+      event:
+        event_title: タイトル
     models:
       user: ユーザー
       circle: サークル

@@ -10,7 +10,7 @@
       <div class="col">
         <div class="fit-blue-border">
           <div class="row my-3">
-            <%= render "layouts/errors", obj: @circle %>
+            <%= render "layouts/errors", obj: @event %>
           </div>
           <div class="row my-3 user-introduction">
             <div class="col-3 p-0 text-center my-auto">
@@ -46,7 +46,7 @@
           </div>
           <div class="row my-3 user-introduction">
             <div class="col-3 p-0 text-center my-auto">
-              <%= f.label :start, "終了日時", class: "font-weight-bold text-blue" %>
+              <%= f.label :end, "終了日時", class: "font-weight-bold text-blue" %>
             </div>
             <div class="col text-blue">
               <%= f.datetime_local_field :end, value: Time.current.change(sec: 0).strftime("%Y-%m-%dT%H:%M"), class: "custom-form" %>
