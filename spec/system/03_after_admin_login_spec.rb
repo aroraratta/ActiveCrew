@@ -57,6 +57,47 @@ describe "[STEP2] 管理者ログイン後のテスト", js: true do
       expect(page).to have_content "退会ユーザー"
     end
   end
+
+  describe "投稿管理のテスト" do
+    before do
+      visit admin_post_path(post)
+    end
+    context "投稿編集フォームのテスト" do
+      it "投稿の詳細画面で投稿編集ボタンを押下すると編集フォームが表示される" do
+        click_button "投稿編集"
+        expect(page).to have_field "post[body]"
+        expect(page).to have_css("label[for='image_input']")
+        expect(page).to have_select("post[circle_id]", options: [circle.circle_name])
+      end
+      # it "ファイルを選択したらプレビューが表示される" do
+      #   attach_file("post[post_image]", Rails.root.join("spec/images/logo.png"), visible: false)
+      #   expect(page).to have_css("#img_prev[src*='data:image']")
+      # end
+    end
+
+    context "投稿編集フォームのテスト" do
+      it "入力フォームを未入力で編集ボタンを押下するとエラーが表示される" do
+        click_button "投稿編集"
+        fill_in "post[body]", with: ""
+        click_button "保存"
+        expect(page).to have_content "件のエラーが発生しました。"
+      end
+      it "投稿の詳細画面で投稿削除ボタンを押下すると投稿が削除される" do
+        old_post_count = Post.count
+        accept_confirm "本当に消しますか？" do
+          click_link("削除", href: admin_post_path(post))
+        end
+        page.refresh
+        expect(Post.count).to eq(old_post_count - 1)
+      end
+      # it "投稿の削除後、フラッシュメッセージが表示される" do
+      #   accept_confirm "本当に消しますか？" do
+      #     click_link("削除", href: admin_post_path(post))
+      #   end
+      #   expect(page).to have_content "投稿を削除しました"
+      # end
+    end
+  end
 end
 
 # bundle exec rspec spec/system/03_after_admin_login_spec.rb:XXX --format documentation
