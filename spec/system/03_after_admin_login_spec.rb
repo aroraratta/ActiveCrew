@@ -98,6 +98,61 @@ describe "[STEP2] 管理者ログイン後のテスト", js: true do
       # end
     end
   end
+  
+  describe "サークルのテスト" do
+    context "サークル編集成功のテスト" do
+      before do
+        visit admin_circle_path(circle)
+        click_button "編集"
+      end
+      it "ファイルを選択したらプレビューが表示される" do
+        attach_file("circle[circle_image]", Rails.root.join("spec/images/background.png"), visible: false)
+        expect(page).to have_css("#img_prev[src*='data:image']")
+      end
+      before do
+        fill_in "circle[circle_name]", with:"aaaaaaaaaa"
+        fill_in "circle[circle_introduction]", with:"bbbbbbbbbb"
+        select "テスト県2", from: "circle_prefecture_id"
+        select "テスト市2", from: "circle_city_id"
+        attach_file("circle[circle_image]", Rails.root.join("spec/images/background.png"), visible: false)
+        click_button "変更を保存"
+      end
+      it "編集内容が正常に保存されている" do
+        expect(page).to have_content "aaaaaaaaaa"
+        expect(page).to have_content "bbbbbbbbbb"
+        expect(page).to have_content "テスト県2"
+        expect(page).to have_content "テスト市2"
+        expect(page).to have_css("img[src*='background.png']")
+      end
+      it "編集成功時にフラッシュメッセージが表示される" do
+        expect(page).to have_content "サークルを編集しました"
+      end
+    end
+
+    context "サークル編集失敗のテスト" do
+      before do
+        visit admin_circle_path(circle)
+        click_button "編集"
+        fill_in "circle[circle_name]", with:""
+        click_button "変更を保存"
+      end
+      it "エラーメッセージが表示される" do
+        expect(page).to have_content "件のエラーが発生しました。"
+      end
+    end
+
+    context "サークル削除のテスト" do
+      before do
+        visit admin_circle_path(circle)
+        accept_confirm "本当に消しますか?" do
+          click_link "削除"
+        end
+      end
+      it "サークルの削除後、フラッシュメッセージが表示される" do
+        expect(page).to have_content "サークルを削除しました"
+      end
+    end
+  end
 end
 
 # bundle exec rspec spec/system/03_after_admin_login_spec.rb:XXX --format documentation
