@@ -157,6 +157,58 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
       end
     end
   end
+  
+  describe "投稿のコメントのテスト" do
+    before do
+      visit post_path(post)
+    end
+    context "コメントの表示のテスト" do
+      it "投稿詳細ページにコメントフォームが表示されている" do
+        expect(page).to have_field "post_comment[comment]"
+      end
+    end
+
+    context "コメントのCRUDのテスト" do
+      before do
+        @old_comment_count = PostComment.count
+        fill_in "post_comment[comment]", with: "テストコメント"
+        click_button "送信"
+        @post_comment = PostComment.last
+      end
+      it "コメントを投稿できる" do
+        page.refresh
+        expect(PostComment.count).to eq(@old_comment_count + 1)
+      end
+      it "コメントを未入力で投稿するとフラッシュメッセージが表示される" do
+        fill_in "post_comment[comment]", with: ""
+        click_button "送信"
+        expect(page).to have_content "コメントに失敗しました"
+      end
+      it "コメント投稿後、フラッシュメッセージが表示される" do
+        expect(page).to have_content "コメントしました"
+      end
+      it "コメントを削除できる" do
+        click_link("削除", href: post_post_comment_path(@post_comment.post, @post_comment))
+        expect(PostComment.count).to eq(@old_comment_count)
+      end
+      it "編集ボタンを押下すると編集フォームが表示される" do
+        find("button[data-comment-id='#{@post_comment.id}']").click
+        expect(all("textarea[name='post_comment[comment]']").count).to eq(2)
+      end
+      it "コメントを編集できる" do
+        find("button[data-comment-id='#{@post_comment.id}']").click
+        all("textarea[name='post_comment[comment]']")[1].set("編集後のコメント")
+        click_button "保存"
+        expect(page).to have_content "編集後のコメント"
+      end
+      it "編集フォームを空にして保存するとフラッシュメッセージが表示される" do
+        find("button[data-comment-id='#{@post_comment.id}']").click
+        all("textarea[name='post_comment[comment]']")[1].set("")
+        click_button "保存"
+        expect(page).to have_content "コメントの編集に失敗しました"
+      end
+    end
+  end
 
   describe "サークルのテスト" do
     context "サークル作成フォームのテスト" do
@@ -712,4 +764,4 @@ describe "[STEP2] ユーザログイン後のテスト", js: true do
   end
 end
 
-# bundle exec rspec spec/system/02_after_login_spec.rb:XXX --format documentation
+# bundle exec rspec spec/system/02_after_user_login_spec.rb:XXX --format documentation
