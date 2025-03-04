@@ -45,7 +45,7 @@ ActiveCrew-alb-1737840770.ap-northeast-1.elb.amazonaws.com
   * ログイン後テスト
 
 ## 設計書
-* ER図 (https://app.diagrams.net/#G1033CUkXHqAnIzeQ_nq3XNBLVO5A-9EHC#%7B%22pageId%22%3A%22vzjcXcgsg06S2VZX8npz%22%7D)
+* ER図 (https://app.diagrams.net/#G1JsOiJ71YaoftlGZn8gdjB_RCHnWe2oPG#%7B%22pageId%22%3A%228pyZ7NkXfS4OZp76zb6y%22%7DZ)
 * UI Flows (https://app.diagrams.net/#G1033CUkXHqAnIzeQ_nq3XNBLVO5A-9EHC#%7B%22pageId%22%3A%22vzjcXcgsg06S2VZX8npz%22%7D)​
 * インフラ設計書(https://app.diagrams.net/#G1iTF0KcVPeRmsga2lJv1m0t-Ee2OCkT01#%7B%22pageId%22%3A%22T6JmGLWKkRxPTz6StvwP%22%7D)
 
